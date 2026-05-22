@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Web e IA Creativa</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #11151d;
+      --panel: rgba(255,255,255,.08);
+      --line: rgba(255,255,255,.16);
+      --text: #f6f7fb;
+      --muted: #aeb7c8;
+      --accent: #7dd3fc;
+      --accent-2: #f0abfc;
+      --shadow: 0 24px 80px rgba(0,0,0,.38);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(125,211,252,.22), transparent 34%),
+        radial-gradient(circle at 84% 18%, rgba(240,171,252,.18), transparent 32%),
+        linear-gradient(135deg, #11151d, #1c2430 54%, #10131a);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 44px 20px;
+    }
+    main { width: min(1040px, 100%); }
+    header { margin-bottom: 28px; }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2.4rem, 6vw, 5.5rem);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
+    }
+    a {
+      min-height: 210px;
+      color: inherit;
+      text-decoration: none;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(160deg, rgba(255,255,255,.12), rgba(255,255,255,.045));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    a:hover, a:focus-visible {
+      transform: translateY(-5px);
+      border-color: rgba(125,211,252,.58);
+      background: linear-gradient(160deg, rgba(125,211,252,.16), rgba(255,255,255,.06));
+      outline: none;
+    }
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: linear-gradient(135deg, rgba(125,211,252,.22), rgba(240,171,252,.18));
+      position: relative;
+    }
+    .icon::after {
+      content: "";
+      position: absolute;
+      inset: 11px;
+      border: 2px solid rgba(255,255,255,.76);
+      border-top-color: transparent;
+      border-radius: 50%;
+    }
+    h2 { margin: 0; font-size: 1.05rem; line-height: 1.25; }
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      body { place-items: start; }
+      .grid { grid-template-columns: 1fr; }
+      a { min-height: 150px; }
+    }
+    /* DESIGN.md: Pacman / retro arcade direction */
+    :root {
+      --bg: #000000;
+      --panel: #050505;
+      --line: #f4b9b0;
+      --text: #fff7d6;
+      --muted: #f4b9b0;
+      --accent: #2a3fe5;
+      --accent-2: #f4b9b0;
+      --shadow: 8px 8px 0 #2a3fe5;
+    }
+    body {
+      font-family: "Press Start 2P", "Space Mono", Consolas, monospace;
+      background-color: #000;
+      background-image:
+        linear-gradient(90deg, rgba(42,63,229,.24) 1px, transparent 1px),
+        linear-gradient(rgba(42,63,229,.24) 1px, transparent 1px),
+        radial-gradient(circle at 18% 22%, #f4b9b0 0 4px, transparent 5px),
+        radial-gradient(circle at 82% 72%, #f4b9b0 0 4px, transparent 5px);
+      background-size: 56px 56px, 56px 56px, 160px 160px, 180px 180px;
+      place-items: center;
+    }
+    h1 {
+      color: #fff7d6;
+      text-shadow: 4px 4px 0 #2a3fe5, 8px 8px 0 #111827;
+      max-width: 980px;
+      font-size: clamp(2rem, 5vw, 4.6rem);
+    }
+    .grid { gap: 24px; }
+    a {
+      border: 3px dotted #f4b9b0;
+      border-radius: 8px;
+      background: #000;
+      box-shadow: var(--shadow);
+      backdrop-filter: none;
+      min-height: 190px;
+    }
+    a:nth-child(2n) { box-shadow: 8px 8px 0 #f4b9b0; }
+    a:hover, a:focus-visible {
+      transform: translate(-3px, -3px);
+      border-color: #fff7d6;
+      background: #111827;
+    }
+    .icon {
+      border-radius: 4px;
+      border: 2px solid #fff7d6;
+      background: #2a3fe5;
+    }
+    .icon::after {
+      inset: 10px;
+      border-width: 0;
+      background: #f4b9b0;
+      clip-path: polygon(0 0, 100% 50%, 0 100%, 32% 50%);
+    }
+    h2 {
+      color: #fff7d6;
+      font-size: .82rem;
+      line-height: 1.65;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Web e IA Creativa</h1>
+    </header>
+    <section class="grid" aria-label="Actividades">
+      <a href="./laboratorio-prompts/"><span class="icon" aria-hidden="true"></span><h2>Clase 1: Tu primer prompt</h2></a>
+      <a href="./hero-ia/"><span class="icon" aria-hidden="true"></span><h2>Clase 2: Bloque web con IA</h2></a>
+      <a href="./sistema-visual/"><span class="icon" aria-hidden="true"></span><h2>Clase 3: Identidad visual</h2></a>
+      <a href="./auditoria-ia/"><span class="icon" aria-hidden="true"></span><h2>Clase 5: Auditoría y cambios</h2></a>
+      <a href="./proyecto-final/"><span class="icon" aria-hidden="true"></span><h2>Proyecto final asistido por IA</h2></a>
+    </section>
+  </main>
+</body>
+</html>

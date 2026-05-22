@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clase 1 - Tu primer prompt</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #000;
+      --panel: #050505;
+      --text: #fff7d6;
+      --muted: #f4b9b0;
+      --primary: #2a3fe5;
+      --ok: #16a34a;
+      --warn: #d97706;
+      --bad: #dc2626;
+      --shadow: 8px 8px 0 #2a3fe5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Press Start 2P", "Space Mono", Consolas, monospace;
+      color: var(--text);
+      background:
+        linear-gradient(90deg, rgba(42,63,229,.22) 1px, transparent 1px),
+        linear-gradient(rgba(42,63,229,.22) 1px, transparent 1px),
+        radial-gradient(circle at 80% 18%, #f4b9b0 0 4px, transparent 5px),
+        #000;
+      background-size: 48px 48px, 48px 48px, 150px 150px;
+      padding: 28px;
+    }
+    .shell { max-width: 1440px; margin: 0 auto; }
+    .eyebrow { color: var(--muted); text-transform: uppercase; font-size: .72rem; letter-spacing: .08em; }
+    h1 {
+      margin: 10px 0 12px;
+      font-size: clamp(1.7rem, 4vw, 3.1rem);
+      line-height: 1.12;
+      text-shadow: 4px 4px 0 var(--primary);
+    }
+    h2, h3 { line-height: 1.35; }
+    p, label, textarea, input, button, small, span { font-family: "Space Mono", Consolas, monospace; }
+    p { color: var(--muted); line-height: 1.65; }
+    .layout {
+      display: grid;
+      grid-template-columns: 320px minmax(420px, 1fr) 360px;
+      gap: 20px;
+      align-items: start;
+    }
+    .panel {
+      border: 3px dotted var(--muted);
+      border-radius: 8px;
+      background: var(--bg);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+    .card {
+      border: 2px solid var(--primary);
+      border-radius: 4px;
+      background: var(--panel);
+      padding: 14px;
+      margin-top: 14px;
+      line-height: 1.55;
+    }
+    form { display: grid; gap: 16px; }
+    label { display: grid; gap: 8px; font-weight: 900; line-height: 1.45; }
+    textarea, input {
+      width: 100%;
+      border: 2px solid var(--primary);
+      border-radius: 4px;
+      background: var(--panel);
+      color: var(--text);
+      padding: 12px 13px;
+      font-size: .95rem;
+      outline: none;
+    }
+    textarea { min-height: 105px; resize: vertical; }
+    textarea:focus, input:focus {
+      border-color: var(--muted);
+      box-shadow: 0 0 0 4px rgba(244,185,176,.18);
+    }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .results { display: grid; gap: 10px; }
+    .resultLine { display: grid; grid-template-columns: 88px 1fr; gap: 10px; align-items: start; }
+    .badge {
+      display: inline-flex;
+      width: fit-content;
+      border: 2px solid #111827;
+      border-radius: 4px;
+      background: var(--muted);
+      color: #111827;
+      padding: 5px 8px;
+      font-weight: 900;
+    }
+    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    button {
+      border: 3px solid #111827;
+      border-radius: 4px;
+      background: var(--muted);
+      color: #111827;
+      box-shadow: 5px 5px 0 var(--primary);
+      padding: 12px 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    button.secondary { background: #000; color: var(--text); border-color: var(--muted); }
+    button:hover { transform: translate(-2px, -2px); }
+    .checklist { display: grid; gap: 10px; margin-top: 14px; }
+    .check {
+      display: flex;
+      gap: 10px;
+      border: 2px solid rgba(255,255,255,.14);
+      border-radius: 4px;
+      background: var(--panel);
+      padding: 11px;
+      line-height: 1.45;
+      font-family: "Space Mono", Consolas, monospace;
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--warn); margin-top: 5px; flex: 0 0 auto; }
+    .success { border-color: var(--ok) !important; background: rgba(22,163,74,.16) !important; }
+    .warning { border-color: var(--warn) !important; background: rgba(217,119,6,.16) !important; }
+    .error { border-color: var(--bad) !important; background: rgba(220,38,38,.16) !important; }
+    .completed .dot { background: var(--ok); }
+    .status { margin-top: 14px; padding: 14px; border-radius: 4px; line-height: 1.55; font-family: "Space Mono", Consolas, monospace; }
+    .promptPreview {
+      white-space: pre-wrap;
+      min-height: 220px;
+      color: #d9f99d;
+      line-height: 1.65;
+      font-family: "Space Mono", Consolas, monospace;
+    }
+    @media (max-width: 1120px) {
+      .layout { grid-template-columns: 1fr 1fr; }
+      .layout aside:last-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 760px) {
+      body { padding: 18px; }
+      .layout, .grid2, .actions, .resultLine { grid-template-columns: 1fr; }
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/activity.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="eyebrow">Clase 1</div>
+      <h1>Tu primer prompt</h1>
+      <p>Aprendé a escribir un prompt claro y específico, probar entre 3 y 5 resultados y justificar una elección final con criterio propio.</p>
+    </header>
+
+    <section class="layout">
+      <aside class="panel">
+        <h2>Consigna</h2>
+        <p>Elegí un tema simple: un afiche, un logo inventado, una imagen para Instagram o una pieza web. La meta no es acertar a la primera, sino ver cómo cambia el resultado según cómo le hablás a la IA.</p>
+        <div class="card"><strong>Usás IA para:</strong><br>generar opciones y comparar resultados.</div>
+        <div class="card"><strong>Tu trabajo es:</strong><br>especificar, revisar, elegir y explicar por qué esa versión funciona mejor.</div>
+        <div class="card"><strong>Actividad independiente:</strong><br>podés completarla como práctica de clase. Al enviarla, el Playground solo recibe si está completa o qué falta.</div>
+      </aside>
+
+      <section class="panel">
+        <form id="activityForm">
+          <div class="grid2">
+            <label>Tema o idea simple
+              <input name="topic" placeholder="Ej: afiche para un recital indie">
+            </label>
+            <label>Contexto de uso
+              <input name="context" placeholder="Ej: historia de Instagram, 1080x1920">
+            </label>
+          </div>
+          <label>MI PRIMER PROMPT
+            <textarea name="prompt" placeholder="Incluí qué querés, para quién es, estilo visual y contexto donde se va a usar."></textarea>
+          </label>
+          <label>RESULTADOS DE LA IA
+            <small>Registrá 3 a 5 resultados. Podés pegar enlaces, nombres de archivo o describir cada imagen/respuesta.</small>
+          </label>
+          <div class="results">
+            <div class="resultLine"><span class="badge">Resultado 1</span><textarea name="result1"></textarea></div>
+            <div class="resultLine"><span class="badge">Resultado 2</span><textarea name="result2"></textarea></div>
+            <div class="resultLine"><span class="badge">Resultado 3</span><textarea name="result3"></textarea></div>
+            <div class="resultLine"><span class="badge">Resultado 4</span><textarea name="result4"></textarea></div>
+            <div class="resultLine"><span class="badge">Resultado 5</span><textarea name="result5"></textarea></div>
+          </div>
+          <label>MI ANÁLISIS
+            <textarea name="analysis" placeholder="Qué funcionó, qué cambiarías, cuál elegiste como final y por qué."></textarea>
+          </label>
+          <div class="actions">
+            <button type="button" id="validateBtn">Enviar actividad</button>
+            <button class="secondary" type="button" id="resetBtn">Reiniciar</button>
+          </div>
+        </form>
+      </section>
+
+      <aside class="panel">
+        <h2>Entregable de hoy</h2>
+        <div class="promptPreview" id="deliverable">Completá las casillas para armar tu entrega.</div>
+        <div class="checklist" id="checklist"></div>
+        <div class="status warning" id="status">Completá la actividad y enviala cuando termines.</div>
+      </aside>
+    </section>
+  </main>
+
+  <script type="module">
+    import { PGEvent } from "../pg-event.js";
+
+    const pgEvent = new PGEvent();
+    pgEvent.getValues();
+    const storageKey = "webIaCreativa.clase1.v1";
+    const form = document.querySelector("#activityForm");
+    const fields = ["topic", "context", "prompt", "result1", "result2", "result3", "result4", "result5", "analysis"];
+
+    function data() {
+      return Object.fromEntries(fields.map((name) => [name, form[name].value.trim()]));
+    }
+
+    function resultCount(values) {
+      return [values.result1, values.result2, values.result3, values.result4, values.result5].filter(Boolean).length;
+    }
+
+    function validate() {
+      const values = data();
+      const prompt = values.prompt.toLowerCase();
+      const analysis = values.analysis.toLowerCase();
+      return {
+        topic: values.topic.length >= 4,
+        context: values.context.length >= 6,
+        prompt: values.prompt.length >= 120,
+        promptParts: /(para|audiencia|dirigido|estilo|visual|contexto|uso)/i.test(prompt),
+        results: resultCount(values) >= 3,
+        analysis: values.analysis.length >= 140,
+        decision: /(elijo|elegí|final|porque|funcionó|cambiaría)/i.test(analysis)
+      };
+    }
+
+    function reasonsFrom(checks) {
+      const labels = {
+        topic: "Falta definir un tema o idea simple.",
+        context: "Falta aclarar el contexto de uso.",
+        prompt: "El prompt tiene que estar más completo.",
+        promptParts: "El prompt debe incluir destinatario, estilo visual o contexto.",
+        results: "Faltan registrar al menos 3 resultados generados con IA.",
+        analysis: "Falta desarrollar el análisis.",
+        decision: "Falta justificar cuál resultado elegiste y por qué."
+      };
+      return Object.entries(checks)
+        .filter(([, ok]) => !ok)
+        .map(([key]) => labels[key]);
+    }
+
+    function sendToPlayground(checks, values) {
+      const reasons = reasonsFrom(checks);
+      pgEvent.postToPg({
+        event: reasons.length === 0 ? "SUCCESS" : "FAILURE",
+        reasons,
+        message: reasons.length === 0
+          ? "Actividad completa: el prompt incluye pruebas, análisis y elección final."
+          : "La actividad todavía tiene puntos por completar.",
+        state: JSON.stringify({
+          activity: "clase-1-tu-primer-prompt",
+          results: resultCount(values),
+          completed: reasons.length === 0,
+          fields: checks
+        })
+      });
+    }
+
+    function save() {
+      localStorage.setItem(storageKey, JSON.stringify(data()));
+      render(false);
+    }
+
+    function load() {
+      const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+      fields.forEach((name) => { if (saved[name]) form[name].value = saved[name]; });
+    }
+
+    function render(analyzed) {
+      const values = data();
+      const checks = validate();
+      const labels = {
+        topic: "Tema o idea definido",
+        context: "Contexto de uso claro",
+        prompt: "Prompt completo, no una frase suelta",
+        promptParts: "Incluye destinatario, estilo o contexto",
+        results: "Hay entre 3 y 5 resultados registrados",
+        analysis: "Análisis con desarrollo suficiente",
+        decision: "La elección final está justificada"
+      };
+      document.querySelector("#deliverable").textContent =
+`MI PRIMER PROMPT:
+${values.prompt || "Pendiente"}
+
+RESULTADOS DE LA IA:
+1. ${values.result1 || "Pendiente"}
+2. ${values.result2 || "Pendiente"}
+3. ${values.result3 || "Pendiente"}
+4. ${values.result4 || "Opcional"}
+5. ${values.result5 || "Opcional"}
+
+MI ANÁLISIS:
+${values.analysis || "Pendiente"}`;
+      document.querySelector("#checklist").innerHTML = Object.entries(labels).map(([key, label]) => `
+        <div class="check ${checks[key] ? "success completed" : analyzed ? "error" : "warning"}">
+          <span class="dot"></span><span>${label}</span>
+        </div>
+      `).join("");
+      const complete = Object.values(checks).every(Boolean);
+      const status = document.querySelector("#status");
+      status.className = `status ${complete ? "success" : analyzed ? "error" : "warning"}`;
+      status.textContent = complete
+        ? "Actividad lista: el prompt tiene opciones, análisis y justificación."
+        : analyzed
+          ? "Revisá los puntos marcados antes de cerrar la actividad."
+          : "Completá el entregable y envialo cuando esté listo.";
+
+      if (analyzed) {
+        sendToPlayground(checks, values);
+      }
+    }
+
+    form.addEventListener("input", save);
+    document.querySelector("#validateBtn").addEventListener("click", () => render(true));
+    document.querySelector("#resetBtn").addEventListener("click", () => {
+      fields.forEach((name) => { form[name].value = ""; });
+      localStorage.removeItem(storageKey);
+      render(false);
+    });
+
+    load();
+    render(false);
+  </script>
+</body>
+</html>

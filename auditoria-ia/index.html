@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clase 5 - Auditoría y justificación</title>
+  <style>
+    :root{color-scheme:dark;--text:#fff7d6;--muted:#f4b9b0;--primary:#2a3fe5;--ok:#16a34a;--warn:#d97706;--bad:#dc2626;--shadow:8px 8px 0 #dc2626}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:"Press Start 2P","Space Mono",Consolas,monospace;color:var(--text);background:#000;background-image:repeating-linear-gradient(0deg,rgba(220,38,38,.2) 0 2px,transparent 2px 34px),repeating-linear-gradient(90deg,rgba(42,63,229,.25) 0 2px,transparent 2px 34px);padding:28px}.shell{max-width:1480px;margin:0 auto}.eyebrow{color:var(--muted);text-transform:uppercase;font-size:.72rem;letter-spacing:.08em}h1{margin:10px 0 12px;font-size:clamp(1.7rem,4vw,3rem);line-height:1.15;text-shadow:4px 4px 0 var(--bad)}h2,h3{line-height:1.35}p,label,textarea,input,select,button,small,span{font-family:"Space Mono",Consolas,monospace}p{color:var(--muted);line-height:1.65}.layout{display:grid;grid-template-columns:330px minmax(430px,1fr) 390px;gap:20px;align-items:start}.panel{border:3px dotted var(--muted);border-radius:8px;background:#000;box-shadow:var(--shadow);padding:20px}.card,.phrase{border:2px solid var(--primary);border-radius:4px;background:#050505;padding:14px;margin-top:14px;line-height:1.55}.phrase{display:grid;gap:10px}form{display:grid;gap:16px}label{display:grid;gap:8px;font-weight:900;line-height:1.45}textarea,input,select{width:100%;border:2px solid var(--primary);border-radius:4px;background:#050505;color:var(--text);padding:12px 13px;font-size:.95rem;outline:none}textarea{min-height:96px;resize:vertical}textarea:focus,input:focus,select:focus{border-color:var(--muted);box-shadow:0 0 0 4px rgba(244,185,176,.18)}.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}.evidence{border:3px solid var(--text);border-radius:4px;padding:14px;background:#050505;min-height:130px;display:grid;align-content:center;gap:8px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}button{border:3px solid #111827;border-radius:4px;background:var(--muted);color:#111827;box-shadow:5px 5px 0 var(--bad);padding:12px 14px;font-weight:900;text-transform:uppercase;cursor:pointer}button.secondary{background:#000;color:var(--text);border-color:var(--muted)}button:hover{transform:translate(-2px,-2px)}.summary{white-space:pre-wrap;color:#d9f99d;line-height:1.65;font-family:"Space Mono",Consolas,monospace}.feedback{display:grid;gap:10px;margin-top:14px}.item{display:flex;gap:10px;border:2px solid rgba(255,255,255,.14);border-radius:4px;background:#050505;padding:11px;line-height:1.45}.dot{width:12px;height:12px;border-radius:50%;background:var(--warn);margin-top:5px;flex:0 0 auto}.success{border-color:var(--ok)!important;background:rgba(22,163,74,.16)!important}.warning{border-color:var(--warn)!important;background:rgba(217,119,6,.16)!important}.error{border-color:var(--bad)!important;background:rgba(220,38,38,.16)!important}.completed .dot{background:var(--ok)}.status{margin-top:14px;padding:14px;border-radius:4px;line-height:1.55}@media(max-width:1150px){.layout{grid-template-columns:1fr 1fr}.layout aside:last-child{grid-column:1/-1}}@media(max-width:760px){body{padding:18px}.layout,.pair,.actions{grid-template-columns:1fr}}
+  </style>
+  <link rel="stylesheet" href="../styles/activity.css">
+</head>
+<body>
+  <main class="shell">
+    <header><div class="eyebrow">Clase 5</div><h1>Auditoría y justificación de cambios</h1><p>Mirás tu propio sitio con ojo crítico, aplicás 4 cambios importantes y explicás cada decisión con criterio técnico.</p></header>
+    <section class="layout">
+      <aside class="panel">
+        <h2>Consigna</h2>
+        <p>La justificación pesa más que “me gusta”. Usá criterios como contraste, jerarquía, claridad, coherencia visual, accesibilidad, audiencia o conversión.</p>
+        <div class="card"><strong>¿Se usa IA?</strong><br>Sí, podés usar IA para diagnosticar o proponer correcciones. Igual tenés que indicar qué aceptaste, qué editaste y por qué.</div>
+        <div class="card"><strong>Evidencia visual</strong><br>Entregá dos capturas: antes.png y despues.png, en PNG o JPG.</div>
+      </aside>
+      <form class="panel" id="auditForm">
+        <h2>Parte A - Justificación guiada</h2>
+        <article class="phrase"><span>Eliminé la sección...</span><input name="removedWhat" placeholder="qué eliminaste"><textarea name="removedWhy" placeholder="porque (criterio técnico)"></textarea></article>
+        <article class="phrase"><span>Reemplacé el texto...</span><input name="textWhat" placeholder="qué texto reemplazaste"><textarea name="textWhy" placeholder="para mejorar (criterio técnico)"></textarea></article>
+        <article class="phrase"><span>La imagen más importante es...</span><input name="imageWhat" placeholder="qué imagen"><textarea name="imageWhy" placeholder="porque (criterio técnico)"></textarea></article>
+        <article class="phrase"><span>El cambio de mayor impacto fue...</span><input name="impactWhat" placeholder="qué cambio"><textarea name="impactWhy" placeholder="porque (criterio técnico)"></textarea></article>
+        <h2>Uso de IA en correcciones</h2>
+        <label>¿Usaste IA para corregir o auditar?<select name="usedAi"><option value="">Seleccionar</option><option>Sí</option><option>No</option></select></label>
+        <label>Detalle<textarea name="aiDetail" placeholder="Si usaste IA: pegá el prompt o resumí qué le pediste. Si no usaste: explicá cómo decidiste los cambios."></textarea></label>
+        <h2>Parte B - Evidencias visuales</h2>
+        <div class="pair">
+          <label>Captura antes<input name="beforeFile" placeholder="antes.png"></label>
+          <label>Captura después<input name="afterFile" placeholder="despues.png"></label>
+        </div>
+      </form>
+      <aside class="panel">
+        <h2>Entrega armada</h2>
+        <div class="pair">
+          <div class="evidence"><strong>ANTES</strong><span id="beforePreview">antes.png pendiente</span></div>
+          <div class="evidence"><strong>DESPUÉS</strong><span id="afterPreview">despues.png pendiente</span></div>
+        </div>
+        <div class="summary" id="summary">Completá las frases para armar la entrega.</div>
+        <div class="actions"><button type="button" id="validateBtn">Enviar actividad</button><button class="secondary" type="button" id="resetBtn">Reiniciar</button></div>
+        <div class="feedback" id="feedback"></div><div class="status warning" id="status">Completá auditoría, uso de IA y evidencias.</div>
+      </aside>
+    </section>
+  </main>
+  <script type="module">
+    import { PGEvent } from "../pg-event.js";
+    const pgEvent = new PGEvent();
+    pgEvent.getValues();
+    const storageKey="webIaCreativa.clase5.v1";const form=document.querySelector("#auditForm");const fields=["removedWhat","removedWhy","textWhat","textWhy","imageWhat","imageWhy","impactWhat","impactWhy","usedAi","aiDetail","beforeFile","afterFile"];
+    function values(){return Object.fromEntries(fields.map(n=>[n,form[n].value.trim()]))}
+    function hasCriterion(text){return /(contraste|jerarqu|claridad|coherencia|accesibilidad|audiencia|conversi|legibilidad|lectura|foco|cta|criterio)/i.test(text)}
+    function fileOk(name,expected){return name.toLowerCase().includes(expected)&&/\.(png|jpg|jpeg)$/i.test(name)}
+    function validate(){const v=values();return{removed:v.removedWhat.length>=3&&hasCriterion(v.removedWhy),text:v.textWhat.length>=3&&hasCriterion(v.textWhy),image:v.imageWhat.length>=3&&hasCriterion(v.imageWhy),impact:v.impactWhat.length>=3&&hasCriterion(v.impactWhy),ai:!!v.usedAi&&v.aiDetail.length>=50,before:fileOk(v.beforeFile,"antes"),after:fileOk(v.afterFile,"despues")}}
+    function reasonsFrom(r){const labels={removed:"Falta completar la frase sobre la sección eliminada con criterio técnico.",text:"Falta completar la frase sobre el texto reemplazado con criterio técnico.",image:"Falta justificar la imagen más importante.",impact:"Falta justificar el cambio de mayor impacto.",ai:"Falta aclarar si usaste IA y cómo decidiste las correcciones.",before:"Falta registrar la evidencia antes.png o JPG.",after:"Falta registrar la evidencia despues.png o JPG."};return Object.entries(r).filter(([,ok])=>!ok).map(([key])=>labels[key])}
+    function sendToPlayground(r,v){const reasons=reasonsFrom(r);pgEvent.postToPg({event:reasons.length===0?"SUCCESS":"FAILURE",reasons,message:reasons.length===0?"Actividad completa: la auditoría incluye cambios, criterios, uso de IA y evidencias.":"La actividad todavía tiene puntos por completar.",state:JSON.stringify({activity:"clase-5-auditoria-cambios",completed:reasons.length===0,usedAi:v.usedAi,fields:r})})}
+    function save(){localStorage.setItem(storageKey,JSON.stringify(values()));render(false)}
+    function load(){const saved=JSON.parse(localStorage.getItem(storageKey)||"{}");fields.forEach(n=>{if(saved[n])form[n].value=saved[n]})}
+    function render(analyzed){const v=values();document.querySelector("#beforePreview").textContent=v.beforeFile||"antes.png pendiente";document.querySelector("#afterPreview").textContent=v.afterFile||"despues.png pendiente";document.querySelector("#summary").textContent=`Eliminé la sección ${v.removedWhat||"_____"} porque ${v.removedWhy||"_____"}.\n\nReemplacé el texto ${v.textWhat||"_____"} para mejorar ${v.textWhy||"_____"}.\n\nLa imagen más importante es ${v.imageWhat||"_____"} porque ${v.imageWhy||"_____"}.\n\nEl cambio de mayor impacto fue ${v.impactWhat||"_____"} porque ${v.impactWhy||"_____"}.\n\nUso de IA: ${v.usedAi||"pendiente"}. ${v.aiDetail||""}`;const r=validate();const labels={removed:"Cambio eliminado con criterio técnico",text:"Texto reemplazado con criterio técnico",image:"Imagen principal justificada",impact:"Mayor impacto justificado",ai:"Aclara si usó IA y cómo",before:"Evidencia antes.png o JPG",after:"Evidencia despues.png o JPG"};document.querySelector("#feedback").innerHTML=Object.entries(labels).map(([k,l])=>`<div class="item ${r[k]?"success completed":analyzed?"error":"warning"}"><span class="dot"></span><span>${l}</span></div>`).join("");const complete=Object.values(r).every(Boolean);const status=document.querySelector("#status");status.className=`status ${complete?"success":analyzed?"error":"warning"}`;status.textContent=complete?"Actividad lista: la auditoría incluye cambios, criterios, uso de IA y evidencias.":analyzed?"Revisá los puntos marcados antes de cerrar la actividad.":"Completá auditoría, uso de IA y evidencias.";if(analyzed)sendToPlayground(r,v)}
+    form.addEventListener("input",save);form.addEventListener("change",save);document.querySelector("#validateBtn").addEventListener("click",()=>render(true));document.querySelector("#resetBtn").addEventListener("click",()=>{fields.forEach(n=>{form[n].value=""});localStorage.removeItem(storageKey);render(false)});load();render(false);
+  </script>
+</body>
+</html>
