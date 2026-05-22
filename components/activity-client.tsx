@@ -97,12 +97,14 @@ export function ActivityClient({ activity }: { activity: Activity }) {
       });
       const payload = (await response.json()) as ValidationResponse;
       setResult(payload);
-      pgEvent.postToPg({
+      const pgPayload = {
         event: payload.event,
         reasons: payload.reasons,
         message: payload.message,
         state: payload.state,
-      });
+      };
+      console.log("[Activity] sending to PG", pgPayload);
+      pgEvent.postToPg(pgPayload);
     } catch {
       const fallback: ValidationResponse = {
         event: "FAILURE",
@@ -111,6 +113,7 @@ export function ActivityClient({ activity }: { activity: Activity }) {
         state: JSON.stringify({ activity: activity.id, completed: false }),
       };
       setResult(fallback);
+      console.log("[Activity] sending fallback to PG", fallback);
       pgEvent.postToPg(fallback);
     } finally {
       setIsSending(false);
