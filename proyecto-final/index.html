@@ -5,77 +5,136 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rediseño Final Asistido por IA</title>
   <style>
-    :root{color-scheme:dark;--text:#f8fafc;--muted:#aeb8c8;--line:rgba(255,255,255,.16);--ok:#34d399;--warn:#fbbf24;--bad:#fb7185;--shadow:0 22px 70px rgba(0,0,0,.36)}
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 18% 12%,rgba(125,211,252,.2),transparent 32%),radial-gradient(circle at 86% 18%,rgba(251,191,36,.16),transparent 34%),linear-gradient(135deg,#11151d,#243143 60%,#11151d);color:var(--text);padding:28px}.shell{max-width:1500px;margin:0 auto}.eyebrow{color:#7dd3fc;font-weight:850;text-transform:uppercase;font-size:.78rem;letter-spacing:.08em}h1{margin:8px 0;font-size:clamp(2rem,4vw,4rem);line-height:1;letter-spacing:0}p{color:var(--muted);line-height:1.6}.layout{display:grid;grid-template-columns:300px minmax(430px,1fr) 420px;gap:18px;align-items:start}.panel,.slide{border:1px solid var(--line);border-radius:22px;background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.045));box-shadow:var(--shadow);backdrop-filter:blur(18px)}.panel{padding:20px}.steps{display:grid;gap:10px}.step{padding:13px;border-radius:15px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06)}form{display:grid;gap:14px}label{display:grid;gap:8px;font-weight:800;color:#e6edf7}textarea,input{width:100%;border:1px solid rgba(255,255,255,.16);background:rgba(7,10,16,.62);color:var(--text);border-radius:14px;padding:13px 14px;font:inherit;outline:none}textarea{min-height:95px;resize:vertical}textarea:focus,input:focus{border-color:rgba(125,211,252,.68);box-shadow:0 0 0 4px rgba(125,211,252,.12)}button{border:0;border-radius:14px;padding:14px 18px;font:inherit;font-weight:900;cursor:pointer;color:#111827;background:linear-gradient(135deg,#7dd3fc,#fbbf24);transition:.18s ease}button:hover{transform:translateY(-2px);filter:brightness(1.05)}.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}.checks label{display:flex;gap:8px;align-items:center;font-weight:700;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);border-radius:12px;padding:10px}.slide{padding:24px;min-height:420px;display:grid;gap:14px;align-content:start;background:linear-gradient(160deg,rgba(125,211,252,.14),rgba(255,255,255,.055))}.slide h2{font-size:2.1rem;line-height:1.05;margin:0}.tag{width:fit-content;border-radius:999px;border:1px solid rgba(255,255,255,.16);padding:7px 10px;color:#7dd3fc}.changeList{display:grid;gap:8px}.changeList span{padding:10px;border-radius:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}.feedback{display:grid;gap:10px;margin-top:14px}.item{padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.055);display:flex;gap:10px}.dot{width:12px;height:12px;border-radius:50%;background:var(--warn);margin-top:5px;flex:0 0 auto}.success{border-color:rgba(52,211,153,.58)!important;background:rgba(52,211,153,.12)!important}.warning{border-color:rgba(251,191,36,.58)!important;background:rgba(251,191,36,.1)!important}.error{border-color:rgba(251,113,133,.58)!important;background:rgba(251,113,133,.1)!important}.completed .dot{background:var(--ok)}.status{margin-top:14px;padding:14px;border-radius:16px;font-weight:900}@media(max-width:1180px){.layout{grid-template-columns:1fr 1fr}.layout aside:last-child{grid-column:1/-1}}@media(max-width:760px){body{padding:18px}.layout,.checks{grid-template-columns:1fr}}
-    /* DESIGN.md: Pacman arcade. La entrega final se presenta como pantalla de victoria. */
-    :root{--text:#fff7d6;--muted:#f4b9b0;--line:#f4b9b0;--ok:#16a34a;--warn:#d97706;--bad:#dc2626;--shadow:8px 8px 0 #2a3fe5}body{font-family:"Press Start 2P","Space Mono",Consolas,monospace;background:#000;background-image:radial-gradient(circle at 12% 20%,#f4b9b0 0 4px,transparent 5px),radial-gradient(circle at 50% 85%,#f4b9b0 0 4px,transparent 5px),radial-gradient(circle at 88% 30%,#f4b9b0 0 4px,transparent 5px),linear-gradient(90deg,rgba(42,63,229,.24) 2px,transparent 2px),linear-gradient(rgba(42,63,229,.24) 2px,transparent 2px);background-size:160px 160px,180px 180px,140px 140px,56px 56px,56px 56px}.eyebrow{color:#f4b9b0}h1{color:#fff7d6;text-shadow:4px 4px 0 #2a3fe5;font-size:clamp(1.7rem,4vw,3rem)}p,textarea,input,span,legend{font-family:"Space Mono",Consolas,monospace}.layout{grid-template-columns:280px minmax(420px,1fr) 460px}.panel,.slide{border:3px dotted #f4b9b0;border-radius:8px;background:#000;box-shadow:var(--shadow);backdrop-filter:none}.steps{counter-reset:stage}.step{border:2px solid #2a3fe5;border-radius:4px;background:#050505;box-shadow:4px 4px 0 #111827}.step::before{counter-increment:stage;content:"STAGE " counter(stage) " ";color:#f4b9b0;display:block;margin-bottom:6px}textarea,input{border:2px solid #2a3fe5;border-radius:4px;background:#050505;color:#fff7d6}textarea:focus,input:focus{border-color:#f4b9b0;box-shadow:0 0 0 4px rgba(244,185,176,.18)}button{border:3px solid #111827;border-radius:4px;background:#f4b9b0;color:#111827;box-shadow:5px 5px 0 #2a3fe5;text-transform:uppercase}.checks label{border:2px solid #2a3fe5;border-radius:4px;background:#050505}.checks label:has(input:checked){border-color:#16a34a;box-shadow:4px 4px 0 #16a34a}.slide{background:#050505;border-style:solid;box-shadow:8px 8px 0 #f4b9b0;position:relative;overflow:hidden}.slide::after{content:"";position:absolute;right:18px;top:18px;width:56px;height:56px;background:#f4b9b0;clip-path:polygon(0 0,100% 50%,0 100%,34% 50%)}.slide h2{color:#fff7d6;text-shadow:3px 3px 0 #2a3fe5}.tag,.changeList span,.item,.status{border-radius:4px}.tag{border:2px solid #f4b9b0;color:#f4b9b0}.changeList span{border:2px solid #2a3fe5;background:#000}
+    :root{color-scheme:dark;--text:#fff7d6;--muted:#f4b9b0;--line:#f4b9b0;--ok:#16a34a;--warn:#d97706;--bad:#dc2626;--shadow:8px 8px 0 #2a3fe5}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:"Press Start 2P","Space Mono",Consolas,monospace;background:#000;background-image:radial-gradient(circle at 12% 20%,#f4b9b0 0 4px,transparent 5px),radial-gradient(circle at 50% 85%,#f4b9b0 0 4px,transparent 5px),radial-gradient(circle at 88% 30%,#f4b9b0 0 4px,transparent 5px),linear-gradient(90deg,rgba(42,63,229,.24) 2px,transparent 2px),linear-gradient(rgba(42,63,229,.24) 2px,transparent 2px);background-size:160px 160px,180px 180px,140px 140px,56px 56px,56px 56px;color:var(--text);padding:28px}.shell{max-width:1500px;margin:0 auto}.eyebrow{color:#f4b9b0;font-weight:850;text-transform:uppercase;font-size:.78rem;letter-spacing:.08em}h1{margin:8px 0;font-size:clamp(1.7rem,4vw,3rem);line-height:1;text-shadow:4px 4px 0 #2a3fe5}p,textarea,input,span,legend,label,button{font-family:"Space Mono",Consolas,monospace}p{color:var(--muted);line-height:1.6}.layout{display:grid;grid-template-columns:280px minmax(420px,1fr) 460px;gap:18px;align-items:start}.panel,.slide{border:3px dotted #f4b9b0;border-radius:8px;background:#000;box-shadow:var(--shadow)}.panel{padding:20px}.steps{display:grid;gap:10px}.step{padding:13px;border:2px solid #2a3fe5;border-radius:4px;background:#050505;box-shadow:4px 4px 0 #111827}.step::before{counter-increment:stage;content:"STAGE " counter(stage) " ";color:#f4b9b0;display:block;margin-bottom:6px}.steps{counter-reset:stage}form{display:grid;gap:14px}label{display:grid;gap:8px;font-weight:800;color:#e6edf7}textarea,input{width:100%;border:2px solid #2a3fe5;background:#050505;color:var(--text);border-radius:4px;padding:13px 14px;font:inherit;outline:none}textarea{min-height:95px;resize:vertical}textarea:focus,input:focus{border-color:#f4b9b0;box-shadow:0 0 0 4px rgba(244,185,176,.18)}button{border:3px solid #111827;border-radius:4px;padding:14px 18px;font:inherit;font-weight:900;cursor:pointer;color:#111827;background:#f4b9b0;box-shadow:5px 5px 0 #2a3fe5;text-transform:uppercase}.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}.checks label{display:flex;gap:8px;align-items:center;font-weight:700;border:2px solid #2a3fe5;background:#050505;border-radius:4px;padding:10px}.checks label:has(input:checked){border-color:#16a34a;box-shadow:4px 4px 0 #16a34a}.slide{padding:24px;min-height:420px;display:grid;gap:14px;align-content:start;background:#050505;box-shadow:8px 8px 0 #f4b9b0;position:relative;overflow:hidden}.slide::after{content:"";position:absolute;right:18px;top:18px;width:56px;height:56px;background:#f4b9b0;clip-path:polygon(0 0,100% 50%,0 100%,34% 50%)}.slide h2{font-size:2.1rem;line-height:1.05;margin:0;color:#fff7d6;text-shadow:3px 3px 0 #2a3fe5}.tag{width:fit-content;border-radius:4px;border:2px solid #f4b9b0;padding:7px 10px;color:#f4b9b0}.changeList{display:grid;gap:8px}.changeList span{padding:10px;border-radius:4px;background:#000;border:2px solid #2a3fe5}.feedback{display:grid;gap:10px;margin-top:14px}.item{padding:12px;border-radius:4px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.055);display:flex;gap:10px}.dot{width:12px;height:12px;border-radius:50%;background:var(--warn);margin-top:5px;flex:0 0 auto}.success{border-color:rgba(52,211,153,.58)!important;background:rgba(52,211,153,.12)!important}.warning{border-color:rgba(251,191,36,.58)!important;background:rgba(251,191,36,.1)!important}.error{border-color:rgba(251,113,133,.58)!important;background:rgba(251,113,133,.1)!important}.completed .dot{background:var(--ok)}.status{margin-top:14px;padding:14px;border-radius:4px;font-weight:900}@media(max-width:1180px){.layout{grid-template-columns:1fr 1fr}.layout aside:last-child{grid-column:1/-1}}@media(max-width:760px){body{padding:18px}.layout,.checks{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <main class="shell">
-    <header><div class="eyebrow">Actividad final</div><h1>Rediseño Final Asistido por IA</h1><p>Documenta el proceso completo: prompt, resultado inicial, cambios propios, decisiones y checklist de calidad.</p></header>
+    <header><div class="eyebrow" id="eyebrow"></div><h1 id="pageTitle"></h1><p id="pageIntro"></p></header>
     <section class="layout">
-      <aside class="panel"><h2>Proceso</h2><div class="steps"><div class="step">1. Describe el proyecto</div><div class="step">2. Registra el prompt</div><div class="step">3. Evalúa el resultado de IA</div><div class="step">4. Lista cambios realizados</div><div class="step">5. Justifica decisiones</div><div class="step">6. Cierra checklist</div></div></aside>
+      <aside class="panel"><h2 id="processTitle"></h2><div class="steps" id="steps"></div></aside>
       <section class="panel">
         <form id="finalForm">
-          <label>Descripción del proyecto<textarea name="description" placeholder="Describe la web, su audiencia y su propósito."></textarea></label>
-          <label>Prompt usado<textarea name="prompt" placeholder="Pega o redacta el prompt usado con la IA."></textarea></label>
-          <label>Resultado inicial de IA<textarea name="initial" placeholder="Resume qué devolvió la IA al inicio."></textarea></label>
-          <label>Cambios realizados<input name="changes" placeholder="Separa al menos 4 cambios con coma o punto y coma"></label>
-          <label>Justificación de decisiones<textarea name="justification" placeholder="Explica por qué esos cambios mejoran el resultado inicial."></textarea></label>
-          <fieldset class="checks"><legend>Checklist final</legend>
-            <label><input type="checkbox" name="finalCheck" value="coherencia"> coherencia visual</label>
-            <label><input type="checkbox" name="finalCheck" value="cta"> CTA claro</label>
-            <label><input type="checkbox" name="finalCheck" value="jerarquia"> buena jerarquía</label>
-            <label><input type="checkbox" name="finalCheck" value="colores"> colores consistentes</label>
-            <label><input type="checkbox" name="finalCheck" value="texto"> texto claro</label>
-            <label><input type="checkbox" name="finalCheck" value="mejora"> mejora respecto al resultado inicial</label>
-          </fieldset>
-          <button type="button" id="validateBtn">Validar entrega final</button>
+          <label><span id="descriptionLabel"></span><textarea name="description" id="description"></textarea></label>
+          <label><span id="promptLabel"></span><textarea name="prompt" id="prompt"></textarea></label>
+          <label><span id="initialLabel"></span><textarea name="initial" id="initial"></textarea></label>
+          <label><span id="changesLabel"></span><input name="changes" id="changes"></label>
+          <label><span id="justificationLabel"></span><textarea name="justification" id="justification"></textarea></label>
+          <fieldset class="checks"><legend id="checklistLegend"></legend><div id="checklistOptions" class="checks"></div></fieldset>
+          <button type="button" id="validateBtn"></button>
         </form>
       </section>
       <aside class="panel">
-        <article class="slide" aria-live="polite"><span class="tag">Presentación final</span><h2 id="slideTitle">Proyecto en construcción</h2><p id="slideSummary">La presentación se completa con tu documentación.</p><div class="changeList" id="changeList"></div><p id="slideJustification"></p></article>
-        <div class="feedback" id="feedback"></div><div class="status warning" id="status">Completa el proceso y valida la entrega.</div>
+        <article class="slide" aria-live="polite"><span class="tag" id="tagLabel"></span><h2 id="slideTitle"></h2><p id="slideSummary"></p><div class="changeList" id="changeList"></div><p id="slideJustification"></p></article>
+        <div class="feedback" id="feedback"></div><div class="status warning" id="status"></div>
       </aside>
     </section>
   </main>
-  <script>
-    const storageKey = "webIaCreativa.proyectoFinal";
+  <script type="module">
+    import { PGEvent } from "../pg-event.js";
+
+    const translations = {
+      es: {
+        metaTitle: "Rediseño Final Asistido por IA", eyebrow: "Actividad final", pageTitle: "Rediseño Final Asistido por IA", pageIntro: "Documenta el proceso completo: prompt, resultado inicial, cambios propios, decisiones y checklist de calidad.",
+        processTitle: "Proceso", steps: ["Describe el proyecto","Registra el prompt","Evalúa el resultado de IA","Lista cambios realizados","Justifica decisiones","Cierra checklist"],
+        descriptionLabel: "Descripción del proyecto", descriptionPlaceholder: "Describe la web, su audiencia y su propósito.",
+        promptLabel: "Prompt usado", promptPlaceholder: "Pegá o redactá el prompt usado con la IA.",
+        initialLabel: "Resultado inicial de IA", initialPlaceholder: "Resumí qué devolvió la IA al inicio.",
+        changesLabel: "Cambios realizados", changesPlaceholder: "Separá al menos 4 cambios con coma o punto y coma",
+        justificationLabel: "Justificación de decisiones", justificationPlaceholder: "Explicá por qué esos cambios mejoran el resultado inicial.",
+        checklistLegend: "Checklist final", checklistOptions: [{ value: "coherencia", label: "coherencia visual" },{ value: "cta", label: "CTA claro" },{ value: "jerarquia", label: "buena jerarquía" },{ value: "colores", label: "colores consistentes" },{ value: "texto", label: "texto claro" },{ value: "mejora", label: "mejora respecto al resultado inicial" }],
+        validateBtn: "Validar entrega final", tagLabel: "Presentación final", slidePendingTitle: "Proyecto en construcción", slidePendingSummary: "La presentación se completa con tu documentación.",
+        feedbackLabels: { description: "Descripción mínima 80 caracteres", prompt: "Prompt mínimo 120 caracteres", initial: "Resultado inicial mínimo 80 caracteres", changes: "Mínimo 4 cambios realizados", justification: "Justificación mínima 160 caracteres", checklist: "Checklist final completo" },
+        reasonLabels: { description: "Falta desarrollar la descripción del proyecto.", prompt: "Falta completar el prompt usado con la IA.", initial: "Falta describir el resultado inicial de la IA.", changes: "Faltan al menos 4 cambios realizados.", justification: "Falta justificar por qué las decisiones mejoran el resultado.", checklist: "Falta completar el checklist final." },
+        statusReady: "SUCCESS: el rediseño final está documentado y cumple los criterios.", statusReview: "FAILURE: la entrega todavía tiene criterios pendientes.", statusPending: "Completa el proceso y valida la entrega.", pgSuccess: "Actividad completa: el rediseño final está documentado y cumple los criterios.", pgFailure: "La actividad todavía tiene puntos por completar."
+      },
+      en: {
+        metaTitle: "Final redesign assisted by AI", eyebrow: "Final activity", pageTitle: "Final Redesign Assisted by AI", pageIntro: "Document the full process: prompt, initial result, your own changes, decisions, and quality checklist.",
+        processTitle: "Process", steps: ["Describe the project","Record the prompt","Evaluate the AI result","List completed changes","Justify decisions","Complete the checklist"],
+        descriptionLabel: "Project description", descriptionPlaceholder: "Describe the website, its audience, and its purpose.",
+        promptLabel: "Prompt used", promptPlaceholder: "Paste or write the prompt used with the AI.",
+        initialLabel: "Initial AI result", initialPlaceholder: "Summarize what the AI returned at the start.",
+        changesLabel: "Completed changes", changesPlaceholder: "Separate at least 4 changes with commas or semicolons",
+        justificationLabel: "Decision justification", justificationPlaceholder: "Explain why those changes improve the initial result.",
+        checklistLegend: "Final checklist", checklistOptions: [{ value: "coherencia", label: "visual coherence" },{ value: "cta", label: "clear CTA" },{ value: "jerarquia", label: "good hierarchy" },{ value: "colores", label: "consistent colors" },{ value: "texto", label: "clear text" },{ value: "mejora", label: "improvement over the initial result" }],
+        validateBtn: "Validate final submission", tagLabel: "Final presentation", slidePendingTitle: "Project in progress", slidePendingSummary: "The presentation is completed with your documentation.",
+        feedbackLabels: { description: "Minimum 80-character description", prompt: "Minimum 120-character prompt", initial: "Minimum 80-character initial result", changes: "Minimum 4 completed changes", justification: "Minimum 160-character justification", checklist: "Complete final checklist" },
+        reasonLabels: { description: "You still need to develop the project description.", prompt: "You still need to complete the prompt used with the AI.", initial: "You still need to describe the initial AI result.", changes: "You still need at least 4 completed changes.", justification: "You still need to justify why the decisions improve the result.", checklist: "You still need to complete the final checklist." },
+        statusReady: "SUCCESS: the final redesign is documented and meets the criteria.", statusReview: "FAILURE: the submission still has pending criteria.", statusPending: "Complete the process and validate the submission.", pgSuccess: "Activity complete: the final redesign is documented and meets the criteria.", pgFailure: "The activity still has incomplete points."
+      },
+      pt: {
+        metaTitle: "Redesign final assistido por IA", eyebrow: "Atividade final", pageTitle: "Redesign Final Assistido por IA", pageIntro: "Documente o processo completo: prompt, resultado inicial, mudanças próprias, decisões e checklist de qualidade.",
+        processTitle: "Processo", steps: ["Descreva o projeto","Registre o prompt","Avalie o resultado da IA","Liste as mudanças realizadas","Justifique as decisões","Feche o checklist"],
+        descriptionLabel: "Descrição do projeto", descriptionPlaceholder: "Descreva o site, seu público e seu propósito.",
+        promptLabel: "Prompt usado", promptPlaceholder: "Cole ou escreva o prompt usado com a IA.",
+        initialLabel: "Resultado inicial da IA", initialPlaceholder: "Resuma o que a IA devolveu no início.",
+        changesLabel: "Mudanças realizadas", changesPlaceholder: "Separe pelo menos 4 mudanças com vírgula ou ponto e vírgula",
+        justificationLabel: "Justificativa das decisões", justificationPlaceholder: "Explique por que essas mudanças melhoram o resultado inicial.",
+        checklistLegend: "Checklist final", checklistOptions: [{ value: "coherencia", label: "coerência visual" },{ value: "cta", label: "CTA claro" },{ value: "jerarquia", label: "boa hierarquia" },{ value: "colores", label: "cores consistentes" },{ value: "texto", label: "texto claro" },{ value: "mejora", label: "melhora em relação ao resultado inicial" }],
+        validateBtn: "Validar entrega final", tagLabel: "Apresentação final", slidePendingTitle: "Projeto em construção", slidePendingSummary: "A apresentação é completada com sua documentação.",
+        feedbackLabels: { description: "Descrição mínima de 80 caracteres", prompt: "Prompt mínimo de 120 caracteres", initial: "Resultado inicial mínimo de 80 caracteres", changes: "Mínimo de 4 mudanças realizadas", justification: "Justificativa mínima de 160 caracteres", checklist: "Checklist final completo" },
+        reasonLabels: { description: "Falta desenvolver a descrição do projeto.", prompt: "Falta completar o prompt usado com a IA.", initial: "Falta descrever o resultado inicial da IA.", changes: "Faltam pelo menos 4 mudanças realizadas.", justification: "Falta justificar por que as decisões melhoram o resultado.", checklist: "Falta completar o checklist final." },
+        statusReady: "SUCCESS: o redesign final está documentado e cumpre os critérios.", statusReview: "FAILURE: a entrega ainda tem critérios pendentes.", statusPending: "Complete o processo e valide a entrega.", pgSuccess: "Atividade completa: o redesign final está documentado e cumpre os critérios.", pgFailure: "A atividade ainda tem pontos a completar."
+      }
+    };
+
+    const supportedLanguages = ["es", "en", "pt"];
+    const justificationPattern = /(improve|improves|improvei|improve|mejora|melhora|because|porque|por que|por qué|clarity|claridad|clareza|hierarch|jerarqu|coheren|coer|contrast|contraste|conversion|convers|audience|audiencia|público|publico)/i;
+    const pgEvent = new PGEvent();
+    pgEvent.getValues();
+    const params = new URLSearchParams(window.location.search);
+
+    function detectLanguage() {
+      const paramLang = (params.get("lang") || "").toLowerCase();
+      if (supportedLanguages.includes(paramLang)) return paramLang;
+      const segments = window.location.pathname.toLowerCase().split("/").filter(Boolean);
+      const segmentLang = segments.find((segment) => supportedLanguages.includes(segment));
+      if (segmentLang) return segmentLang;
+      const hashLang = window.location.hash.replace("#", "").toLowerCase();
+      if (supportedLanguages.includes(hashLang)) return hashLang;
+      return "es";
+    }
+
+    const currentLanguage = detectLanguage();
+    const t = translations[currentLanguage];
+    const storageKey = `webIaCreativa.proyectoFinal.v2.${currentLanguage}`;
     const form = document.querySelector("#finalForm");
     const feedback = document.querySelector("#feedback");
     const statusBox = document.querySelector("#status");
     const textFields = ["description","prompt","initial","changes","justification"];
-    function selectedChecks(){ return Array.from(document.querySelectorAll("input[name='finalCheck']:checked")).map(input => input.value); }
-    function changeItems(){ return form.changes.value.split(/[;,]/).map(item => item.trim()).filter(Boolean); }
-    function values(){ return Object.fromEntries(textFields.map(name => [name, form[name].value.trim()])).valueOf(); }
+
+    function setText(id, value) { document.querySelector(`#${id}`).textContent = value; }
+
+    function applyTranslations() {
+      document.documentElement.lang = currentLanguage;
+      document.title = t.metaTitle;
+      ["eyebrow","pageTitle","pageIntro","processTitle","descriptionLabel","promptLabel","initialLabel","changesLabel","justificationLabel","checklistLegend","validateBtn","tagLabel"].forEach((id)=>setText(id,t[id]));
+      document.querySelector("#steps").innerHTML = t.steps.map((step)=>`<div class="step">${step}</div>`).join("");
+      document.querySelector("#description").placeholder = t.descriptionPlaceholder;
+      document.querySelector("#prompt").placeholder = t.promptPlaceholder;
+      document.querySelector("#initial").placeholder = t.initialPlaceholder;
+      document.querySelector("#changes").placeholder = t.changesPlaceholder;
+      document.querySelector("#justification").placeholder = t.justificationPlaceholder;
+      document.querySelector("#checklistOptions").innerHTML = t.checklistOptions.map((item)=>`<label><input type="checkbox" name="finalCheck" value="${item.value}"> ${item.label}</label>`).join("");
+    }
+
+    function selectedChecks(){ return Array.from(document.querySelectorAll("input[name='finalCheck']:checked")).map((input) => input.value); }
+    function changeItems(){ return form.changes.value.split(/[;,]/).map((item) => item.trim()).filter(Boolean); }
+    function values(){ return Object.fromEntries(textFields.map((name) => [name, form[name].value.trim()])); }
     function allValues(){ return { ...values(), checks: selectedChecks() }; }
-    function save(){ localStorage.setItem(storageKey, JSON.stringify(allValues())); updatePreview(); }
-    function updatePreview(){
-      const data = allValues();
-      document.querySelector("#slideTitle").textContent = data.description ? data.description.slice(0, 72) + (data.description.length > 72 ? "..." : "") : "Proyecto en construcción";
-      document.querySelector("#slideSummary").textContent = data.initial || "La presentación se completa con tu documentación.";
-      document.querySelector("#changeList").innerHTML = changeItems().map(item => `<span>${item}</span>`).join("");
-      document.querySelector("#slideJustification").textContent = data.justification || "";
-    }
-    function validateFinal(){
-      const data = allValues();
-      return { description: data.description.length >= 80, prompt: data.prompt.length >= 120, initial: data.initial.length >= 80, changes: changeItems().length >= 4, justification: data.justification.length >= 160, checklist: data.checks.length === 6 };
-    }
-    function renderFeedback(result, analyzed){
-      const labels = { description:"Descripción mínima 80 caracteres", prompt:"Prompt mínimo 120 caracteres", initial:"Resultado inicial mínimo 80 caracteres", changes:"Mínimo 4 cambios realizados", justification:"Justificación mínima 160 caracteres", checklist:"Checklist final completo" };
-      feedback.innerHTML = Object.entries(labels).map(([key,label])=>`<div class="item ${result[key] ? "success completed" : analyzed ? "error" : "warning"}"><span class="dot"></span><span>${label}</span></div>`).join("");
-      const complete = Object.values(result).every(Boolean);
-      statusBox.className = `status ${complete ? "success" : analyzed ? "error" : "warning"}`;
-      statusBox.textContent = complete ? "SUCCESS: el rediseño final está documentado y cumple los criterios." : analyzed ? "FAILURE: la entrega todavía tiene criterios pendientes." : "Completa el proceso y valida la entrega.";
-    }
-    function load(){
-      const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
-      textFields.forEach(name => { if(saved[name]) form[name].value = saved[name]; });
-      if (Array.isArray(saved.checks)) document.querySelectorAll("input[name='finalCheck']").forEach(input => input.checked = saved.checks.includes(input.value));
-      updatePreview(); renderFeedback(validateFinal(), false);
-    }
-    form.addEventListener("input", save); form.addEventListener("change", save); document.querySelector("#validateBtn").addEventListener("click",()=>renderFeedback(validateFinal(), true)); load();
+    function save(){ localStorage.setItem(storageKey, JSON.stringify(allValues())); updatePreview(); renderFeedback(validateFinal(), false); }
+    function updatePreview(){ const data = allValues(); document.querySelector("#slideTitle").textContent = data.description ? data.description.slice(0,72) + (data.description.length > 72 ? "..." : "") : t.slidePendingTitle; document.querySelector("#slideSummary").textContent = data.initial || t.slidePendingSummary; document.querySelector("#changeList").innerHTML = changeItems().map((item)=>`<span>${item}</span>`).join(""); document.querySelector("#slideJustification").textContent = data.justification || ""; }
+    function validateFinal(){ const data = allValues(); return { description: data.description.length >= 80, prompt: data.prompt.length >= 120, initial: data.initial.length >= 80, changes: changeItems().length >= 4, justification: data.justification.length >= 160 && justificationPattern.test(data.justification.toLowerCase()), checklist: data.checks.length === 6 }; }
+    function reasonsFrom(result){ return Object.entries(result).filter(([,ok])=>!ok).map(([key])=>t.reasonLabels[key]); }
+    function renderFeedback(result, analyzed){ feedback.innerHTML = Object.entries(t.feedbackLabels).map(([key,label])=>`<div class="item ${result[key] ? "success completed" : analyzed ? "error" : "warning"}"><span class="dot"></span><span>${label}</span></div>`).join(""); const complete = Object.values(result).every(Boolean); statusBox.className = `status ${complete ? "success" : analyzed ? "error" : "warning"}`; statusBox.textContent = complete ? t.statusReady : analyzed ? t.statusReview : t.statusPending; if (analyzed) { const submission = { ...allValues(), changeItems: changeItems() }; const reasons = reasonsFrom(result); pgEvent.postToPg({ event: reasons.length === 0 ? "SUCCESS" : "FAILURE", reasons, message: reasons.length === 0 ? t.pgSuccess : t.pgFailure, feedbackLanguage: currentLanguage, submissionLanguage: currentLanguage, submission, state: JSON.stringify({ activity: "proyecto-final-rediseno-ia", language: currentLanguage, feedbackLanguage: currentLanguage, completed: reasons.length === 0, fields: result, submission, evaluatorInstructions: { supportedInputLanguages: supportedLanguages, feedbackLanguage: currentLanguage, returnFeedbackInSelectedLanguage: true } }) }); } }
+    function load(){ const saved = JSON.parse(localStorage.getItem(storageKey) || "{}"); textFields.forEach((name) => { if (saved[name]) form[name].value = saved[name]; }); if (Array.isArray(saved.checks)) document.querySelectorAll("input[name='finalCheck']").forEach((input) => { input.checked = saved.checks.includes(input.value); }); updatePreview(); renderFeedback(validateFinal(), false); }
+
+    applyTranslations();
+    form.addEventListener("input", save);
+    form.addEventListener("change", save);
+    document.querySelector("#validateBtn").addEventListener("click",()=>renderFeedback(validateFinal(), true));
+    load();
   </script>
 </body>
 </html>

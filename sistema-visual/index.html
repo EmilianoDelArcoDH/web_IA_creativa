@@ -5,52 +5,177 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Clase 3 - Sistema visual IA</title>
   <style>
-    :root{color-scheme:dark;--text:#fff7d6;--muted:#f4b9b0;--primary:#2a3fe5;--ok:#16a34a;--warn:#d97706;--bad:#dc2626;--shadow:8px 8px 0 #2a3fe5}
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:"Press Start 2P","Space Mono",Consolas,monospace;color:var(--text);background:#000;background-image:linear-gradient(45deg,rgba(42,63,229,.24) 25%,transparent 25%),linear-gradient(-45deg,rgba(42,63,229,.24) 25%,transparent 25%),radial-gradient(circle at 82% 20%,#f4b9b0 0 4px,transparent 5px);background-size:50px 50px,50px 50px,140px 140px;padding:28px}.shell{max-width:1480px;margin:0 auto}.eyebrow{color:var(--muted);text-transform:uppercase;font-size:.72rem;letter-spacing:.08em}h1{margin:10px 0 12px;font-size:clamp(1.7rem,4vw,3rem);line-height:1.15;text-shadow:4px 4px 0 var(--primary)}h2,h3{line-height:1.35}p,label,textarea,input,select,button,small,span{font-family:"Space Mono",Consolas,monospace}p{color:var(--muted);line-height:1.65}.layout{display:grid;grid-template-columns:minmax(430px,1fr) 430px;gap:20px;align-items:start}.panel,.preview{border:3px dotted var(--muted);border-radius:8px;background:#000;box-shadow:var(--shadow);padding:20px}.section{border:2px solid var(--primary);border-radius:4px;background:#050505;padding:16px;margin-bottom:16px}form{display:grid;gap:0}label{display:grid;gap:8px;font-weight:900;line-height:1.45;margin-top:10px}textarea,input,select{width:100%;border:2px solid var(--primary);border-radius:4px;background:#050505;color:var(--text);padding:12px 13px;font-size:.95rem;outline:none}textarea{min-height:92px;resize:vertical}textarea:focus,input:focus,select:focus{border-color:var(--muted);box-shadow:0 0 0 4px rgba(244,185,176,.18)}.colorGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.preview{box-shadow:8px 8px 0 var(--muted);position:sticky;top:20px}.mock{border:3px solid var(--text);border-radius:4px;min-height:330px;padding:22px;background:#111827;color:#fff7d6;display:grid;align-content:center;gap:14px}.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.swatch{height:54px;border:2px solid rgba(255,255,255,.7);border-radius:4px}.iconRow{display:flex;gap:8px}.fakeIcon{width:34px;height:34px;border:3px solid currentColor;border-radius:4px;position:relative}.fakeIcon:after{content:"";position:absolute;inset:8px;background:currentColor}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}button{border:3px solid #111827;border-radius:4px;background:var(--muted);color:#111827;box-shadow:5px 5px 0 var(--primary);padding:12px 14px;font-weight:900;text-transform:uppercase;cursor:pointer}button.secondary{background:#000;color:var(--text);border-color:var(--muted)}button:hover{transform:translate(-2px,-2px)}.feedback{display:grid;gap:10px;margin-top:14px}.item{display:flex;gap:10px;border:2px solid rgba(255,255,255,.14);border-radius:4px;background:#050505;padding:11px;line-height:1.45}.dot{width:12px;height:12px;border-radius:50%;background:var(--warn);margin-top:5px;flex:0 0 auto}.success{border-color:var(--ok)!important;background:rgba(22,163,74,.16)!important}.warning{border-color:var(--warn)!important;background:rgba(217,119,6,.16)!important}.error{border-color:var(--bad)!important;background:rgba(220,38,38,.16)!important}.completed .dot{background:var(--ok)}.status{margin-top:14px;padding:14px;border-radius:4px;line-height:1.55}@media(max-width:1080px){.layout{grid-template-columns:1fr}.preview{position:static}}@media(max-width:720px){body{padding:18px}.colorGrid,.swatches,.actions{grid-template-columns:1fr}}
+    :root { color-scheme: dark; --text: #fff7d6; --muted: #f4b9b0; --primary: #2a3fe5; --ok: #16a34a; --warn: #d97706; --bad: #dc2626; --shadow: 8px 8px 0 #2a3fe5 }
+    * { box-sizing: border-box } body { margin: 0; min-height: 100vh; font-family: "Press Start 2P", "Space Mono", Consolas, monospace; color: var(--text); background: #000; background-image: linear-gradient(45deg, rgba(42, 63, 229, .24) 25%, transparent 25%), linear-gradient(-45deg, rgba(42, 63, 229, .24) 25%, transparent 25%), radial-gradient(circle at 82% 20%, #f4b9b0 0 4px, transparent 5px); background-size: 50px 50px, 50px 50px, 140px 140px; padding: 28px }
+    .shell { max-width: 1480px; margin: 0 auto } .eyebrow { color: var(--muted); text-transform: uppercase; font-size: .72rem; letter-spacing: .08em } h1 { margin: 10px 0 12px; font-size: clamp(1.7rem, 4vw, 3rem); line-height: 1.15; text-shadow: 4px 4px 0 var(--primary) } h2, h3 { line-height: 1.35 } p, label, textarea, input, select, button, small, span { font-family: "Space Mono", Consolas, monospace } p { color: var(--muted); line-height: 1.65 }
+    .layout { display: grid; grid-template-columns: minmax(430px, 1fr) 430px; gap: 20px; align-items: start } .panel, .preview { border: 3px dotted var(--muted); border-radius: 8px; background: #000; box-shadow: var(--shadow); padding: 20px } .section { border: 2px solid var(--primary); border-radius: 4px; background: #050505; padding: 16px; margin-bottom: 16px } form { display: grid; gap: 0 }
+    label { display: grid; gap: 8px; font-weight: 900; line-height: 1.45; margin-top: 10px } textarea, input, select { width: 100%; border: 2px solid var(--primary); border-radius: 4px; background: #050505; color: var(--text); padding: 12px 13px; font-size: .95rem; outline: none } textarea { min-height: 92px; resize: vertical } textarea:focus, input:focus, select:focus { border-color: var(--muted); box-shadow: 0 0 0 4px rgba(244, 185, 176, .18) }
+    .colorGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px } .preview { box-shadow: 8px 8px 0 var(--muted); position: sticky; top: 20px } .mock { border: 3px solid var(--text); border-radius: 4px; min-height: 330px; padding: 22px; background: #111827; color: #fff7d6; display: grid; align-content: center; gap: 14px } .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px } .swatch { height: 54px; border: 2px solid rgba(255, 255, 255, .7); border-radius: 4px } .iconRow { display: flex; gap: 8px } .fakeIcon { width: 34px; height: 34px; border: 3px solid currentColor; border-radius: 4px; position: relative } .fakeIcon:after { content: ""; position: absolute; inset: 8px; background: currentColor }
+    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px } button { border: 3px solid #111827; border-radius: 4px; background: var(--muted); color: #111827; box-shadow: 5px 5px 0 var(--primary); padding: 12px 14px; font-weight: 900; text-transform: uppercase; cursor: pointer } button.secondary { background: #000; color: var(--text); border-color: var(--muted) } button:hover { transform: translate(-2px, -2px) }
+    .feedback { display: grid; gap: 10px; margin-top: 14px } .item { display: flex; gap: 10px; border: 2px solid rgba(255, 255, 255, .14); border-radius: 4px; background: #050505; padding: 11px; line-height: 1.45 } .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--warn); margin-top: 5px; flex: 0 0 auto } .success { border-color: var(--ok) !important; background: rgba(22, 163, 74, .16) !important } .warning { border-color: var(--warn) !important; background: rgba(217, 119, 6, .16) !important } .error { border-color: var(--bad) !important; background: rgba(220, 38, 38, .16) !important } .completed .dot { background: var(--ok) } .status { margin-top: 14px; padding: 14px; border-radius: 4px; line-height: 1.55 }
+    @media(max-width:1080px) { .layout { grid-template-columns: 1fr } .preview { position: static } }
+    @media(max-width:720px) { body { padding: 18px } .colorGrid, .swatches, .actions { grid-template-columns: 1fr } }
   </style>
   <link rel="stylesheet" href="../styles/activity.css">
 </head>
 <body>
   <main class="shell">
-    <header><div class="eyebrow">Clase 3</div><h1>Identidad visual documentada</h1><p>Definí audiencia, imagen hero, paleta e íconos. La consigna no es “que se vea lindo”: cada decisión tiene que poder defenderse.</p></header>
+    <header>
+      <div class="eyebrow" id="eyebrow"></div>
+      <h1 id="pageTitle"></h1>
+      <p id="pageIntro"></p>
+    </header>
     <section class="layout">
       <form class="panel" id="visualForm">
-        <article class="section"><h2>1. Definiciones</h2><label>Audiencia<textarea name="audience" placeholder="¿Para quién es?"></textarea></label><label>Contexto<textarea name="context" placeholder="¿Dónde se va a ver?"></textarea></label><label>Mood<textarea name="mood" placeholder="¿Qué sensación tiene que transmitir?"></textarea></label></article>
-        <article class="section"><h2>2. Prompt de la hero</h2><label>Prompt completo<textarea name="heroPrompt" placeholder="Copiá el prompt usado para generar la imagen principal del sitio."></textarea></label></article>
-        <article class="section"><h2>3. Paleta con HEX + contraste</h2><div class="colorGrid"><label>Color 1<input name="color1" value="#000000"></label><label>Color 2<input name="color2" value="#fff7d6"></label><label>Color 3<input name="color3" value="#2a3fe5"></label><label>Color 4<input name="color4" value="#f4b9b0"></label></div><label>Verificación de contraste<textarea name="contrast" placeholder="Explicá qué combinación usarías para fondo/texto y si resulta legible."></textarea></label></article>
-        <article class="section"><h2>4. Íconos</h2><label>Método y estilo<select name="icons"><option value="">Seleccionar</option><option>Librería de íconos lineales</option><option>Íconos generados con IA</option><option>Dibujo propio</option><option>Sistema geométrico simple</option></select></label><label>Por qué ese estilo funciona<textarea name="iconsWhy"></textarea></label></article>
-        <article class="section"><h2>5. Coherencia general</h2><label>Revisión propia<textarea name="coherence" placeholder="¿Los colores, íconos e imagen hero conviven bien? ¿Qué ajustarías?"></textarea></label></article>
+        <article class="section">
+          <h2 id="section1Title"></h2>
+          <label><span id="audienceLabel"></span><textarea name="audience" id="audience"></textarea></label>
+          <label><span id="contextLabel"></span><textarea name="context" id="context"></textarea></label>
+          <label><span id="moodLabelText"></span><textarea name="mood" id="mood"></textarea></label>
+        </article>
+        <article class="section">
+          <h2 id="section2Title"></h2>
+          <label><span id="heroPromptLabel"></span><textarea name="heroPrompt" id="heroPrompt"></textarea></label>
+        </article>
+        <article class="section">
+          <h2 id="section3Title"></h2>
+          <div class="colorGrid">
+            <label><span id="color1Label"></span><input name="color1" value="#000000"></label>
+            <label><span id="color2Label"></span><input name="color2" value="#fff7d6"></label>
+            <label><span id="color3Label"></span><input name="color3" value="#2a3fe5"></label>
+            <label><span id="color4Label"></span><input name="color4" value="#f4b9b0"></label>
+          </div>
+          <label><span id="contrastLabel"></span><textarea name="contrast" id="contrast"></textarea></label>
+        </article>
+        <article class="section">
+          <h2 id="section4Title"></h2>
+          <label><span id="iconsLabel"></span><select name="icons" id="icons"></select></label>
+          <label><span id="iconsWhyLabel"></span><textarea name="iconsWhy" id="iconsWhy"></textarea></label>
+        </article>
+        <article class="section">
+          <h2 id="section5Title"></h2>
+          <label><span id="coherenceLabel"></span><textarea name="coherence" id="coherence"></textarea></label>
+        </article>
       </form>
       <aside class="preview">
-        <h2>Vista de documentación</h2>
+        <h2 id="previewTitleText"></h2>
         <article class="mock" id="mock">
-          <span id="moodLabel">Mood pendiente</span>
-          <h2>Hero visual del proyecto</h2>
-          <p id="audienceLabel">Audiencia pendiente</p>
+          <span id="moodPreview"></span>
+          <h2 id="heroPreviewTitle"></h2>
+          <p id="audiencePreview"></p>
           <div class="swatches" id="swatches"></div>
           <div class="iconRow"><span class="fakeIcon"></span><span class="fakeIcon"></span><span class="fakeIcon"></span></div>
         </article>
-        <div class="actions"><button type="button" id="validateBtn">Enviar actividad</button><button class="secondary" type="button" id="resetBtn">Reiniciar</button></div>
-        <div class="feedback" id="feedback"></div><div class="status warning" id="status">Completá la documentación visual.</div>
+        <div class="actions"><button type="button" id="validateBtn"></button><button class="secondary" type="button" id="resetBtn"></button></div>
+        <div class="feedback" id="feedback"></div>
+        <div class="status warning" id="status"></div>
       </aside>
     </section>
   </main>
   <script type="module">
     import { PGEvent } from "../pg-event.js";
+
+    const translations = {
+      es: {
+        metaTitle: "Clase 3 - Sistema visual IA", eyebrow: "Clase 3", pageTitle: "Identidad visual documentada", pageIntro: "Definí audiencia, imagen hero, paleta e íconos. La consigna no es \"que se vea lindo\": cada decisión tiene que poder defenderse.",
+        section1Title: "1. Definiciones", audienceLabel: "Audiencia", audiencePlaceholder: "¿Para quién es?", contextLabel: "Contexto", contextPlaceholder: "¿Dónde se va a ver?", moodLabelText: "Mood", moodPlaceholder: "¿Qué sensación tiene que transmitir?",
+        section2Title: "2. Prompt de la hero", heroPromptLabel: "Prompt completo", heroPromptPlaceholder: "Copiá el prompt usado para generar la imagen principal del sitio.",
+        section3Title: "3. Paleta con HEX + contraste", color1Label: "Color 1", color2Label: "Color 2", color3Label: "Color 3", color4Label: "Color 4", contrastLabel: "Verificación de contraste", contrastPlaceholder: "Explicá qué combinación usarías para fondo/texto y si resulta legible.",
+        section4Title: "4. Íconos", iconsLabel: "Método y estilo", iconsOptions: ["Seleccionar","Librería de íconos lineales","Íconos generados con IA","Dibujo propio","Sistema geométrico simple"], iconsWhyLabel: "Por qué ese estilo funciona", iconsWhyPlaceholder: "",
+        section5Title: "5. Coherencia general", coherenceLabel: "Revisión propia", coherencePlaceholder: "¿Los colores, íconos e imagen hero conviven bien? ¿Qué ajustarías?",
+        previewTitleText: "Vista de documentación", moodPending: "Mood pendiente", heroPreviewTitle: "Hero visual del proyecto", audiencePending: "Audiencia pendiente", palettePending: "Paleta pendiente",
+        validateBtn: "Enviar actividad", resetBtn: "Reiniciar",
+        feedbackLabels: (ratioText) => ({ definitions: "Audiencia, contexto y mood definidos", heroPrompt: "Prompt de hero completo", hex: "Al menos 3 colores HEX válidos", contrast: `Contraste fondo/texto documentado${ratioText}`, icons: "Íconos justificados para la audiencia", coherence: "Revisión de coherencia escrita" }),
+        reasonLabels: { definitions: "Falta completar audiencia, contexto y mood.", heroPrompt: "Falta copiar el prompt completo de la hero.", hex: "Faltan al menos 3 colores HEX válidos.", contrast: "Falta verificar contraste legible entre fondo y texto.", icons: "Falta justificar método y estilo de íconos.", coherence: "Falta escribir la revisión de coherencia general." },
+        statusReady: "Actividad lista: la identidad visual está documentada y defendida.", statusReview: "Revisá los puntos marcados antes de cerrar la actividad.", statusPending: "Completá la documentación visual.", pgSuccess: "Actividad completa: la identidad visual está documentada con criterios técnicos.", pgFailure: "La actividad todavía tiene puntos por completar."
+      },
+      en: {
+        metaTitle: "Class 3 - AI visual system", eyebrow: "Class 3", pageTitle: "Documented visual identity", pageIntro: "Define audience, hero image, palette, and icons. The goal is not just \"to make it look nice\": every decision should be defensible.",
+        section1Title: "1. Definitions", audienceLabel: "Audience", audiencePlaceholder: "Who is it for?", contextLabel: "Context", contextPlaceholder: "Where will it be seen?", moodLabelText: "Mood", moodPlaceholder: "What feeling should it communicate?",
+        section2Title: "2. Hero prompt", heroPromptLabel: "Full prompt", heroPromptPlaceholder: "Copy the prompt used to generate the website's main image.",
+        section3Title: "3. Palette with HEX + contrast", color1Label: "Color 1", color2Label: "Color 2", color3Label: "Color 3", color4Label: "Color 4", contrastLabel: "Contrast verification", contrastPlaceholder: "Explain which combination you would use for background/text and whether it is readable.",
+        section4Title: "4. Icons", iconsLabel: "Method and style", iconsOptions: ["Select","Linear icon library","AI-generated icons","Own drawing","Simple geometric system"], iconsWhyLabel: "Why this style works", iconsWhyPlaceholder: "",
+        section5Title: "5. Overall coherence", coherenceLabel: "Self review", coherencePlaceholder: "Do the colors, icons, and hero image work well together? What would you adjust?",
+        previewTitleText: "Documentation preview", moodPending: "Pending mood", heroPreviewTitle: "Project hero visual", audiencePending: "Pending audience", palettePending: "Pending palette",
+        validateBtn: "Submit activity", resetBtn: "Reset",
+        feedbackLabels: (ratioText) => ({ definitions: "Audience, context, and mood are defined", heroPrompt: "Hero prompt is complete", hex: "At least 3 valid HEX colors", contrast: `Background/text contrast documented${ratioText}`, icons: "Icons justified for the audience", coherence: "Coherence review is written" }),
+        reasonLabels: { definitions: "You still need to complete audience, context, and mood.", heroPrompt: "You still need to copy the full hero prompt.", hex: "You still need at least 3 valid HEX colors.", contrast: "You still need to verify readable contrast between background and text.", icons: "You still need to justify the icon method and style.", coherence: "You still need to write the overall coherence review." },
+        statusReady: "Activity ready: the visual identity is documented and defended.", statusReview: "Review the marked points before closing the activity.", statusPending: "Complete the visual documentation.", pgSuccess: "Activity complete: the visual identity is documented with technical criteria.", pgFailure: "The activity still has incomplete points."
+      },
+      pt: {
+        metaTitle: "Aula 3 - Sistema visual IA", eyebrow: "Aula 3", pageTitle: "Identidade visual documentada", pageIntro: "Defina público, imagem hero, paleta e ícones. A proposta não é apenas \"ficar bonito\": cada decisão precisa poder ser defendida.",
+        section1Title: "1. Definições", audienceLabel: "Público", audiencePlaceholder: "Para quem é?", contextLabel: "Contexto", contextPlaceholder: "Onde será visto?", moodLabelText: "Mood", moodPlaceholder: "Que sensação deve transmitir?",
+        section2Title: "2. Prompt da hero", heroPromptLabel: "Prompt completo", heroPromptPlaceholder: "Copie o prompt usado para gerar a imagem principal do site.",
+        section3Title: "3. Paleta com HEX + contraste", color1Label: "Cor 1", color2Label: "Cor 2", color3Label: "Cor 3", color4Label: "Cor 4", contrastLabel: "Verificação de contraste", contrastPlaceholder: "Explique qual combinação você usaria para fundo/texto e se é legível.",
+        section4Title: "4. Ícones", iconsLabel: "Método e estilo", iconsOptions: ["Selecionar","Biblioteca de ícones lineares","Ícones gerados com IA","Desenho próprio","Sistema geométrico simples"], iconsWhyLabel: "Por que esse estilo funciona", iconsWhyPlaceholder: "",
+        section5Title: "5. Coerência geral", coherenceLabel: "Revisão própria", coherencePlaceholder: "As cores, os ícones e a imagem hero convivem bem? O que você ajustaria?",
+        previewTitleText: "Visualização da documentação", moodPending: "Mood pendente", heroPreviewTitle: "Hero visual do projeto", audiencePending: "Público pendente", palettePending: "Paleta pendente",
+        validateBtn: "Enviar atividade", resetBtn: "Reiniciar",
+        feedbackLabels: (ratioText) => ({ definitions: "Público, contexto e mood definidos", heroPrompt: "Prompt da hero completo", hex: "Pelo menos 3 cores HEX válidas", contrast: `Contraste fundo/texto documentado${ratioText}`, icons: "Ícones justificados para o público", coherence: "Revisão de coerência escrita" }),
+        reasonLabels: { definitions: "Falta completar público, contexto e mood.", heroPrompt: "Falta copiar o prompt completo da hero.", hex: "Faltam pelo menos 3 cores HEX válidas.", contrast: "Falta verificar contraste legível entre fundo e texto.", icons: "Falta justificar método e estilo dos ícones.", coherence: "Falta escrever a revisão de coerência geral." },
+        statusReady: "Atividade pronta: a identidade visual está documentada e defendida.", statusReview: "Revise os pontos marcados antes de encerrar a atividade.", statusPending: "Complete a documentação visual.", pgSuccess: "Atividade completa: a identidade visual está documentada com critérios técnicos.", pgFailure: "A atividade ainda tem pontos a completar."
+      }
+    };
+
+    const supportedLanguages = ["es", "en", "pt"];
+    const coherencePattern = /(coheren|coer|contrast|contraste|legible|readable|legível|legibilidad|legibilidade|audience|audiencia|público|publico|icons|ícon|icones|ícones|hero|palette|paleta|colors|colores|cores|adjust|ajust|mejor|melhor)/i;
+    const iconsPattern = /(audience|audiencia|publico|público|style|estilo|clarity|claridad|clareza|coheren|coer|brand|marca|identity|identidad|identidade)/i;
     const pgEvent = new PGEvent();
     pgEvent.getValues();
-    const storageKey="webIaCreativa.clase3.v1";const form=document.querySelector("#visualForm");const fields=["audience","context","mood","heroPrompt","color1","color2","color3","color4","contrast","icons","iconsWhy","coherence"];
-    function values(){return Object.fromEntries(fields.map(n=>[n,form[n].value.trim()]))}
-    function isHex(v){return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(v)}
-    function luminance(hex){let c=hex.slice(1);if(c.length===3)c=c.split("").map(x=>x+x).join("");const rgb=[0,2,4].map(i=>parseInt(c.slice(i,i+2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*rgb[0]+.7152*rgb[1]+.0722*rgb[2]}
-    function ratio(a,b){const l1=luminance(a),l2=luminance(b);return ((Math.max(l1,l2)+.05)/(Math.min(l1,l2)+.05)).toFixed(2)}
-    function validate(){const v=values();const colors=[v.color1,v.color2,v.color3,v.color4];const validColors=colors.filter(isHex);return{definitions:v.audience.length>=20&&v.context.length>=20&&v.mood.length>=20,heroPrompt:v.heroPrompt.length>=120,hex:validColors.length>=3,contrast:isHex(v.color1)&&isHex(v.color2)&&Number(ratio(v.color1,v.color2))>=4.5&&v.contrast.length>=50,icons:!!v.icons&&v.iconsWhy.length>=60,coherence:v.coherence.length>=100}}
-    function reasonsFrom(r){const labels={definitions:"Falta completar audiencia, contexto y mood.",heroPrompt:"Falta copiar el prompt completo de la hero.",hex:"Faltan al menos 3 colores HEX válidos.",contrast:"Falta verificar contraste legible entre fondo y texto.",icons:"Falta justificar método y estilo de íconos.",coherence:"Falta escribir la revisión de coherencia general."};return Object.entries(r).filter(([,ok])=>!ok).map(([key])=>labels[key])}
-    function sendToPlayground(r,v){const reasons=reasonsFrom(r);pgEvent.postToPg({event:reasons.length===0?"SUCCESS":"FAILURE",reasons,message:reasons.length===0?"Actividad completa: la identidad visual está documentada con criterios técnicos.":"La actividad todavía tiene puntos por completar.",state:JSON.stringify({activity:"clase-3-identidad-visual",completed:reasons.length===0,contrast:isHex(v.color1)&&isHex(v.color2)?Number(ratio(v.color1,v.color2)):0,fields:r})})}
-    function save(){localStorage.setItem(storageKey,JSON.stringify(values()));render(false)}
-    function load(){const saved=JSON.parse(localStorage.getItem(storageKey)||"{}");fields.forEach(n=>{if(saved[n])form[n].value=saved[n]})}
-    function render(analyzed){const v=values();const colors=[v.color1,v.color2,v.color3,v.color4].filter(isHex);document.querySelector("#mock").style.background=colors[0]||"#111827";document.querySelector("#mock").style.color=colors[1]||"#fff7d6";document.querySelector("#audienceLabel").textContent=v.audience||"Audiencia pendiente";document.querySelector("#moodLabel").textContent=v.mood?`Mood: ${v.mood}`:"Mood pendiente";document.querySelector("#swatches").innerHTML=colors.map(c=>`<span class="swatch" style="background:${c}"></span>`).join("")||"<p>Paleta pendiente</p>";const r=validate();const labels={definitions:"Audiencia, contexto y mood definidos",heroPrompt:"Prompt de hero completo",hex:"Al menos 3 colores HEX válidos",contrast:`Contraste fondo/texto documentado${isHex(v.color1)&&isHex(v.color2)?` (${ratio(v.color1,v.color2)}:1)`:""}`,icons:"Íconos justificados para la audiencia",coherence:"Revisión de coherencia escrita"};document.querySelector("#feedback").innerHTML=Object.entries(labels).map(([k,l])=>`<div class="item ${r[k]?"success completed":analyzed?"error":"warning"}"><span class="dot"></span><span>${l}</span></div>`).join("");const complete=Object.values(r).every(Boolean);const status=document.querySelector("#status");status.className=`status ${complete?"success":analyzed?"error":"warning"}`;status.textContent=complete?"Actividad lista: la identidad visual está documentada y defendida.":analyzed?"Revisá los puntos marcados antes de cerrar la actividad.":"Completá la documentación visual.";if(analyzed)sendToPlayground(r,v)}
-    form.addEventListener("input",save);form.addEventListener("change",save);document.querySelector("#validateBtn").addEventListener("click",()=>render(true));document.querySelector("#resetBtn").addEventListener("click",()=>{fields.forEach(n=>{form[n].value=""});form.color1.value="#000000";form.color2.value="#fff7d6";form.color3.value="#2a3fe5";form.color4.value="#f4b9b0";localStorage.removeItem(storageKey);render(false)});load();render(false);
+    const params = new URLSearchParams(window.location.search);
+
+    function detectLanguage() {
+      const paramLang = (params.get("lang") || "").toLowerCase();
+      if (supportedLanguages.includes(paramLang)) return paramLang;
+      const segments = window.location.pathname.toLowerCase().split("/").filter(Boolean);
+      const segmentLang = segments.find((segment) => supportedLanguages.includes(segment));
+      if (segmentLang) return segmentLang;
+      const hashLang = window.location.hash.replace("#", "").toLowerCase();
+      if (supportedLanguages.includes(hashLang)) return hashLang;
+      return "es";
+    }
+
+    const currentLanguage = detectLanguage();
+    const t = translations[currentLanguage];
+    const storageKey = `webIaCreativa.clase3.v2.${currentLanguage}`;
+    const form = document.querySelector("#visualForm");
+    const fields = ["audience","context","mood","heroPrompt","color1","color2","color3","color4","contrast","icons","iconsWhy","coherence"];
+
+    function setText(id, value) { document.querySelector(`#${id}`).textContent = value; }
+
+    function applyTranslations() {
+      document.documentElement.lang = currentLanguage;
+      document.title = t.metaTitle;
+      ["eyebrow","pageTitle","pageIntro","section1Title","audienceLabel","contextLabel","moodLabelText","section2Title","heroPromptLabel","section3Title","color1Label","color2Label","color3Label","color4Label","contrastLabel","section4Title","iconsLabel","iconsWhyLabel","section5Title","coherenceLabel","previewTitleText","validateBtn","resetBtn"].forEach((id)=>setText(id,t[id]));
+      document.querySelector("#audience").placeholder = t.audiencePlaceholder;
+      document.querySelector("#context").placeholder = t.contextPlaceholder;
+      document.querySelector("#mood").placeholder = t.moodPlaceholder;
+      document.querySelector("#heroPrompt").placeholder = t.heroPromptPlaceholder;
+      document.querySelector("#contrast").placeholder = t.contrastPlaceholder;
+      document.querySelector("#coherence").placeholder = t.coherencePlaceholder;
+      document.querySelector("#iconsWhy").placeholder = t.iconsWhyPlaceholder;
+      document.querySelector("#icons").innerHTML = t.iconsOptions.map((option,index)=>`<option value="${index===0?"":option}">${option}</option>`).join("");
+      document.querySelector("#heroPreviewTitle").textContent = t.heroPreviewTitle;
+    }
+
+    function values() { return Object.fromEntries(fields.map((name) => [name, form[name].value.trim()])); }
+    function isHex(value) { return /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(value); }
+    function luminance(hex) { let c = hex.slice(1); if (c.length === 3) c = c.split("").map((x) => x + x).join(""); const rgb = [0,2,4].map((i)=>parseInt(c.slice(i, i + 2), 16) / 255).map((v)=>v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4)); return .2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2]; }
+    function ratio(a, b) { const l1 = luminance(a), l2 = luminance(b); return ((Math.max(l1, l2) + .05) / (Math.min(l1, l2) + .05)).toFixed(2); }
+    function validate() { const v = values(); const colors = [v.color1, v.color2, v.color3, v.color4]; const validColors = colors.filter(isHex); return { definitions: v.audience.length >= 20 && v.context.length >= 20 && v.mood.length >= 20, heroPrompt: v.heroPrompt.length >= 120, hex: validColors.length >= 3, contrast: isHex(v.color1) && isHex(v.color2) && Number(ratio(v.color1, v.color2)) >= 4.5 && v.contrast.length >= 50 && coherencePattern.test(v.contrast.toLowerCase()), icons: !!v.icons && v.iconsWhy.length >= 60 && iconsPattern.test(v.iconsWhy.toLowerCase()), coherence: v.coherence.length >= 100 && coherencePattern.test(v.coherence.toLowerCase()) }; }
+    function reasonsFrom(result) { return Object.entries(result).filter(([, ok]) => !ok).map(([key]) => t.reasonLabels[key]); }
+    function sendToPlayground(result, submission) { const reasons = reasonsFrom(result); pgEvent.postToPg({ event: reasons.length === 0 ? "SUCCESS" : "FAILURE", reasons, message: reasons.length === 0 ? t.pgSuccess : t.pgFailure, feedbackLanguage: currentLanguage, submissionLanguage: currentLanguage, submission, state: JSON.stringify({ activity: "clase-3-identidad-visual", language: currentLanguage, feedbackLanguage: currentLanguage, completed: reasons.length === 0, contrast: isHex(submission.color1) && isHex(submission.color2) ? Number(ratio(submission.color1, submission.color2)) : 0, fields: result, submission, evaluatorInstructions: { supportedInputLanguages: supportedLanguages, feedbackLanguage: currentLanguage, returnFeedbackInSelectedLanguage: true } }) }); }
+    function save() { localStorage.setItem(storageKey, JSON.stringify(values())); render(false); }
+    function load() { const saved = JSON.parse(localStorage.getItem(storageKey) || "{}"); fields.forEach((name) => { if (saved[name]) form[name].value = saved[name]; }); }
+    function render(analyzed) { const v = values(); const colors = [v.color1, v.color2, v.color3, v.color4].filter(isHex); document.querySelector("#mock").style.background = colors[0] || "#111827"; document.querySelector("#mock").style.color = colors[1] || "#fff7d6"; document.querySelector("#audiencePreview").textContent = v.audience || t.audiencePending; document.querySelector("#moodPreview").textContent = v.mood ? `Mood: ${v.mood}` : t.moodPending; document.querySelector("#swatches").innerHTML = colors.map((color)=>`<span class="swatch" style="background:${color}"></span>`).join("") || `<p>${t.palettePending}</p>`; const result = validate(); const ratioText = isHex(v.color1) && isHex(v.color2) ? ` (${ratio(v.color1, v.color2)}:1)` : ""; document.querySelector("#feedback").innerHTML = Object.entries(t.feedbackLabels(ratioText)).map(([key,label])=>`<div class="item ${result[key] ? "success completed" : analyzed ? "error" : "warning"}"><span class="dot"></span><span>${label}</span></div>`).join(""); const complete = Object.values(result).every(Boolean); const status = document.querySelector("#status"); status.className = `status ${complete ? "success" : analyzed ? "error" : "warning"}`; status.textContent = complete ? t.statusReady : analyzed ? t.statusReview : t.statusPending; if (analyzed) sendToPlayground(result, { ...v, colors }); }
+
+    applyTranslations();
+    form.addEventListener("input", save);
+    form.addEventListener("change", save);
+    document.querySelector("#validateBtn").addEventListener("click", () => render(true));
+    document.querySelector("#resetBtn").addEventListener("click", () => { fields.forEach((name) => { form[name].value = ""; }); form.color1.value = "#000000"; form.color2.value = "#fff7d6"; form.color3.value = "#2a3fe5"; form.color4.value = "#f4b9b0"; localStorage.removeItem(storageKey); render(false); });
+    load();
+    render(false);
   </script>
 </body>
 </html>

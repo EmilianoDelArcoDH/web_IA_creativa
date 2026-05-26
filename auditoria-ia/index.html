@@ -12,56 +12,264 @@
 </head>
 <body>
   <main class="shell">
-    <header><div class="eyebrow">Clase 5</div><h1>Auditoría y justificación de cambios</h1><p>Mirás tu propio sitio con ojo crítico, aplicás 4 cambios importantes y explicás cada decisión con criterio técnico.</p></header>
+    <header><div class="eyebrow" id="eyebrow"></div><h1 id="pageTitle"></h1><p id="pageIntro"></p></header>
     <section class="layout">
       <aside class="panel">
-        <h2>Consigna</h2>
-        <p>La justificación pesa más que “me gusta”. Usá criterios como contraste, jerarquía, claridad, coherencia visual, accesibilidad, audiencia o conversión.</p>
-        <div class="card"><strong>¿Se usa IA?</strong><br>Sí, podés usar IA para diagnosticar o proponer correcciones. Igual tenés que indicar qué aceptaste, qué editaste y por qué.</div>
-        <div class="card"><strong>Evidencia visual</strong><br>Entregá dos capturas: antes.png y despues.png, en PNG o JPG.</div>
+        <h2 id="briefTitle"></h2>
+        <p id="briefText"></p>
+        <div class="card"><strong id="cardAiLabel"></strong><br><span id="cardAiText"></span></div>
+        <div class="card"><strong id="cardEvidenceLabel"></strong><br><span id="cardEvidenceText"></span></div>
       </aside>
       <form class="panel" id="auditForm">
-        <h2>Parte A - Justificación guiada</h2>
-        <article class="phrase"><span>Eliminé la sección...</span><input name="removedWhat" placeholder="qué eliminaste"><textarea name="removedWhy" placeholder="porque (criterio técnico)"></textarea></article>
-        <article class="phrase"><span>Reemplacé el texto...</span><input name="textWhat" placeholder="qué texto reemplazaste"><textarea name="textWhy" placeholder="para mejorar (criterio técnico)"></textarea></article>
-        <article class="phrase"><span>La imagen más importante es...</span><input name="imageWhat" placeholder="qué imagen"><textarea name="imageWhy" placeholder="porque (criterio técnico)"></textarea></article>
-        <article class="phrase"><span>El cambio de mayor impacto fue...</span><input name="impactWhat" placeholder="qué cambio"><textarea name="impactWhy" placeholder="porque (criterio técnico)"></textarea></article>
-        <h2>Uso de IA en correcciones</h2>
-        <label>¿Usaste IA para corregir o auditar?<select name="usedAi"><option value="">Seleccionar</option><option>Sí</option><option>No</option></select></label>
-        <label>Detalle<textarea name="aiDetail" placeholder="Si usaste IA: pegá el prompt o resumí qué le pediste. Si no usaste: explicá cómo decidiste los cambios."></textarea></label>
-        <h2>Parte B - Evidencias visuales</h2>
+        <h2 id="partATitle"></h2>
+        <article class="phrase"><span id="removedSpan"></span><input name="removedWhat" id="removedWhat"><textarea name="removedWhy" id="removedWhy"></textarea></article>
+        <article class="phrase"><span id="textSpan"></span><input name="textWhat" id="textWhat"><textarea name="textWhy" id="textWhy"></textarea></article>
+        <article class="phrase"><span id="imageSpan"></span><input name="imageWhat" id="imageWhat"><textarea name="imageWhy" id="imageWhy"></textarea></article>
+        <article class="phrase"><span id="impactSpan"></span><input name="impactWhat" id="impactWhat"><textarea name="impactWhy" id="impactWhy"></textarea></article>
+        <h2 id="aiUsageTitle"></h2>
+        <label><span id="usedAiLabel"></span><select name="usedAi" id="usedAi"></select></label>
+        <label><span id="detailLabel"></span><textarea name="aiDetail" id="aiDetail"></textarea></label>
+        <h2 id="partBTitle"></h2>
         <div class="pair">
-          <label>Captura antes<input name="beforeFile" placeholder="antes.png"></label>
-          <label>Captura después<input name="afterFile" placeholder="despues.png"></label>
+          <label><span id="beforeLabel"></span><input name="beforeFile" id="beforeFile"></label>
+          <label><span id="afterLabel"></span><input name="afterFile" id="afterFile"></label>
         </div>
       </form>
       <aside class="panel">
-        <h2>Entrega armada</h2>
+        <h2 id="deliveryTitle"></h2>
         <div class="pair">
-          <div class="evidence"><strong>ANTES</strong><span id="beforePreview">antes.png pendiente</span></div>
-          <div class="evidence"><strong>DESPUÉS</strong><span id="afterPreview">despues.png pendiente</span></div>
+          <div class="evidence"><strong id="beforeBox"></strong><span id="beforePreview"></span></div>
+          <div class="evidence"><strong id="afterBox"></strong><span id="afterPreview"></span></div>
         </div>
-        <div class="summary" id="summary">Completá las frases para armar la entrega.</div>
-        <div class="actions"><button type="button" id="validateBtn">Enviar actividad</button><button class="secondary" type="button" id="resetBtn">Reiniciar</button></div>
-        <div class="feedback" id="feedback"></div><div class="status warning" id="status">Completá auditoría, uso de IA y evidencias.</div>
+        <div class="summary" id="summary"></div>
+        <div class="actions"><button type="button" id="validateBtn"></button><button class="secondary" type="button" id="resetBtn"></button></div>
+        <div class="feedback" id="feedback"></div><div class="status warning" id="status"></div>
       </aside>
     </section>
   </main>
   <script type="module">
     import { PGEvent } from "../pg-event.js";
+
+    const translations = {
+      es: {
+        metaTitle: "Clase 5 - Auditoría y justificación",
+        eyebrow: "Clase 5",
+        pageTitle: "Auditoría y justificación de cambios",
+        pageIntro: "Mirás tu propio sitio con ojo crítico, aplicás 4 cambios importantes y explicás cada decisión con criterio técnico.",
+        briefTitle: "Consigna",
+        briefText: "La justificación pesa más que \"me gusta\". Usá criterios como contraste, jerarquía, claridad, coherencia visual, accesibilidad, audiencia o conversión.",
+        cardAiLabel: "¿Se usa IA?",
+        cardAiText: "Sí, podés usar IA para diagnosticar o proponer correcciones. Igual tenés que indicar qué aceptaste, qué editaste y por qué.",
+        cardEvidenceLabel: "Evidencia visual",
+        cardEvidenceText: "Entregá dos capturas: antes.png y despues.png, en PNG o JPG.",
+        partATitle: "Parte A - Justificación guiada",
+        removedSpan: "Eliminé la sección...",
+        removedWhatPlaceholder: "qué eliminaste",
+        removedWhyPlaceholder: "por qué (criterio técnico)",
+        textSpan: "Reemplacé el texto...",
+        textWhatPlaceholder: "qué texto reemplazaste",
+        textWhyPlaceholder: "para mejorar (criterio técnico)",
+        imageSpan: "La imagen más importante es...",
+        imageWhatPlaceholder: "qué imagen",
+        imageWhyPlaceholder: "por qué (criterio técnico)",
+        impactSpan: "El cambio de mayor impacto fue...",
+        impactWhatPlaceholder: "qué cambio",
+        impactWhyPlaceholder: "por qué (criterio técnico)",
+        aiUsageTitle: "Uso de IA en correcciones",
+        usedAiLabel: "¿Usaste IA para corregir o auditar?",
+        usedAiOptions: ["Seleccionar", "Sí", "No"],
+        detailLabel: "Detalle",
+        detailPlaceholder: "Si usaste IA: pegá el prompt o resumí qué le pediste. Si no usaste: explicá cómo decidiste los cambios.",
+        partBTitle: "Parte B - Evidencias visuales",
+        beforeLabel: "Captura antes",
+        afterLabel: "Captura después",
+        beforePlaceholder: "antes.png",
+        afterPlaceholder: "despues.png",
+        deliveryTitle: "Entrega armada",
+        beforeBox: "ANTES",
+        afterBox: "DESPUÉS",
+        beforePending: "antes.png pendiente",
+        afterPending: "despues.png pendiente",
+        pending: "pendiente",
+        emptyLine: "_____",
+        validateBtn: "Enviar actividad",
+        resetBtn: "Reiniciar",
+        summary(v){return `Eliminé la sección ${v.removedWhat || "_____"} porque ${v.removedWhy || "_____"}.\n\nReemplacé el texto ${v.textWhat || "_____"} para mejorar ${v.textWhy || "_____"}.\n\nLa imagen más importante es ${v.imageWhat || "_____"} porque ${v.imageWhy || "_____"}.\n\nEl cambio de mayor impacto fue ${v.impactWhat || "_____"} porque ${v.impactWhy || "_____"}.\n\nUso de IA: ${v.usedAi || "pendiente"}. ${v.aiDetail || ""}`;},
+        feedbackLabels: { removed: "Cambio eliminado con criterio técnico", text: "Texto reemplazado con criterio técnico", image: "Imagen principal justificada", impact: "Mayor impacto justificado", ai: "Aclara si usó IA y cómo", before: "Evidencia antes.png o JPG", after: "Evidencia despues.png o JPG" },
+        reasonLabels: { removed: "Falta completar la frase sobre la sección eliminada con criterio técnico.", text: "Falta completar la frase sobre el texto reemplazado con criterio técnico.", image: "Falta justificar la imagen más importante.", impact: "Falta justificar el cambio de mayor impacto.", ai: "Falta aclarar si usaste IA y cómo decidiste las correcciones.", before: "Falta registrar la evidencia antes.png o JPG.", after: "Falta registrar la evidencia despues.png o JPG." },
+        statusReady: "Actividad lista: la auditoría incluye cambios, criterios, uso de IA y evidencias.",
+        statusReview: "Revisá los puntos marcados antes de cerrar la actividad.",
+        statusPending: "Completá auditoría, uso de IA y evidencias.",
+        pgSuccess: "Actividad completa: la auditoría incluye cambios, criterios, uso de IA y evidencias.",
+        pgFailure: "La actividad todavía tiene puntos por completar."
+      },
+      en: {
+        metaTitle: "Class 5 - Audit and justification",
+        eyebrow: "Class 5",
+        pageTitle: "Audit and justification of changes",
+        pageIntro: "Review your own site critically, apply 4 important changes, and explain each decision using technical criteria.",
+        briefTitle: "Assignment",
+        briefText: "Justification matters more than saying \"I like it\". Use criteria such as contrast, hierarchy, clarity, visual coherence, accessibility, audience, or conversion.",
+        cardAiLabel: "Is AI used?",
+        cardAiText: "Yes, you can use AI to diagnose or suggest corrections. You still need to explain what you accepted, what you edited, and why.",
+        cardEvidenceLabel: "Visual evidence",
+        cardEvidenceText: "Submit two screenshots: before.png and after.png, in PNG or JPG.",
+        partATitle: "Part A - Guided justification",
+        removedSpan: "I removed the section...",
+        removedWhatPlaceholder: "what you removed",
+        removedWhyPlaceholder: "why (technical criterion)",
+        textSpan: "I replaced the text...",
+        textWhatPlaceholder: "which text you replaced",
+        textWhyPlaceholder: "to improve (technical criterion)",
+        imageSpan: "The most important image is...",
+        imageWhatPlaceholder: "which image",
+        imageWhyPlaceholder: "why (technical criterion)",
+        impactSpan: "The highest-impact change was...",
+        impactWhatPlaceholder: "which change",
+        impactWhyPlaceholder: "why (technical criterion)",
+        aiUsageTitle: "AI use in corrections",
+        usedAiLabel: "Did you use AI to correct or audit?",
+        usedAiOptions: ["Select", "Yes", "No"],
+        detailLabel: "Detail",
+        detailPlaceholder: "If you used AI: paste the prompt or summarize what you asked for. If you did not: explain how you decided on the changes.",
+        partBTitle: "Part B - Visual evidence",
+        beforeLabel: "Before screenshot",
+        afterLabel: "After screenshot",
+        beforePlaceholder: "before.png",
+        afterPlaceholder: "after.png",
+        deliveryTitle: "Prepared submission",
+        beforeBox: "BEFORE",
+        afterBox: "AFTER",
+        beforePending: "before.png pending",
+        afterPending: "after.png pending",
+        pending: "pending",
+        emptyLine: "_____",
+        validateBtn: "Submit activity",
+        resetBtn: "Reset",
+        summary(v){return `I removed the section ${v.removedWhat || "_____"} because ${v.removedWhy || "_____"}.\n\nI replaced the text ${v.textWhat || "_____"} to improve ${v.textWhy || "_____"}.\n\nThe most important image is ${v.imageWhat || "_____"} because ${v.imageWhy || "_____"}.\n\nThe highest-impact change was ${v.impactWhat || "_____"} because ${v.impactWhy || "_____"}.\n\nAI use: ${v.usedAi || "pending"}. ${v.aiDetail || ""}`;},
+        feedbackLabels: { removed: "Removed change justified with technical criteria", text: "Replaced text justified with technical criteria", image: "Main image is justified", impact: "Highest-impact change is justified", ai: "Explains whether AI was used and how", before: "before.png or JPG evidence", after: "after.png or JPG evidence" },
+        reasonLabels: { removed: "You still need to complete the sentence about the removed section with technical criteria.", text: "You still need to complete the sentence about the replaced text with technical criteria.", image: "You still need to justify the most important image.", impact: "You still need to justify the highest-impact change.", ai: "You still need to clarify whether you used AI and how you decided on the corrections.", before: "You still need to register the before.png or JPG evidence.", after: "You still need to register the after.png or JPG evidence." },
+        statusReady: "Activity ready: the audit includes changes, criteria, AI use, and evidence.",
+        statusReview: "Review the marked points before closing the activity.",
+        statusPending: "Complete the audit, AI use, and evidence.",
+        pgSuccess: "Activity complete: the audit includes changes, criteria, AI use, and evidence.",
+        pgFailure: "The activity still has incomplete points."
+      },
+      pt: {
+        metaTitle: "Aula 5 - Auditoria e justificativa",
+        eyebrow: "Aula 5",
+        pageTitle: "Auditoria e justificativa de mudanças",
+        pageIntro: "Observe seu próprio site com olhar crítico, aplique 4 mudanças importantes e explique cada decisão com critério técnico.",
+        briefTitle: "Proposta",
+        briefText: "A justificativa pesa mais do que dizer \"eu gosto\". Use critérios como contraste, hierarquia, clareza, coerência visual, acessibilidade, público ou conversão.",
+        cardAiLabel: "Usa IA?",
+        cardAiText: "Sim, você pode usar IA para diagnosticar ou propor correções. Mesmo assim, precisa indicar o que aceitou, o que editou e por quê.",
+        cardEvidenceLabel: "Evidência visual",
+        cardEvidenceText: "Entregue duas capturas: antes.png e depois.png, em PNG ou JPG.",
+        partATitle: "Parte A - Justificativa guiada",
+        removedSpan: "Removi a seção...",
+        removedWhatPlaceholder: "o que você removeu",
+        removedWhyPlaceholder: "por quê (critério técnico)",
+        textSpan: "Substituí o texto...",
+        textWhatPlaceholder: "qual texto você substituiu",
+        textWhyPlaceholder: "para melhorar (critério técnico)",
+        imageSpan: "A imagem mais importante é...",
+        imageWhatPlaceholder: "qual imagem",
+        imageWhyPlaceholder: "por quê (critério técnico)",
+        impactSpan: "A mudança de maior impacto foi...",
+        impactWhatPlaceholder: "qual mudança",
+        impactWhyPlaceholder: "por quê (critério técnico)",
+        aiUsageTitle: "Uso de IA nas correções",
+        usedAiLabel: "Você usou IA para corrigir ou auditar?",
+        usedAiOptions: ["Selecionar", "Sim", "Não"],
+        detailLabel: "Detalhe",
+        detailPlaceholder: "Se usou IA: cole o prompt ou resuma o que pediu. Se não usou: explique como decidiu as mudanças.",
+        partBTitle: "Parte B - Evidências visuais",
+        beforeLabel: "Captura antes",
+        afterLabel: "Captura depois",
+        beforePlaceholder: "antes.png",
+        afterPlaceholder: "depois.png",
+        deliveryTitle: "Entrega montada",
+        beforeBox: "ANTES",
+        afterBox: "DEPOIS",
+        beforePending: "antes.png pendente",
+        afterPending: "depois.png pendente",
+        pending: "pendente",
+        emptyLine: "_____",
+        validateBtn: "Enviar atividade",
+        resetBtn: "Reiniciar",
+        summary(v){return `Removi a seção ${v.removedWhat || "_____"} porque ${v.removedWhy || "_____"}.\n\nSubstituí o texto ${v.textWhat || "_____"} para melhorar ${v.textWhy || "_____"}.\n\nA imagem mais importante é ${v.imageWhat || "_____"} porque ${v.imageWhy || "_____"}.\n\nA mudança de maior impacto foi ${v.impactWhat || "_____"} porque ${v.impactWhy || "_____"}.\n\nUso de IA: ${v.usedAi || "pendente"}. ${v.aiDetail || ""}`;},
+        feedbackLabels: { removed: "Mudança removida com critério técnico", text: "Texto substituído com critério técnico", image: "Imagem principal justificada", impact: "Maior impacto justificado", ai: "Explica se usou IA e como", before: "Evidência antes.png ou JPG", after: "Evidência depois.png ou JPG" },
+        reasonLabels: { removed: "Falta completar a frase sobre a seção removida com critério técnico.", text: "Falta completar a frase sobre o texto substituído com critério técnico.", image: "Falta justificar a imagem mais importante.", impact: "Falta justificar a mudança de maior impacto.", ai: "Falta esclarecer se você usou IA e como decidiu as correções.", before: "Falta registrar a evidência antes.png ou JPG.", after: "Falta registrar a evidência depois.png ou JPG." },
+        statusReady: "Atividade pronta: a auditoria inclui mudanças, critérios, uso de IA e evidências.",
+        statusReview: "Revise os pontos marcados antes de encerrar a atividade.",
+        statusPending: "Complete a auditoria, o uso de IA e as evidências.",
+        pgSuccess: "Atividade completa: a auditoria inclui mudanças, critérios, uso de IA e evidências.",
+        pgFailure: "A atividade ainda tem pontos a completar."
+      }
+    };
+
+    const supportedLanguages = ["es", "en", "pt"];
+    const criteriaPattern = /(contrast|contraste|hierarchy|hierarch|jerarqu|clarity|claridad|clareza|coherence|coherencia|coerencia|coerência|accessibility|accesibilidad|acessibilidade|audience|audiencia|publico|público|conversion|conversi|legibility|legibilidad|legibilidade|readability|foco|focus|cta|criterion|criteria|criterio|critério)/i;
     const pgEvent = new PGEvent();
     pgEvent.getValues();
-    const storageKey="webIaCreativa.clase5.v1";const form=document.querySelector("#auditForm");const fields=["removedWhat","removedWhy","textWhat","textWhy","imageWhat","imageWhy","impactWhat","impactWhy","usedAi","aiDetail","beforeFile","afterFile"];
-    function values(){return Object.fromEntries(fields.map(n=>[n,form[n].value.trim()]))}
-    function hasCriterion(text){return /(contraste|jerarqu|claridad|coherencia|accesibilidad|audiencia|conversi|legibilidad|lectura|foco|cta|criterio)/i.test(text)}
-    function fileOk(name,expected){return name.toLowerCase().includes(expected)&&/\.(png|jpg|jpeg)$/i.test(name)}
-    function validate(){const v=values();return{removed:v.removedWhat.length>=3&&hasCriterion(v.removedWhy),text:v.textWhat.length>=3&&hasCriterion(v.textWhy),image:v.imageWhat.length>=3&&hasCriterion(v.imageWhy),impact:v.impactWhat.length>=3&&hasCriterion(v.impactWhy),ai:!!v.usedAi&&v.aiDetail.length>=50,before:fileOk(v.beforeFile,"antes"),after:fileOk(v.afterFile,"despues")}}
-    function reasonsFrom(r){const labels={removed:"Falta completar la frase sobre la sección eliminada con criterio técnico.",text:"Falta completar la frase sobre el texto reemplazado con criterio técnico.",image:"Falta justificar la imagen más importante.",impact:"Falta justificar el cambio de mayor impacto.",ai:"Falta aclarar si usaste IA y cómo decidiste las correcciones.",before:"Falta registrar la evidencia antes.png o JPG.",after:"Falta registrar la evidencia despues.png o JPG."};return Object.entries(r).filter(([,ok])=>!ok).map(([key])=>labels[key])}
-    function sendToPlayground(r,v){const reasons=reasonsFrom(r);pgEvent.postToPg({event:reasons.length===0?"SUCCESS":"FAILURE",reasons,message:reasons.length===0?"Actividad completa: la auditoría incluye cambios, criterios, uso de IA y evidencias.":"La actividad todavía tiene puntos por completar.",state:JSON.stringify({activity:"clase-5-auditoria-cambios",completed:reasons.length===0,usedAi:v.usedAi,fields:r})})}
-    function save(){localStorage.setItem(storageKey,JSON.stringify(values()));render(false)}
-    function load(){const saved=JSON.parse(localStorage.getItem(storageKey)||"{}");fields.forEach(n=>{if(saved[n])form[n].value=saved[n]})}
-    function render(analyzed){const v=values();document.querySelector("#beforePreview").textContent=v.beforeFile||"antes.png pendiente";document.querySelector("#afterPreview").textContent=v.afterFile||"despues.png pendiente";document.querySelector("#summary").textContent=`Eliminé la sección ${v.removedWhat||"_____"} porque ${v.removedWhy||"_____"}.\n\nReemplacé el texto ${v.textWhat||"_____"} para mejorar ${v.textWhy||"_____"}.\n\nLa imagen más importante es ${v.imageWhat||"_____"} porque ${v.imageWhy||"_____"}.\n\nEl cambio de mayor impacto fue ${v.impactWhat||"_____"} porque ${v.impactWhy||"_____"}.\n\nUso de IA: ${v.usedAi||"pendiente"}. ${v.aiDetail||""}`;const r=validate();const labels={removed:"Cambio eliminado con criterio técnico",text:"Texto reemplazado con criterio técnico",image:"Imagen principal justificada",impact:"Mayor impacto justificado",ai:"Aclara si usó IA y cómo",before:"Evidencia antes.png o JPG",after:"Evidencia despues.png o JPG"};document.querySelector("#feedback").innerHTML=Object.entries(labels).map(([k,l])=>`<div class="item ${r[k]?"success completed":analyzed?"error":"warning"}"><span class="dot"></span><span>${l}</span></div>`).join("");const complete=Object.values(r).every(Boolean);const status=document.querySelector("#status");status.className=`status ${complete?"success":analyzed?"error":"warning"}`;status.textContent=complete?"Actividad lista: la auditoría incluye cambios, criterios, uso de IA y evidencias.":analyzed?"Revisá los puntos marcados antes de cerrar la actividad.":"Completá auditoría, uso de IA y evidencias.";if(analyzed)sendToPlayground(r,v)}
-    form.addEventListener("input",save);form.addEventListener("change",save);document.querySelector("#validateBtn").addEventListener("click",()=>render(true));document.querySelector("#resetBtn").addEventListener("click",()=>{fields.forEach(n=>{form[n].value=""});localStorage.removeItem(storageKey);render(false)});load();render(false);
+    const params = new URLSearchParams(window.location.search);
+
+    function detectLanguage() {
+      const paramLang = (params.get("lang") || "").toLowerCase();
+      if (supportedLanguages.includes(paramLang)) return paramLang;
+      const segments = window.location.pathname.toLowerCase().split("/").filter(Boolean);
+      const segmentLang = segments.find((segment) => supportedLanguages.includes(segment));
+      if (segmentLang) return segmentLang;
+      const hashLang = window.location.hash.replace("#", "").toLowerCase();
+      if (supportedLanguages.includes(hashLang)) return hashLang;
+      return "es";
+    }
+
+    const currentLanguage = detectLanguage();
+    const t = translations[currentLanguage];
+    const storageKey = `webIaCreativa.clase5.v2.${currentLanguage}`;
+    const form = document.querySelector("#auditForm");
+    const fields = ["removedWhat","removedWhy","textWhat","textWhy","imageWhat","imageWhy","impactWhat","impactWhy","usedAi","aiDetail","beforeFile","afterFile"];
+
+    function setText(id, value) { document.querySelector(`#${id}`).textContent = value; }
+    function setPlaceholder(id, value) { document.querySelector(`#${id}`).placeholder = value; }
+
+    function applyTranslations() {
+      document.documentElement.lang = currentLanguage;
+      document.title = t.metaTitle;
+      ["eyebrow","pageTitle","pageIntro","briefTitle","briefText","cardAiLabel","cardAiText","cardEvidenceLabel","cardEvidenceText","partATitle","removedSpan","textSpan","imageSpan","impactSpan","aiUsageTitle","usedAiLabel","detailLabel","partBTitle","beforeLabel","afterLabel","deliveryTitle","beforeBox","afterBox","validateBtn","resetBtn"].forEach((id) => setText(id, t[id]));
+      setPlaceholder("removedWhat", t.removedWhatPlaceholder);
+      setPlaceholder("removedWhy", t.removedWhyPlaceholder);
+      setPlaceholder("textWhat", t.textWhatPlaceholder);
+      setPlaceholder("textWhy", t.textWhyPlaceholder);
+      setPlaceholder("imageWhat", t.imageWhatPlaceholder);
+      setPlaceholder("imageWhy", t.imageWhyPlaceholder);
+      setPlaceholder("impactWhat", t.impactWhatPlaceholder);
+      setPlaceholder("impactWhy", t.impactWhyPlaceholder);
+      setPlaceholder("aiDetail", t.detailPlaceholder);
+      setPlaceholder("beforeFile", t.beforePlaceholder);
+      setPlaceholder("afterFile", t.afterPlaceholder);
+      document.querySelector("#usedAi").innerHTML = t.usedAiOptions.map((option, index) => `<option value="${index === 0 ? "" : option}">${option}</option>`).join("");
+    }
+
+    function values(){return Object.fromEntries(fields.map((name)=>[name,form[name].value.trim()]));}
+    function hasCriterion(text){return criteriaPattern.test(text);}
+    function fileOk(name, options){return options.words.some((word)=>name.toLowerCase().includes(word)) && /\.(png|jpg|jpeg)$/i.test(name);}
+    function validate(){const v=values();const beforeWords=currentLanguage==="en"?["before"]:currentLanguage==="pt"?["antes"]:["antes"];const afterWords=currentLanguage==="en"?["after"]:currentLanguage==="pt"?["depois"]:["despues","después"];return{removed:v.removedWhat.length>=3&&hasCriterion(v.removedWhy),text:v.textWhat.length>=3&&hasCriterion(v.textWhy),image:v.imageWhat.length>=3&&hasCriterion(v.imageWhy),impact:v.impactWhat.length>=3&&hasCriterion(v.impactWhy),ai:!!v.usedAi&&v.aiDetail.length>=50,before:fileOk(v.beforeFile,{words:beforeWords}),after:fileOk(v.afterFile,{words:afterWords})};}
+    function reasonsFrom(result){return Object.entries(result).filter(([,ok])=>!ok).map(([key])=>t.reasonLabels[key]);}
+    function sendToPlayground(result, submission){const reasons=reasonsFrom(result);pgEvent.postToPg({event:reasons.length===0?"SUCCESS":"FAILURE",reasons,message:reasons.length===0?t.pgSuccess:t.pgFailure,feedbackLanguage:currentLanguage,submissionLanguage:currentLanguage,submission,state:JSON.stringify({activity:"clase-5-auditoria-cambios",language:currentLanguage,feedbackLanguage:currentLanguage,completed:reasons.length===0,usedAi:submission.usedAi,fields:result,submission,evaluatorInstructions:{supportedInputLanguages:supportedLanguages,feedbackLanguage:currentLanguage,returnFeedbackInSelectedLanguage:true}})});}
+    function save(){localStorage.setItem(storageKey,JSON.stringify(values()));render(false);}
+    function load(){const saved=JSON.parse(localStorage.getItem(storageKey)||"{}");fields.forEach((name)=>{if(saved[name])form[name].value=saved[name];});}
+    function render(analyzed){const v=values();document.querySelector("#beforePreview").textContent=v.beforeFile||t.beforePending;document.querySelector("#afterPreview").textContent=v.afterFile||t.afterPending;document.querySelector("#summary").textContent=t.summary(v);const result=validate();document.querySelector("#feedback").innerHTML=Object.entries(t.feedbackLabels).map(([key,label])=>`<div class="item ${result[key]?"success completed":analyzed?"error":"warning"}"><span class="dot"></span><span>${label}</span></div>`).join("");const complete=Object.values(result).every(Boolean);const status=document.querySelector("#status");status.className=`status ${complete?"success":analyzed?"error":"warning"}`;status.textContent=complete?t.statusReady:analyzed?t.statusReview:t.statusPending;if(analyzed){sendToPlayground(result,{...v,beforeFile:v.beforeFile,afterFile:v.afterFile});}}
+
+    applyTranslations();
+    form.addEventListener("input",save);
+    form.addEventListener("change",save);
+    document.querySelector("#validateBtn").addEventListener("click",()=>render(true));
+    document.querySelector("#resetBtn").addEventListener("click",()=>{fields.forEach((name)=>{form[name].value="";});localStorage.removeItem(storageKey);render(false);});
+    load();
+    render(false);
   </script>
 </body>
 </html>

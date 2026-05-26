@@ -145,58 +145,63 @@
 <body>
   <main class="shell">
     <header>
-      <div class="eyebrow">Clase 1</div>
-      <h1>Tu primer prompt</h1>
-      <p>Aprendé a escribir un prompt claro y específico, probar entre 3 y 5 resultados y justificar una elección final con criterio propio.</p>
+      <div class="eyebrow" id="eyebrow"></div>
+      <h1 id="pageTitle"></h1>
+      <p id="pageIntro"></p>
     </header>
 
     <section class="layout">
       <aside class="panel">
-        <h2>Consigna</h2>
-        <p>Elegí un tema simple: un afiche, un logo inventado, una imagen para Instagram o una pieza web. La meta no es acertar a la primera, sino ver cómo cambia el resultado según cómo le hablás a la IA.</p>
-        <div class="card"><strong>Usás IA para:</strong><br>generar opciones y comparar resultados.</div>
-        <div class="card"><strong>Tu trabajo es:</strong><br>especificar, revisar, elegir y explicar por qué esa versión funciona mejor.</div>
-        <div class="card"><strong>Actividad independiente:</strong><br>podés completarla como práctica de clase. Al enviarla, el Playground solo recibe si está completa o qué falta.</div>
+        <h2 id="briefTitle"></h2>
+        <p id="briefText"></p>
+        <div class="card"><strong id="cardAiLabel"></strong><br><span id="cardAiText"></span></div>
+        <div class="card"><strong id="cardWorkLabel"></strong><br><span id="cardWorkText"></span></div>
+        <div class="card"><strong id="cardIndependentLabel"></strong><br><span id="cardIndependentText"></span></div>
       </aside>
 
       <section class="panel">
         <form id="activityForm">
           <div class="grid2">
-            <label>Tema o idea simple
-              <input name="topic" placeholder="Ej: afiche para un recital indie">
+            <label>
+              <span id="topicLabel">Tema o idea simple</span>
+              <input name="topic" id="topicInput">
             </label>
-            <label>Contexto de uso
-              <input name="context" placeholder="Ej: historia de Instagram, 1080x1920">
+            <label>
+              <span id="contextLabel">Contexto de uso</span>
+              <input name="context" id="contextInput">
             </label>
           </div>
-          <label>MI PRIMER PROMPT
-            <textarea name="prompt" placeholder="Incluí qué querés, para quién es, estilo visual y contexto donde se va a usar."></textarea>
+          <label>
+            <span id="promptLabel">MI PRIMER PROMPT</span>
+            <textarea name="prompt" id="promptInput"></textarea>
           </label>
-          <label>RESULTADOS DE LA IA
-            <small>Registrá 3 a 5 resultados. Podés pegar enlaces, nombres de archivo o describir cada imagen/respuesta.</small>
+          <label>
+            <span id="resultsLabel">RESULTADOS DE LA IA</span>
+            <small id="resultsHelp"></small>
           </label>
           <div class="results">
-            <div class="resultLine"><span class="badge">Resultado 1</span><textarea name="result1"></textarea></div>
-            <div class="resultLine"><span class="badge">Resultado 2</span><textarea name="result2"></textarea></div>
-            <div class="resultLine"><span class="badge">Resultado 3</span><textarea name="result3"></textarea></div>
-            <div class="resultLine"><span class="badge">Resultado 4</span><textarea name="result4"></textarea></div>
-            <div class="resultLine"><span class="badge">Resultado 5</span><textarea name="result5"></textarea></div>
+            <div class="resultLine"><span class="badge" id="resultBadge1"></span><textarea name="result1"></textarea></div>
+            <div class="resultLine"><span class="badge" id="resultBadge2"></span><textarea name="result2"></textarea></div>
+            <div class="resultLine"><span class="badge" id="resultBadge3"></span><textarea name="result3"></textarea></div>
+            <div class="resultLine"><span class="badge" id="resultBadge4"></span><textarea name="result4"></textarea></div>
+            <div class="resultLine"><span class="badge" id="resultBadge5"></span><textarea name="result5"></textarea></div>
           </div>
-          <label>MI ANÁLISIS
-            <textarea name="analysis" placeholder="Qué funcionó, qué cambiarías, cuál elegiste como final y por qué."></textarea>
+          <label>
+            <span id="analysisLabel">MI ANÁLISIS</span>
+            <textarea name="analysis" id="analysisInput"></textarea>
           </label>
           <div class="actions">
-            <button type="button" id="validateBtn">Enviar actividad</button>
-            <button class="secondary" type="button" id="resetBtn">Reiniciar</button>
+            <button type="button" id="validateBtn"></button>
+            <button class="secondary" type="button" id="resetBtn"></button>
           </div>
         </form>
       </section>
 
       <aside class="panel">
-        <h2>Entregable de hoy</h2>
-        <div class="promptPreview" id="deliverable">Completá las casillas para armar tu entrega.</div>
+        <h2 id="deliverableTitle"></h2>
+        <div class="promptPreview" id="deliverable"></div>
         <div class="checklist" id="checklist"></div>
-        <div class="status warning" id="status">Completá la actividad y enviala cuando termines.</div>
+        <div class="status warning" id="status"></div>
       </aside>
     </section>
   </main>
@@ -204,11 +209,257 @@
   <script type="module">
     import { PGEvent } from "../pg-event.js";
 
+    const translations = {
+      es: {
+        metaTitle: "Clase 1 - Tu primer prompt",
+        pageTitle: "Tu primer prompt",
+        eyebrow: "Clase 1",
+        pageIntro: "Aprendé a escribir un prompt claro y específico, probar entre 3 y 5 resultados y justificar una elección final con criterio propio.",
+        briefTitle: "Consigna",
+        briefText: "Elegí un tema simple: un afiche, un logo inventado, una imagen para Instagram o una pieza web. La meta no es acertar a la primera, sino ver cómo cambia el resultado según cómo le hablás a la IA.",
+        cardAiLabel: "Usás IA para:",
+        cardAiText: "generar opciones y comparar resultados.",
+        cardWorkLabel: "Tu trabajo es:",
+        cardWorkText: "especificar, revisar, elegir y explicar por qué esa versión funciona mejor.",
+        cardIndependentLabel: "Actividad independiente:",
+        cardIndependentText: "podés completarla como práctica de clase. Al enviarla, el Playground solo recibe si está completa o qué falta.",
+        topicLabel: "Tema o idea simple",
+        topicPlaceholder: "Ej: afiche para un recital indie",
+        contextLabel: "Contexto de uso",
+        contextPlaceholder: "Ej: historia de Instagram, 1080x1920",
+        promptLabel: "MI PRIMER PROMPT",
+        promptPlaceholder: "Incluí qué querés, para quién es, estilo visual y contexto donde se va a usar.",
+        resultsLabel: "RESULTADOS DE LA IA",
+        resultsHelp: "Registrá 3 a 5 resultados. Podés pegar enlaces, nombres de archivo o describir cada imagen/respuesta.",
+        resultBadge: "Resultado",
+        analysisLabel: "MI ANÁLISIS",
+        analysisPlaceholder: "Qué funcionó, qué cambiarías, cuál elegiste como final y por qué.",
+        validateBtn: "Enviar actividad",
+        resetBtn: "Reiniciar",
+        deliverableTitle: "Entregable de hoy",
+        pending: "Pendiente",
+        optional: "Opcional",
+        previewPrompt: "MI PRIMER PROMPT:",
+        previewResults: "RESULTADOS DE LA IA:",
+        previewAnalysis: "MI ANÁLISIS:",
+        checklistLabels: {
+          topic: "Tema o idea definido",
+          context: "Contexto de uso claro",
+          prompt: "Prompt completo, no una frase suelta",
+          promptParts: "Incluye destinatario, estilo o contexto",
+          results: "Hay entre 3 y 5 resultados registrados",
+          analysis: "Análisis con desarrollo suficiente",
+          decision: "La elección final está justificada"
+        },
+        reasonLabels: {
+          topic: "Falta definir un tema o idea simple.",
+          context: "Falta aclarar el contexto de uso.",
+          prompt: "El prompt tiene que estar más completo.",
+          promptParts: "El prompt debe incluir destinatario, estilo visual o contexto.",
+          results: "Faltan registrar al menos 3 resultados generados con IA.",
+          analysis: "Falta desarrollar el análisis.",
+          decision: "Falta justificar cuál resultado elegiste y por qué."
+        },
+        statusReady: "Actividad lista: el prompt tiene opciones, análisis y justificación.",
+        statusReview: "Revisá los puntos marcados antes de cerrar la actividad.",
+        statusPending: "Completá el entregable y envialo cuando esté listo.",
+        pgSuccess: "Actividad completa: el prompt incluye pruebas, análisis y elección final.",
+        pgFailure: "La actividad todavía tiene puntos por completar.",
+        validation: {
+          promptParts: /(para|audiencia|dirigido|estilo|visual|contexto|uso)/i,
+          decision: /(elijo|elegí|final|porque|por qué|funcionó|cambiaría)/i
+        }
+      },
+      en: {
+        metaTitle: "Class 1 - Your first prompt",
+        pageTitle: "Your first prompt",
+        eyebrow: "Class 1",
+        pageIntro: "Learn to write a clear, specific prompt, test 3 to 5 results, and justify a final choice using your own criteria.",
+        briefTitle: "Assignment",
+        briefText: "Choose a simple topic: a poster, a fictional logo, an Instagram image, or a web piece. The goal is not to get it right on the first try, but to see how the result changes depending on how you talk to the AI.",
+        cardAiLabel: "You use AI to:",
+        cardAiText: "generate options and compare results.",
+        cardWorkLabel: "Your job is to:",
+        cardWorkText: "specify, review, choose, and explain why that version works best.",
+        cardIndependentLabel: "Independent activity:",
+        cardIndependentText: "you can complete it as class practice. When you submit it, Playground only receives whether it is complete or what is missing.",
+        topicLabel: "Simple topic or idea",
+        topicPlaceholder: "Ex: poster for an indie concert",
+        contextLabel: "Usage context",
+        contextPlaceholder: "Ex: Instagram story, 1080x1920",
+        promptLabel: "MY FIRST PROMPT",
+        promptPlaceholder: "Include what you want, who it is for, the visual style, and the context where it will be used.",
+        resultsLabel: "AI RESULTS",
+        resultsHelp: "Record 3 to 5 results. You can paste links, file names, or describe each image/response.",
+        resultBadge: "Result",
+        analysisLabel: "MY ANALYSIS",
+        analysisPlaceholder: "What worked, what you would change, which one you chose as final, and why.",
+        validateBtn: "Submit activity",
+        resetBtn: "Reset",
+        deliverableTitle: "Today's deliverable",
+        pending: "Pending",
+        optional: "Optional",
+        previewPrompt: "MY FIRST PROMPT:",
+        previewResults: "AI RESULTS:",
+        previewAnalysis: "MY ANALYSIS:",
+        checklistLabels: {
+          topic: "Topic or idea is defined",
+          context: "Usage context is clear",
+          prompt: "Prompt is complete, not just a short phrase",
+          promptParts: "Includes audience, style, or context",
+          results: "There are 3 to 5 recorded results",
+          analysis: "Analysis has enough development",
+          decision: "The final choice is justified"
+        },
+        reasonLabels: {
+          topic: "You still need to define a simple topic or idea.",
+          context: "You still need to clarify the usage context.",
+          prompt: "The prompt needs to be more complete.",
+          promptParts: "The prompt should include audience, visual style, or context.",
+          results: "You still need to record at least 3 AI-generated results.",
+          analysis: "You still need to develop the analysis.",
+          decision: "You still need to justify which result you chose and why."
+        },
+        statusReady: "Activity ready: the prompt includes options, analysis, and justification.",
+        statusReview: "Review the marked points before closing the activity.",
+        statusPending: "Complete the deliverable and submit it when it is ready.",
+        pgSuccess: "Activity complete: the prompt includes tests, analysis, and a final choice.",
+        pgFailure: "The activity still has incomplete points.",
+        validation: {
+          promptParts: /(for|audience|target|style|visual|context|use)/i,
+          decision: /(i choose|chosen|final|because|worked|would change|best option)/i
+        }
+      },
+      pt: {
+        metaTitle: "Aula 1 - Seu primeiro prompt",
+        pageTitle: "Seu primeiro prompt",
+        eyebrow: "Aula 1",
+        pageIntro: "Aprenda a escrever um prompt claro e específico, testar entre 3 e 5 resultados e justificar uma escolha final com critério próprio.",
+        briefTitle: "Proposta",
+        briefText: "Escolha um tema simples: um cartaz, um logotipo inventado, uma imagem para Instagram ou uma peça web. A meta não é acertar de primeira, mas ver como o resultado muda de acordo com a forma como você fala com a IA.",
+        cardAiLabel: "Você usa IA para:",
+        cardAiText: "gerar opções e comparar resultados.",
+        cardWorkLabel: "Seu trabalho é:",
+        cardWorkText: "especificar, revisar, escolher e explicar por que essa versão funciona melhor.",
+        cardIndependentLabel: "Atividade independente:",
+        cardIndependentText: "você pode completá-la como prática de aula. Ao enviá-la, o Playground recebe apenas se está completa ou o que está faltando.",
+        topicLabel: "Tema ou ideia simples",
+        topicPlaceholder: "Ex: cartaz para um show indie",
+        contextLabel: "Contexto de uso",
+        contextPlaceholder: "Ex: story do Instagram, 1080x1920",
+        promptLabel: "MEU PRIMEIRO PROMPT",
+        promptPlaceholder: "Inclua o que você quer, para quem é, o estilo visual e o contexto em que será usado.",
+        resultsLabel: "RESULTADOS DA IA",
+        resultsHelp: "Registre de 3 a 5 resultados. Você pode colar links, nomes de arquivos ou descrever cada imagem/resposta.",
+        resultBadge: "Resultado",
+        analysisLabel: "MINHA ANÁLISE",
+        analysisPlaceholder: "O que funcionou, o que mudaria, qual você escolheu como final e por quê.",
+        validateBtn: "Enviar atividade",
+        resetBtn: "Reiniciar",
+        deliverableTitle: "Entrega de hoje",
+        pending: "Pendente",
+        optional: "Opcional",
+        previewPrompt: "MEU PRIMEIRO PROMPT:",
+        previewResults: "RESULTADOS DA IA:",
+        previewAnalysis: "MINHA ANÁLISE:",
+        checklistLabels: {
+          topic: "Tema ou ideia definidos",
+          context: "Contexto de uso claro",
+          prompt: "Prompt completo, não apenas uma frase solta",
+          promptParts: "Inclui público, estilo ou contexto",
+          results: "Há de 3 a 5 resultados registrados",
+          analysis: "A análise tem desenvolvimento suficiente",
+          decision: "A escolha final está justificada"
+        },
+        reasonLabels: {
+          topic: "Falta definir um tema ou ideia simples.",
+          context: "Falta esclarecer o contexto de uso.",
+          prompt: "O prompt precisa estar mais completo.",
+          promptParts: "O prompt deve incluir público, estilo visual ou contexto.",
+          results: "Falta registrar pelo menos 3 resultados gerados com IA.",
+          analysis: "Falta desenvolver a análise.",
+          decision: "Falta justificar qual resultado você escolheu e por quê."
+        },
+        statusReady: "Atividade pronta: o prompt tem opções, análise e justificativa.",
+        statusReview: "Revise os pontos marcados antes de encerrar a atividade.",
+        statusPending: "Complete a entrega e envie quando estiver pronta.",
+        pgSuccess: "Atividade completa: o prompt inclui testes, análise e escolha final.",
+        pgFailure: "A atividade ainda tem pontos a completar.",
+        validation: {
+          promptParts: /(para|publico|público|estilo|visual|contexto|uso)/i,
+          decision: /(escolho|escolhi|final|porque|por que|funcionou|mudaria)/i
+        }
+      }
+    };
+
     const pgEvent = new PGEvent();
     pgEvent.getValues();
-    const storageKey = "webIaCreativa.clase1.v1";
+
+    const supportedLanguages = ["es", "en", "pt"];
+    const params = new URLSearchParams(window.location.search);
+    const multilingualValidation = {
+      promptParts: /(para|for|audience|target|dirigido|estilo|style|visual|contexto|context|uso|use|publico|público)/i,
+      decision: /(elijo|elegi|elegí|escolho|escolhi|i choose|chosen|final|because|porque|por que|por qué|worked|funciono|funcionó|funcionou|mudaria|cambiaria|cambiaría|would change|best option)/i
+    };
+
+    function detectLanguage() {
+      const paramLang = (params.get("lang") || "").toLowerCase();
+      if (supportedLanguages.includes(paramLang)) return paramLang;
+
+      const segments = window.location.pathname.toLowerCase().split("/").filter(Boolean);
+      const segmentLang = segments.find((segment) => supportedLanguages.includes(segment));
+      if (segmentLang) return segmentLang;
+
+      const hashLang = window.location.hash.replace("#", "").toLowerCase();
+      if (supportedLanguages.includes(hashLang)) return hashLang;
+
+      return "es";
+    }
+
+    const currentLanguage = detectLanguage();
+    const t = translations[currentLanguage];
+    const storageKey = `webIaCreativa.clase1.v2.${currentLanguage}`;
     const form = document.querySelector("#activityForm");
     const fields = ["topic", "context", "prompt", "result1", "result2", "result3", "result4", "result5", "analysis"];
+
+    function setText(id, value) {
+      document.querySelector(`#${id}`).textContent = value;
+    }
+
+    function applyTranslations() {
+      document.documentElement.lang = currentLanguage;
+      document.title = t.metaTitle;
+
+      setText("eyebrow", t.eyebrow);
+      setText("pageTitle", t.pageTitle);
+      setText("pageIntro", t.pageIntro);
+      setText("briefTitle", t.briefTitle);
+      setText("briefText", t.briefText);
+      setText("cardAiLabel", t.cardAiLabel);
+      setText("cardAiText", t.cardAiText);
+      setText("cardWorkLabel", t.cardWorkLabel);
+      setText("cardWorkText", t.cardWorkText);
+      setText("cardIndependentLabel", t.cardIndependentLabel);
+      setText("cardIndependentText", t.cardIndependentText);
+      setText("topicLabel", t.topicLabel);
+      setText("contextLabel", t.contextLabel);
+      setText("promptLabel", t.promptLabel);
+      setText("resultsLabel", t.resultsLabel);
+      setText("resultsHelp", t.resultsHelp);
+      setText("analysisLabel", t.analysisLabel);
+      setText("validateBtn", t.validateBtn);
+      setText("resetBtn", t.resetBtn);
+      setText("deliverableTitle", t.deliverableTitle);
+
+      document.querySelector("#topicInput").placeholder = t.topicPlaceholder;
+      document.querySelector("#contextInput").placeholder = t.contextPlaceholder;
+      document.querySelector("#promptInput").placeholder = t.promptPlaceholder;
+      document.querySelector("#analysisInput").placeholder = t.analysisPlaceholder;
+
+      for (let index = 1; index <= 5; index += 1) {
+        setText(`resultBadge${index}`, `${t.resultBadge} ${index}`);
+      }
+    }
 
     function data() {
       return Object.fromEntries(fields.map((name) => [name, form[name].value.trim()]));
@@ -226,41 +477,49 @@
         topic: values.topic.length >= 4,
         context: values.context.length >= 6,
         prompt: values.prompt.length >= 120,
-        promptParts: /(para|audiencia|dirigido|estilo|visual|contexto|uso)/i.test(prompt),
+        promptParts: multilingualValidation.promptParts.test(prompt) || t.validation.promptParts.test(prompt),
         results: resultCount(values) >= 3,
         analysis: values.analysis.length >= 140,
-        decision: /(elijo|elegí|final|porque|funcionó|cambiaría)/i.test(analysis)
+        decision: multilingualValidation.decision.test(analysis) || t.validation.decision.test(analysis)
       };
     }
 
     function reasonsFrom(checks) {
-      const labels = {
-        topic: "Falta definir un tema o idea simple.",
-        context: "Falta aclarar el contexto de uso.",
-        prompt: "El prompt tiene que estar más completo.",
-        promptParts: "El prompt debe incluir destinatario, estilo visual o contexto.",
-        results: "Faltan registrar al menos 3 resultados generados con IA.",
-        analysis: "Falta desarrollar el análisis.",
-        decision: "Falta justificar cuál resultado elegiste y por qué."
-      };
       return Object.entries(checks)
         .filter(([, ok]) => !ok)
-        .map(([key]) => labels[key]);
+        .map(([key]) => t.reasonLabels[key]);
     }
 
     function sendToPlayground(checks, values) {
       const reasons = reasonsFrom(checks);
+      const submission = {
+        topic: values.topic,
+        context: values.context,
+        prompt: values.prompt,
+        results: [values.result1, values.result2, values.result3, values.result4, values.result5].filter(Boolean),
+        analysis: values.analysis
+      };
+
       pgEvent.postToPg({
         event: reasons.length === 0 ? "SUCCESS" : "FAILURE",
         reasons,
-        message: reasons.length === 0
-          ? "Actividad completa: el prompt incluye pruebas, análisis y elección final."
-          : "La actividad todavía tiene puntos por completar.",
+        message: reasons.length === 0 ? t.pgSuccess : t.pgFailure,
+        feedbackLanguage: currentLanguage,
+        submissionLanguage: currentLanguage,
+        submission,
         state: JSON.stringify({
           activity: "clase-1-tu-primer-prompt",
+          language: currentLanguage,
+          feedbackLanguage: currentLanguage,
           results: resultCount(values),
           completed: reasons.length === 0,
-          fields: checks
+          fields: checks,
+          submission,
+          evaluatorInstructions: {
+            supportedInputLanguages: supportedLanguages,
+            feedbackLanguage: currentLanguage,
+            returnFeedbackInSelectedLanguage: true
+          }
         })
       });
     }
@@ -272,53 +531,50 @@
 
     function load() {
       const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
-      fields.forEach((name) => { if (saved[name]) form[name].value = saved[name]; });
+      fields.forEach((name) => {
+        if (saved[name]) form[name].value = saved[name];
+      });
     }
 
     function render(analyzed) {
       const values = data();
       const checks = validate();
-      const labels = {
-        topic: "Tema o idea definido",
-        context: "Contexto de uso claro",
-        prompt: "Prompt completo, no una frase suelta",
-        promptParts: "Incluye destinatario, estilo o contexto",
-        results: "Hay entre 3 y 5 resultados registrados",
-        analysis: "Análisis con desarrollo suficiente",
-        decision: "La elección final está justificada"
-      };
+
       document.querySelector("#deliverable").textContent =
-`MI PRIMER PROMPT:
-${values.prompt || "Pendiente"}
+`${t.previewPrompt}
+${values.prompt || t.pending}
 
-RESULTADOS DE LA IA:
-1. ${values.result1 || "Pendiente"}
-2. ${values.result2 || "Pendiente"}
-3. ${values.result3 || "Pendiente"}
-4. ${values.result4 || "Opcional"}
-5. ${values.result5 || "Opcional"}
+${t.previewResults}
+1. ${values.result1 || t.pending}
+2. ${values.result2 || t.pending}
+3. ${values.result3 || t.pending}
+4. ${values.result4 || t.optional}
+5. ${values.result5 || t.optional}
 
-MI ANÁLISIS:
-${values.analysis || "Pendiente"}`;
-      document.querySelector("#checklist").innerHTML = Object.entries(labels).map(([key, label]) => `
+${t.previewAnalysis}
+${values.analysis || t.pending}`;
+
+      document.querySelector("#checklist").innerHTML = Object.entries(t.checklistLabels).map(([key, label]) => `
         <div class="check ${checks[key] ? "success completed" : analyzed ? "error" : "warning"}">
           <span class="dot"></span><span>${label}</span>
         </div>
       `).join("");
+
       const complete = Object.values(checks).every(Boolean);
       const status = document.querySelector("#status");
       status.className = `status ${complete ? "success" : analyzed ? "error" : "warning"}`;
       status.textContent = complete
-        ? "Actividad lista: el prompt tiene opciones, análisis y justificación."
+        ? t.statusReady
         : analyzed
-          ? "Revisá los puntos marcados antes de cerrar la actividad."
-          : "Completá el entregable y envialo cuando esté listo.";
+          ? t.statusReview
+          : t.statusPending;
 
       if (analyzed) {
         sendToPlayground(checks, values);
       }
     }
 
+    applyTranslations();
     form.addEventListener("input", save);
     document.querySelector("#validateBtn").addEventListener("click", () => render(true));
     document.querySelector("#resetBtn").addEventListener("click", () => {
