@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { Activity, ActivityField } from "@/lib/activities";
+import type { Activity, ActivityField, Language } from "@/lib/activities";
 import { PGEvent } from "@/lib/pg-event";
 
 type ValidationResponse = {
@@ -18,13 +18,53 @@ function emptyAnswers(activity: Activity) {
   ) as Record<string, string>;
 }
 
+function uiText(language: Language) {
+  return {
+    es: {
+      select: "Seleccionar",
+      submit: "Enviar actividad",
+      reviewing: "Revisando...",
+      reset: "Reiniciar",
+      delivery: "Entrega",
+      ordered: "Tus respuestas se van ordenando aca mientras trabajas.",
+      complete: "Actividad completa.",
+      fallbackReason: "No se pudo revisar la actividad en este momento.",
+      fallbackMessage: "Hubo un problema al validar la actividad.",
+    },
+    en: {
+      select: "Select",
+      submit: "Submit activity",
+      reviewing: "Reviewing...",
+      reset: "Reset",
+      delivery: "Submission",
+      ordered: "Your answers will be organized here while you work.",
+      complete: "Activity complete.",
+      fallbackReason: "The activity could not be reviewed right now.",
+      fallbackMessage: "There was a problem validating the activity.",
+    },
+    pt: {
+      select: "Selecionar",
+      submit: "Enviar atividade",
+      reviewing: "Revisando...",
+      reset: "Reiniciar",
+      delivery: "Entrega",
+      ordered: "Suas respostas vao sendo organizadas aqui enquanto voce trabalha.",
+      complete: "Atividade completa.",
+      fallbackReason: "Nao foi possivel revisar a atividade neste momento.",
+      fallbackMessage: "Houve um problema ao validar a atividade.",
+    },
+  }[language];
+}
+
 function FieldControl({
   field,
   value,
+  language,
   onChange,
 }: {
   field: ActivityField;
   value: string;
+  language: Language;
   onChange: (value: string) => void;
 }) {
   const id = `field-${field.name}`;
@@ -35,7 +75,7 @@ function FieldControl({
       {field.help ? <small>{field.help}</small> : null}
       {field.type === "select" ? (
         <select className="select" id={id} value={value} onChange={(event) => onChange(event.target.value)}>
-          <option value="">Seleccionar</option>
+          <option value="">{uiText(language).select}</option>
           {field.options?.map((option) => (
             <option key={option} value={option}>
               {option}
@@ -63,18 +103,21 @@ function FieldControl({
   );
 }
 
-export function ActivityClient({ activity }: { activity: Activity }) {
-  const storageKey = `webIaCreativa.next.${activity.id}`;
+export function ActivityClient({ activity, language }: { activity: Activity; language: Language }) {
+  const storageKey = `webIaCreativa.next.${activity.id}.${language}`;
   const [answers, setAnswers] = useState<Record<string, string>>(() => emptyAnswers(activity));
   const [result, setResult] = useState<ValidationResponse | null>(null);
   const [isSending, setIsSending] = useState(false);
   const pgEvent = useMemo(() => new PGEvent(), []);
+  const text = uiText(language);
 
   useEffect(() => {
     pgEvent.getValues();
     const saved = window.localStorage.getItem(storageKey);
     if (saved) {
       setAnswers({ ...emptyAnswers(activity), ...JSON.parse(saved) });
+    } else {
+      setAnswers(emptyAnswers(activity));
     }
   }, [activity, pgEvent, storageKey]);
 
@@ -93,28 +136,33 @@ export function ActivityClient({ activity }: { activity: Activity }) {
       const response = await fetch("/api/validate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ activityId: activity.id, answers }),
+        body: JSON.stringify({ activityId: activity.id, answers, language }),
       });
       const payload = (await response.json()) as ValidationResponse;
       setResult(payload);
-      const pgPayload = {
+      pgEvent.postToPg({
         event: payload.event,
         reasons: payload.reasons,
         message: payload.message,
         state: payload.state,
-      };
-      console.log("[Activity] sending to PG", pgPayload);
-      pgEvent.postToPg(pgPayload);
+        feedbackLanguage: language,
+        submissionLanguage: language,
+        submission: answers,
+      });
     } catch {
       const fallback: ValidationResponse = {
         event: "FAILURE",
-        reasons: ["No se pudo revisar la actividad en este momento."],
-        message: "Hubo un problema al validar la actividad.",
-        state: JSON.stringify({ activity: activity.id, completed: false }),
+        reasons: [text.fallbackReason],
+        message: text.fallbackMessage,
+        state: JSON.stringify({ activity: activity.id, completed: false, language }),
       };
       setResult(fallback);
-      console.log("[Activity] sending fallback to PG", fallback);
-      pgEvent.postToPg(fallback);
+      pgEvent.postToPg({
+        ...fallback,
+        feedbackLanguage: language,
+        submissionLanguage: language,
+        submission: answers,
+      });
     } finally {
       setIsSending(false);
     }
@@ -150,6 +198,7 @@ export function ActivityClient({ activity }: { activity: Activity }) {
                   <FieldControl
                     field={field}
                     key={field.name}
+                    language={language}
                     value={answers[field.name] || ""}
                     onChange={(value) => updateAnswer(field.name, value)}
                   />
@@ -160,20 +209,20 @@ export function ActivityClient({ activity }: { activity: Activity }) {
         </form>
 
         <aside className="side-panel">
-          <span className="chip">Entrega</span>
+          <span className="chip">{text.delivery}</span>
           <h2>{activity.sideTitle}</h2>
           {activity.sideCopy.map((copy) => (
             <p key={copy}>{copy}</p>
           ))}
 
-          <div className="preview-box">{preview || "Tus respuestas se van ordenando aca mientras trabajas."}</div>
+          <div className="preview-box">{preview || text.ordered}</div>
 
           <div className="actions">
             <button className="button" type="button" onClick={submitActivity} disabled={isSending}>
-              {isSending ? "Revisando..." : "Enviar actividad"}
+              {isSending ? text.reviewing : text.submit}
             </button>
             <button className="button secondary" type="button" onClick={resetActivity}>
-              Reiniciar
+              {text.reset}
             </button>
           </div>
 
@@ -181,7 +230,7 @@ export function ActivityClient({ activity }: { activity: Activity }) {
             <>
               <div className={`status ${result.event === "SUCCESS" ? "ok" : "bad"}`}>{result.message}</div>
               <div className="feedback">
-                {(result.reasons.length ? result.reasons : ["Actividad completa."]).map((reason) => (
+                {(result.reasons.length ? result.reasons : [text.complete]).map((reason) => (
                   <div className={`feedback-item ${result.event === "SUCCESS" ? "ok" : "bad"}`} key={reason}>
                     {reason}
                   </div>

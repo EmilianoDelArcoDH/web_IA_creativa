@@ -1,7 +1,13 @@
 import Link from "next/link";
-import { activities } from "@/lib/activities";
+import { activities, normalizeLanguage } from "@/lib/activities";
 
-export default function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ lang?: string }>;
+}) {
+  const { lang } = await searchParams;
+  const language = normalizeLanguage(lang);
   return (
     <main className="shell">
       <span className="eyebrow">Web e IA Creativa</span>
@@ -12,7 +18,7 @@ export default function HomePage() {
 
       <section className="home-grid" aria-label="Actividades">
         {activities.map((activity) => (
-          <Link className="home-card" href={`/${activity.slug}`} key={activity.id}>
+          <Link className="home-card" href={`/${activity.slug}?lang=${language}`} key={activity.id}>
             <span>{activity.eyebrow}</span>
             <h2>{activity.title}</h2>
           </Link>
