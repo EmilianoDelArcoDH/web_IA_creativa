@@ -26,7 +26,7 @@ function uiText(language: Language) {
       reviewing: "Revisando...",
       reset: "Reiniciar",
       delivery: "Entrega",
-      ordered: "Tus respuestas se van ordenando aca mientras trabajas.",
+      ordered: "Tus respuestas se ordenan aca mientras trabajas.",
       complete: "Actividad completa.",
       fallbackReason: "No se pudo revisar la actividad en este momento.",
       fallbackMessage: "Hubo un problema al validar la actividad.",

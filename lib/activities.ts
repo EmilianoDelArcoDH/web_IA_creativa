@@ -39,10 +39,10 @@ export const activities: Activity[] = [
     slug: "laboratorio-prompts",
     eyebrow: "Clase 1",
     title: "Tu primer prompt",
-    lead: "Escribi un prompt claro, genera varias opciones y explica por que elegis una version final.",
+    lead: "Escribi un prompt claro, genera varias opciones y explica por que una version funciona mejor.",
     sideTitle: "Como trabajar",
     sideCopy: [
-      "La IA sirve para generar opciones. Tu tarea es decidir, comparar y justificar.",
+      "La IA sirve para generar opciones. Tu tarea es decidir, comparar y justificar con criterio.",
       "No alcanza con llenar casillas: las respuestas tienen que ser coherentes con la consigna.",
     ],
     sections: [
@@ -74,7 +74,7 @@ export const activities: Activity[] = [
       {
         title: "MI ANALISIS",
         intro: "Explica que funciono, que cambiarias, cual elegiste y por que.",
-        fields: [{ name: "analysis", label: "Analisis y eleccion final", type: "textarea" }],
+        fields: [{ name: "analysis", label: "Analisis y decision final", type: "textarea" }],
       },
     ],
   },
@@ -83,7 +83,7 @@ export const activities: Activity[] = [
     slug: "hero-ia",
     eyebrow: "Clase 2",
     title: "Bloque web con IA",
-    lead: "Genera opciones, elegi una, editala y revisa si el bloque completo habla del mismo proyecto.",
+    lead: "Genera opciones, elegi una, editala y revisa si cada parte habla del mismo proyecto.",
     sideTitle: "Proceso lineal",
     sideCopy: [
       "Primero exploras opciones. Despues elegis y editas.",
@@ -96,7 +96,7 @@ export const activities: Activity[] = [
       },
       {
         title: "01 - Titulo",
-        intro: "Genera 5 opciones con IA y despues escribi la version elegida.",
+        intro: "Genera 5 opciones con IA y despues escribi la version final.",
         grid: "grid-5",
         fields: [
           { name: "title1", label: "Titulo 1", type: "textarea" },
@@ -104,7 +104,7 @@ export const activities: Activity[] = [
           { name: "title3", label: "Titulo 3", type: "textarea" },
           { name: "title4", label: "Titulo 4", type: "textarea" },
           { name: "title5", label: "Titulo 5", type: "textarea" },
-          { name: "titleFinal", label: "Titulo elegido y editado" },
+          { name: "titleFinal", label: "Titulo final con edicion" },
         ],
       },
       {
@@ -114,7 +114,7 @@ export const activities: Activity[] = [
           { name: "subtitle1", label: "Subtitulo 1", type: "textarea" },
           { name: "subtitle2", label: "Subtitulo 2", type: "textarea" },
           { name: "subtitle3", label: "Subtitulo 3", type: "textarea" },
-          { name: "subtitleFinal", label: "Subtitulo elegido y editado", type: "textarea" },
+          { name: "subtitleFinal", label: "Subtitulo final con edicion", type: "textarea" },
         ],
       },
       {
@@ -139,7 +139,7 @@ export const activities: Activity[] = [
           { name: "cta3", label: "CTA 3" },
           { name: "cta4", label: "CTA 4" },
           { name: "cta5", label: "CTA 5" },
-          { name: "ctaFinal", label: "CTA elegido" },
+          { name: "ctaFinal", label: "CTA final" },
           { name: "ctaAction", label: "Que pasa al hacer clic" },
         ],
       },
@@ -154,11 +154,11 @@ export const activities: Activity[] = [
     slug: "sistema-visual",
     eyebrow: "Clase 3",
     title: "Identidad visual documentada",
-    lead: "Defini audiencia, imagen hero, paleta e iconos con criterios tecnicos y no solo gusto personal.",
+    lead: "Defini audiencia, imagen hero, paleta e iconos con criterios tecnicos, no solo desde el gusto personal.",
     sideTitle: "Criterio visual",
     sideCopy: [
       "Las decisiones visuales tienen que poder explicarse.",
-      "Contraste, audiencia y coherencia son parte del entregable.",
+      "Contraste, audiencia y coherencia forman parte de la entrega.",
     ],
     sections: [
       {
@@ -187,13 +187,13 @@ export const activities: Activity[] = [
       {
         title: "4. Iconos",
         fields: [
-          { name: "icons", label: "Metodo y estilo", type: "select", options: ["Libreria lineal", "IA", "Dibujo propio", "Sistema geometrico"] },
+          { name: "icons", label: "Metodo y estilo", type: "select", options: ["Libreria lineal", "IA", "Dibujo manual", "Sistema geometrico"] },
           { name: "iconsWhy", label: "Por que funciona para esta audiencia", type: "textarea" },
         ],
       },
       {
         title: "5. Coherencia general",
-        fields: [{ name: "coherence", label: "Revision propia", type: "textarea" }],
+        fields: [{ name: "coherence", label: "Revision personal", type: "textarea" }],
       },
     ],
   },
@@ -205,8 +205,8 @@ export const activities: Activity[] = [
     lead: "Identifica cambios importantes, aplicalos y explica cada decision con criterio tecnico.",
     sideTitle: "Mirada critica",
     sideCopy: [
-      "Podes usar IA para diagnosticar, pero la decision final tiene que ser tuya.",
-      "Las evidencias antes/despues muestran el proceso, no solo el resultado.",
+      "Podes usar IA para diagnosticar, pero la decision final tiene que quedar a tu cargo.",
+      "La justificacion muestra el proceso, no solo el resultado.",
     ],
     sections: [
       {
@@ -226,15 +226,7 @@ export const activities: Activity[] = [
         title: "Uso de IA",
         fields: [
           { name: "usedAi", label: "Usaste IA para corregir o auditar", type: "select", options: ["Si", "No"] },
-          { name: "aiDetail", label: "Detalle de uso o criterio propio", type: "textarea" },
-        ],
-      },
-      {
-        title: "Parte B - Evidencias",
-        grid: "grid-2",
-        fields: [
-          { name: "beforeFile", label: "Captura antes", placeholder: "antes.png" },
-          { name: "afterFile", label: "Captura despues", placeholder: "despues.png" },
+          { name: "aiDetail", label: "Detalle de uso o criterio personal", type: "textarea" },
         ],
       },
     ],
@@ -247,10 +239,10 @@ const activityTranslations: ActivityTranslations = {
     en: {
       eyebrow: "Class 1",
       title: "Your first prompt",
-      lead: "Write a clear prompt, generate several options, and explain why you choose a final version.",
+      lead: "Write a clear prompt, generate several options, and explain why one version works better.",
       sideTitle: "How to work",
       sideCopy: [
-        "AI helps generate options. Your task is to decide, compare, and justify.",
+        "AI helps generate options. Your task is to decide, compare, and justify with criteria.",
         "It is not enough to fill fields: the answers need to match the assignment coherently.",
       ],
       sections: [
@@ -262,16 +254,16 @@ const activityTranslations: ActivityTranslations = {
         { title: "AI RESULTS", intro: "Record 3 to 5 results. You can describe them or paste links/file names.", fields: [
           { name: "result1", label: "Result 1", type: "textarea" }, { name: "result2", label: "Result 2", type: "textarea" }, { name: "result3", label: "Result 3", type: "textarea" }, { name: "result4", label: "Optional result 4", type: "textarea" }, { name: "result5", label: "Optional result 5", type: "textarea" },
         ]},
-        { title: "MY ANALYSIS", intro: "Explain what worked, what you would change, which one you chose, and why.", fields: [{ name: "analysis", label: "Analysis and final choice", type: "textarea" }] },
+        { title: "MY ANALYSIS", intro: "Explain what worked, what you would change, which version stays final, and why.", fields: [{ name: "analysis", label: "Analysis and final decision", type: "textarea" }] },
       ],
     },
     pt: {
       eyebrow: "Aula 1",
       title: "Seu primeiro prompt",
-      lead: "Escreva um prompt claro, gere varias opcoes e explique por que escolhe uma versao final.",
+      lead: "Escreva um prompt claro, gere varias opcoes e explique por que uma versao funciona melhor.",
       sideTitle: "Como trabalhar",
       sideCopy: [
-        "A IA ajuda a gerar opcoes. Sua tarefa e decidir, comparar e justificar.",
+        "A IA ajuda a gerar opcoes. Sua tarefa e decidir, comparar e justificar com criterio.",
         "Nao basta preencher campos: as respostas precisam ser coerentes com a proposta.",
       ],
       sections: [
@@ -283,7 +275,7 @@ const activityTranslations: ActivityTranslations = {
         { title: "RESULTADOS DA IA", intro: "Registre de 3 a 5 resultados. Voce pode descreve-los ou colar links/nomes de arquivo.", fields: [
           { name: "result1", label: "Resultado 1", type: "textarea" }, { name: "result2", label: "Resultado 2", type: "textarea" }, { name: "result3", label: "Resultado 3", type: "textarea" }, { name: "result4", label: "Resultado 4 opcional", type: "textarea" }, { name: "result5", label: "Resultado 5 opcional", type: "textarea" },
         ]},
-        { title: "MINHA ANALISE", intro: "Explique o que funcionou, o que mudaria, qual voce escolheu e por que.", fields: [{ name: "analysis", label: "Analise e escolha final", type: "textarea" }] },
+        { title: "MINHA ANALISE", intro: "Explique o que funcionou, o que mudaria, qual versao fica como final e por que.", fields: [{ name: "analysis", label: "Analise e decisao final", type: "textarea" }] },
       ],
     },
   },
@@ -292,16 +284,16 @@ const activityTranslations: ActivityTranslations = {
     en: {
       eyebrow: "Class 2",
       title: "Web block with AI",
-      lead: "Generate options, choose one, edit it, and review whether the full block speaks about the same project.",
+      lead: "Generate options, choose one, edit it, and review whether each part speaks about the same project.",
       sideTitle: "Linear process",
       sideCopy: ["First explore options. Then choose and edit.", "Final coherence matters more than keeping the first answer."],
       sections: [
         { title: "Block project", fields: [{ name: "project", label: "Name or topic", placeholder: "Ex: mobile photography course" }] },
-        { title: "01 - Title", intro: "Generate 5 options with AI and then write the chosen version.", grid: "grid-5", fields: [
-          { name: "title1", label: "Title 1", type: "textarea" }, { name: "title2", label: "Title 2", type: "textarea" }, { name: "title3", label: "Title 3", type: "textarea" }, { name: "title4", label: "Title 4", type: "textarea" }, { name: "title5", label: "Title 5", type: "textarea" }, { name: "titleFinal", label: "Chosen and edited title" },
+        { title: "01 - Title", intro: "Generate 5 options with AI and then write the final version.", grid: "grid-5", fields: [
+          { name: "title1", label: "Title 1", type: "textarea" }, { name: "title2", label: "Title 2", type: "textarea" }, { name: "title3", label: "Title 3", type: "textarea" }, { name: "title4", label: "Title 4", type: "textarea" }, { name: "title5", label: "Title 5", type: "textarea" }, { name: "titleFinal", label: "Final title with edits" },
         ]},
         { title: "02 - Subtitle", grid: "grid-3", fields: [
-          { name: "subtitle1", label: "Subtitle 1", type: "textarea" }, { name: "subtitle2", label: "Subtitle 2", type: "textarea" }, { name: "subtitle3", label: "Subtitle 3", type: "textarea" }, { name: "subtitleFinal", label: "Chosen and edited subtitle", type: "textarea" },
+          { name: "subtitle1", label: "Subtitle 1", type: "textarea" }, { name: "subtitle2", label: "Subtitle 2", type: "textarea" }, { name: "subtitle3", label: "Subtitle 3", type: "textarea" }, { name: "subtitleFinal", label: "Final subtitle with edits", type: "textarea" },
         ]},
         { title: "03 - Benefits with traffic light", intro: "Green: keep it. Yellow: edit it. Red: discard it and generate another.", grid: "grid-3", fields: [
           { name: "benefit1", label: "Benefit 1", type: "textarea" }, { name: "benefit1Light", label: "Traffic light 1", type: "select", options: ["Green", "Yellow", "Red"] },
@@ -309,7 +301,7 @@ const activityTranslations: ActivityTranslations = {
           { name: "benefit3", label: "Benefit 3", type: "textarea" }, { name: "benefit3Light", label: "Traffic light 3", type: "select", options: ["Green", "Yellow", "Red"] },
         ]},
         { title: "04 - CTA", grid: "grid-5", fields: [
-          { name: "cta1", label: "CTA 1" }, { name: "cta2", label: "CTA 2" }, { name: "cta3", label: "CTA 3" }, { name: "cta4", label: "CTA 4" }, { name: "cta5", label: "CTA 5" }, { name: "ctaFinal", label: "Chosen CTA" }, { name: "ctaAction", label: "What happens on click" },
+          { name: "cta1", label: "CTA 1" }, { name: "cta2", label: "CTA 2" }, { name: "cta3", label: "CTA 3" }, { name: "cta4", label: "CTA 4" }, { name: "cta5", label: "CTA 5" }, { name: "ctaFinal", label: "Final CTA" }, { name: "ctaAction", label: "What happens on click" },
         ]},
         { title: "05 - Final review", fields: [{ name: "coherence", label: "Block coherence", type: "textarea" }] },
       ],
@@ -317,16 +309,16 @@ const activityTranslations: ActivityTranslations = {
     pt: {
       eyebrow: "Aula 2",
       title: "Bloco web com IA",
-      lead: "Gere opcoes, escolha uma, edite e revise se o bloco inteiro fala do mesmo projeto.",
+      lead: "Gere opcoes, escolha uma, edite e revise se cada parte fala do mesmo projeto.",
       sideTitle: "Processo linear",
       sideCopy: ["Primeiro voce explora opcoes. Depois escolhe e edita.", "A coerencia final importa mais do que ficar com a primeira resposta."],
       sections: [
         { title: "Projeto do bloco", fields: [{ name: "project", label: "Nome ou tema", placeholder: "Ex: curso de fotografia com celular" }] },
-        { title: "01 - Titulo", intro: "Gere 5 opcoes com IA e depois escreva a versao escolhida.", grid: "grid-5", fields: [
-          { name: "title1", label: "Titulo 1", type: "textarea" }, { name: "title2", label: "Titulo 2", type: "textarea" }, { name: "title3", label: "Titulo 3", type: "textarea" }, { name: "title4", label: "Titulo 4", type: "textarea" }, { name: "title5", label: "Titulo 5", type: "textarea" }, { name: "titleFinal", label: "Titulo escolhido e editado" },
+        { title: "01 - Titulo", intro: "Gere 5 opcoes com IA e depois escreva a versao final.", grid: "grid-5", fields: [
+          { name: "title1", label: "Titulo 1", type: "textarea" }, { name: "title2", label: "Titulo 2", type: "textarea" }, { name: "title3", label: "Titulo 3", type: "textarea" }, { name: "title4", label: "Titulo 4", type: "textarea" }, { name: "title5", label: "Titulo 5", type: "textarea" }, { name: "titleFinal", label: "Titulo final com edicao" },
         ]},
         { title: "02 - Subtitulo", grid: "grid-3", fields: [
-          { name: "subtitle1", label: "Subtitulo 1", type: "textarea" }, { name: "subtitle2", label: "Subtitulo 2", type: "textarea" }, { name: "subtitle3", label: "Subtitulo 3", type: "textarea" }, { name: "subtitleFinal", label: "Subtitulo escolhido e editado", type: "textarea" },
+          { name: "subtitle1", label: "Subtitulo 1", type: "textarea" }, { name: "subtitle2", label: "Subtitulo 2", type: "textarea" }, { name: "subtitle3", label: "Subtitulo 3", type: "textarea" }, { name: "subtitleFinal", label: "Subtitulo final com edicao", type: "textarea" },
         ]},
         { title: "03 - Beneficios com semaforo", intro: "Verde: fica. Amarelo: edita. Vermelho: descarta e gera outro.", grid: "grid-3", fields: [
           { name: "benefit1", label: "Beneficio 1", type: "textarea" }, { name: "benefit1Light", label: "Semaforo 1", type: "select", options: ["Verde", "Amarelo", "Vermelho"] },
@@ -334,7 +326,7 @@ const activityTranslations: ActivityTranslations = {
           { name: "benefit3", label: "Beneficio 3", type: "textarea" }, { name: "benefit3Light", label: "Semaforo 3", type: "select", options: ["Verde", "Amarelo", "Vermelho"] },
         ]},
         { title: "04 - CTA", grid: "grid-5", fields: [
-          { name: "cta1", label: "CTA 1" }, { name: "cta2", label: "CTA 2" }, { name: "cta3", label: "CTA 3" }, { name: "cta4", label: "CTA 4" }, { name: "cta5", label: "CTA 5" }, { name: "ctaFinal", label: "CTA escolhido" }, { name: "ctaAction", label: "O que acontece ao clicar" },
+          { name: "cta1", label: "CTA 1" }, { name: "cta2", label: "CTA 2" }, { name: "cta3", label: "CTA 3" }, { name: "cta4", label: "CTA 4" }, { name: "cta5", label: "CTA 5" }, { name: "ctaFinal", label: "CTA final" }, { name: "ctaAction", label: "O que acontece ao clicar" },
         ]},
         { title: "05 - Revisao final", fields: [{ name: "coherence", label: "Coerencia do bloco", type: "textarea" }] },
       ],
@@ -343,7 +335,7 @@ const activityTranslations: ActivityTranslations = {
   "clase-3-identidad-visual": {
     es: activities[2],
     en: {
-      eyebrow: "Class 3", title: "Documented visual identity", lead: "Define audience, hero image, palette, and icons using technical criteria instead of personal taste alone.", sideTitle: "Visual criteria", sideCopy: ["Visual decisions need to be explainable.", "Contrast, audience, and coherence are part of the deliverable."],
+      eyebrow: "Class 3", title: "Documented visual identity", lead: "Define audience, hero image, palette, and icons using technical criteria, not only personal taste.", sideTitle: "Visual criteria", sideCopy: ["Visual decisions need to be explainable.", "Contrast, audience, and coherence are part of the submission."],
       sections: [
         { title: "1. Definitions", fields: [{ name: "audience", label: "Audience", type: "textarea" }, { name: "context", label: "Context", type: "textarea" }, { name: "mood", label: "Mood", type: "textarea" }] },
         { title: "2. Hero prompt", fields: [{ name: "heroPrompt", label: "Full prompt", type: "textarea" }] },
@@ -351,13 +343,13 @@ const activityTranslations: ActivityTranslations = {
           { name: "color1", label: "Background color", placeholder: "#000000" }, { name: "color2", label: "Text color", placeholder: "#fff7d6" }, { name: "color3", label: "Accent color", placeholder: "#2a3fe5" }, { name: "color4", label: "Secondary color", placeholder: "#f4b9b0" }, { name: "contrast", label: "Contrast check", type: "textarea" },
         ]},
         { title: "4. Icons", fields: [
-          { name: "icons", label: "Method and style", type: "select", options: ["Linear library", "AI", "Own drawing", "Geometric system"] }, { name: "iconsWhy", label: "Why it works for this audience", type: "textarea" },
+          { name: "icons", label: "Method and style", type: "select", options: ["Linear library", "AI", "Manual drawing", "Geometric system"] }, { name: "iconsWhy", label: "Why it works for this audience", type: "textarea" },
         ]},
-        { title: "5. Overall coherence", fields: [{ name: "coherence", label: "Self review", type: "textarea" }] },
+        { title: "5. Overall coherence", fields: [{ name: "coherence", label: "Personal review", type: "textarea" }] },
       ],
     },
     pt: {
-      eyebrow: "Aula 3", title: "Identidade visual documentada", lead: "Defina publico, imagem hero, paleta e icones com criterios tecnicos e nao apenas gosto pessoal.", sideTitle: "Criterio visual", sideCopy: ["As decisoes visuais precisam poder ser explicadas.", "Contraste, publico e coerencia fazem parte da entrega."],
+      eyebrow: "Aula 3", title: "Identidade visual documentada", lead: "Defina publico, imagem hero, paleta e icones com criterios tecnicos, nao apenas a partir do gosto pessoal.", sideTitle: "Criterio visual", sideCopy: ["As decisoes visuais precisam poder ser explicadas.", "Contraste, publico e coerencia fazem parte da entrega."],
       sections: [
         { title: "1. Definicoes", fields: [{ name: "audience", label: "Publico", type: "textarea" }, { name: "context", label: "Contexto", type: "textarea" }, { name: "mood", label: "Mood", type: "textarea" }] },
         { title: "2. Prompt da hero", fields: [{ name: "heroPrompt", label: "Prompt completo", type: "textarea" }] },
@@ -365,39 +357,33 @@ const activityTranslations: ActivityTranslations = {
           { name: "color1", label: "Cor de fundo", placeholder: "#000000" }, { name: "color2", label: "Cor do texto", placeholder: "#fff7d6" }, { name: "color3", label: "Cor de destaque", placeholder: "#2a3fe5" }, { name: "color4", label: "Cor secundaria", placeholder: "#f4b9b0" }, { name: "contrast", label: "Verificacao de contraste", type: "textarea" },
         ]},
         { title: "4. Icones", fields: [
-          { name: "icons", label: "Metodo e estilo", type: "select", options: ["Biblioteca linear", "IA", "Desenho proprio", "Sistema geometrico"] }, { name: "iconsWhy", label: "Por que funciona para este publico", type: "textarea" },
+          { name: "icons", label: "Metodo e estilo", type: "select", options: ["Biblioteca linear", "IA", "Desenho manual", "Sistema geometrico"] }, { name: "iconsWhy", label: "Por que funciona para este publico", type: "textarea" },
         ]},
-        { title: "5. Coerencia geral", fields: [{ name: "coherence", label: "Revisao propria", type: "textarea" }] },
+        { title: "5. Coerencia geral", fields: [{ name: "coherence", label: "Revisao pessoal", type: "textarea" }] },
       ],
     },
   },
   "clase-5-auditoria-cambios": {
     es: activities[3],
     en: {
-      eyebrow: "Class 5", title: "Audit and justification of changes", lead: "Identify important changes, apply them, and explain each decision using technical criteria.", sideTitle: "Critical eye", sideCopy: ["You can use AI to diagnose, but the final decision should be yours.", "Before/after evidence shows the process, not only the result."],
+      eyebrow: "Class 5", title: "Audit and justification of changes", lead: "Identify important changes, apply them, and explain each decision using technical criteria.", sideTitle: "Critical eye", sideCopy: ["You can use AI to diagnose, but the final decision should stay under your control.", "The justification shows the process, not only the result."],
       sections: [
         { title: "Part A - Guided justification", fields: [
           { name: "removedWhat", label: "I removed the section..." }, { name: "removedWhy", label: "Because...", type: "textarea" }, { name: "textWhat", label: "I replaced the text..." }, { name: "textWhy", label: "To improve...", type: "textarea" }, { name: "imageWhat", label: "The most important image is..." }, { name: "imageWhy", label: "Because...", type: "textarea" }, { name: "impactWhat", label: "The highest-impact change was..." }, { name: "impactWhy", label: "Because...", type: "textarea" },
         ]},
         { title: "AI use", fields: [
-          { name: "usedAi", label: "Did you use AI to correct or audit", type: "select", options: ["Yes", "No"] }, { name: "aiDetail", label: "Usage detail or own criterion", type: "textarea" },
-        ]},
-        { title: "Part B - Evidence", grid: "grid-2", fields: [
-          { name: "beforeFile", label: "Before screenshot", placeholder: "before.png" }, { name: "afterFile", label: "After screenshot", placeholder: "after.png" },
+          { name: "usedAi", label: "Did you use AI to correct or audit", type: "select", options: ["Yes", "No"] }, { name: "aiDetail", label: "Usage detail or personal criterion", type: "textarea" },
         ]},
       ],
     },
     pt: {
-      eyebrow: "Aula 5", title: "Auditoria e justificativa de mudancas", lead: "Identifique mudancas importantes, aplique-as e explique cada decisao com criterio tecnico.", sideTitle: "Olhar critico", sideCopy: ["Voce pode usar IA para diagnosticar, mas a decisao final precisa ser sua.", "As evidencias antes/depois mostram o processo, nao apenas o resultado."],
+      eyebrow: "Aula 5", title: "Auditoria e justificativa de mudancas", lead: "Identifique mudancas importantes, aplique-as e explique cada decisao com criterio tecnico.", sideTitle: "Olhar critico", sideCopy: ["Voce pode usar IA para diagnosticar, mas a decisao final precisa ficar a seu cargo.", "A justificativa mostra o processo, nao apenas o resultado."],
       sections: [
         { title: "Parte A - Justificativa guiada", fields: [
           { name: "removedWhat", label: "Removi a secao..." }, { name: "removedWhy", label: "Porque...", type: "textarea" }, { name: "textWhat", label: "Substitui o texto..." }, { name: "textWhy", label: "Para melhorar...", type: "textarea" }, { name: "imageWhat", label: "A imagem mais importante e..." }, { name: "imageWhy", label: "Porque...", type: "textarea" }, { name: "impactWhat", label: "A mudanca de maior impacto foi..." }, { name: "impactWhy", label: "Porque...", type: "textarea" },
         ]},
         { title: "Uso de IA", fields: [
-          { name: "usedAi", label: "Voce usou IA para corrigir ou auditar", type: "select", options: ["Sim", "Nao"] }, { name: "aiDetail", label: "Detalhe de uso ou criterio proprio", type: "textarea" },
-        ]},
-        { title: "Parte B - Evidencias", grid: "grid-2", fields: [
-          { name: "beforeFile", label: "Captura antes", placeholder: "antes.png" }, { name: "afterFile", label: "Captura depois", placeholder: "depois.png" },
+          { name: "usedAi", label: "Voce usou IA para corrigir ou auditar", type: "select", options: ["Sim", "Nao"] }, { name: "aiDetail", label: "Detalhe de uso ou criterio pessoal", type: "textarea" },
         ]},
       ],
     },

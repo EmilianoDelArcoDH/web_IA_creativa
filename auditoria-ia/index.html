@@ -6,7 +6,7 @@
   <title>Clase 5 - Auditoría y justificación</title>
   <style>
     :root{color-scheme:dark;--text:#fff7d6;--muted:#f4b9b0;--primary:#2a3fe5;--ok:#16a34a;--warn:#d97706;--bad:#dc2626;--shadow:8px 8px 0 #dc2626}
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:"Press Start 2P","Space Mono",Consolas,monospace;color:var(--text);background:#000;background-image:repeating-linear-gradient(0deg,rgba(220,38,38,.2) 0 2px,transparent 2px 34px),repeating-linear-gradient(90deg,rgba(42,63,229,.25) 0 2px,transparent 2px 34px);padding:28px}.shell{max-width:1480px;margin:0 auto}.eyebrow{color:var(--muted);text-transform:uppercase;font-size:.72rem;letter-spacing:.08em}h1{margin:10px 0 12px;font-size:clamp(1.7rem,4vw,3rem);line-height:1.15;text-shadow:4px 4px 0 var(--bad)}h2,h3{line-height:1.35}p,label,textarea,input,select,button,small,span{font-family:"Space Mono",Consolas,monospace}p{color:var(--muted);line-height:1.65}.layout{display:grid;grid-template-columns:330px minmax(430px,1fr) 390px;gap:20px;align-items:start}.panel{border:3px dotted var(--muted);border-radius:8px;background:#000;box-shadow:var(--shadow);padding:20px}.card,.phrase{border:2px solid var(--primary);border-radius:4px;background:#050505;padding:14px;margin-top:14px;line-height:1.55}.phrase{display:grid;gap:10px}form{display:grid;gap:16px}label{display:grid;gap:8px;font-weight:900;line-height:1.45}textarea,input,select{width:100%;border:2px solid var(--primary);border-radius:4px;background:#050505;color:var(--text);padding:12px 13px;font-size:.95rem;outline:none}textarea{min-height:96px;resize:vertical}textarea:focus,input:focus,select:focus{border-color:var(--muted);box-shadow:0 0 0 4px rgba(244,185,176,.18)}.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}.evidence{border:3px solid var(--text);border-radius:4px;padding:14px;background:#050505;min-height:130px;display:grid;align-content:center;gap:8px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}button{border:3px solid #111827;border-radius:4px;background:var(--muted);color:#111827;box-shadow:5px 5px 0 var(--bad);padding:12px 14px;font-weight:900;text-transform:uppercase;cursor:pointer}button.secondary{background:#000;color:var(--text);border-color:var(--muted)}button:hover{transform:translate(-2px,-2px)}.summary{white-space:pre-wrap;color:#d9f99d;line-height:1.65;font-family:"Space Mono",Consolas,monospace}.feedback{display:grid;gap:10px;margin-top:14px}.item{display:flex;gap:10px;border:2px solid rgba(255,255,255,.14);border-radius:4px;background:#050505;padding:11px;line-height:1.45}.dot{width:12px;height:12px;border-radius:50%;background:var(--warn);margin-top:5px;flex:0 0 auto}.success{border-color:var(--ok)!important;background:rgba(22,163,74,.16)!important}.warning{border-color:var(--warn)!important;background:rgba(217,119,6,.16)!important}.error{border-color:var(--bad)!important;background:rgba(220,38,38,.16)!important}.completed .dot{background:var(--ok)}.status{margin-top:14px;padding:14px;border-radius:4px;line-height:1.55}@media(max-width:1150px){.layout{grid-template-columns:1fr 1fr}.layout aside:last-child{grid-column:1/-1}}@media(max-width:760px){body{padding:18px}.layout,.pair,.actions{grid-template-columns:1fr}}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:"Press Start 2P","Space Mono",Consolas,monospace;color:var(--text);background:#000;background-image:repeating-linear-gradient(0deg,rgba(220,38,38,.2) 0 2px,transparent 2px 34px),repeating-linear-gradient(90deg,rgba(42,63,229,.25) 0 2px,transparent 2px 34px);padding:28px}.shell{max-width:1480px;margin:0 auto}.eyebrow{color:var(--muted);text-transform:uppercase;font-size:.72rem;letter-spacing:.08em}h1{margin:10px 0 12px;font-size:clamp(1.7rem,4vw,3rem);line-height:1.15;text-shadow:4px 4px 0 var(--bad)}h2,h3{line-height:1.35}p,label,textarea,input,select,button,small,span{font-family:"Space Mono",Consolas,monospace}p{color:var(--muted);line-height:1.65}.layout{display:grid;grid-template-columns:330px minmax(430px,1fr) 390px;gap:20px;align-items:start}.panel{border:3px dotted var(--muted);border-radius:8px;background:#000;box-shadow:var(--shadow);padding:20px}.card,.phrase{border:2px solid var(--primary);border-radius:4px;background:#050505;padding:14px;margin-top:14px;line-height:1.55}.phrase{display:grid;gap:10px}form{display:grid;gap:16px}label{display:grid;gap:8px;font-weight:900;line-height:1.45}textarea,input,select{width:100%;border:2px solid var(--primary);border-radius:4px;background:#050505;color:var(--text);padding:12px 13px;font-size:.95rem;outline:none}textarea{min-height:96px;resize:vertical}textarea:focus,input:focus,select:focus{border-color:var(--muted);box-shadow:0 0 0 4px rgba(244,185,176,.18)}.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}button{border:3px solid #111827;border-radius:4px;background:var(--muted);color:#111827;box-shadow:5px 5px 0 var(--bad);padding:12px 14px;font-weight:900;text-transform:uppercase;cursor:pointer}button.secondary{background:#000;color:var(--text);border-color:var(--muted)}button:hover{transform:translate(-2px,-2px)}.summary{white-space:pre-wrap;color:#d9f99d;line-height:1.65;font-family:"Space Mono",Consolas,monospace}.feedback{display:grid;gap:10px;margin-top:14px}.item{display:flex;gap:10px;border:2px solid rgba(255,255,255,.14);border-radius:4px;background:#050505;padding:11px;line-height:1.45}.dot{width:12px;height:12px;border-radius:50%;background:var(--warn);margin-top:5px;flex:0 0 auto}.success{border-color:var(--ok)!important;background:rgba(22,163,74,.16)!important}.warning{border-color:var(--warn)!important;background:rgba(217,119,6,.16)!important}.error{border-color:var(--bad)!important;background:rgba(220,38,38,.16)!important}.completed .dot{background:var(--ok)}.status{margin-top:14px;padding:14px;border-radius:4px;line-height:1.55}@media(max-width:1150px){.layout{grid-template-columns:1fr 1fr}.layout aside:last-child{grid-column:1/-1}}@media(max-width:760px){body{padding:18px}.layout,.pair,.actions{grid-template-columns:1fr}}
   </style>
   <link rel="stylesheet" href="../styles/activity.css">
 </head>
@@ -18,7 +18,6 @@
         <h2 id="briefTitle"></h2>
         <p id="briefText"></p>
         <div class="card"><strong id="cardAiLabel"></strong><br><span id="cardAiText"></span></div>
-        <div class="card"><strong id="cardEvidenceLabel"></strong><br><span id="cardEvidenceText"></span></div>
       </aside>
       <form class="panel" id="auditForm">
         <h2 id="partATitle"></h2>
@@ -29,18 +28,9 @@
         <h2 id="aiUsageTitle"></h2>
         <label><span id="usedAiLabel"></span><select name="usedAi" id="usedAi"></select></label>
         <label><span id="detailLabel"></span><textarea name="aiDetail" id="aiDetail"></textarea></label>
-        <h2 id="partBTitle"></h2>
-        <div class="pair">
-          <label><span id="beforeLabel"></span><input name="beforeFile" id="beforeFile"></label>
-          <label><span id="afterLabel"></span><input name="afterFile" id="afterFile"></label>
-        </div>
       </form>
       <aside class="panel">
         <h2 id="deliveryTitle"></h2>
-        <div class="pair">
-          <div class="evidence"><strong id="beforeBox"></strong><span id="beforePreview"></span></div>
-          <div class="evidence"><strong id="afterBox"></strong><span id="afterPreview"></span></div>
-        </div>
         <div class="summary" id="summary"></div>
         <div class="actions"><button type="button" id="validateBtn"></button><button class="secondary" type="button" id="resetBtn"></button></div>
         <div class="feedback" id="feedback"></div><div class="status warning" id="status"></div>
@@ -55,13 +45,11 @@
         metaTitle: "Clase 5 - Auditoría y justificación",
         eyebrow: "Clase 5",
         pageTitle: "Auditoría y justificación de cambios",
-        pageIntro: "Mirás tu propio sitio con ojo crítico, aplicás 4 cambios importantes y explicás cada decisión con criterio técnico.",
+        pageIntro: "Mirás tu sitio con criterio, aplicás 4 cambios importantes y explicás cada decisión con fundamento técnico.",
         briefTitle: "Consigna",
         briefText: "La justificación pesa más que \"me gusta\". Usá criterios como contraste, jerarquía, claridad, coherencia visual, accesibilidad, audiencia o conversión.",
         cardAiLabel: "¿Se usa IA?",
         cardAiText: "Sí, podés usar IA para diagnosticar o proponer correcciones. Igual tenés que indicar qué aceptaste, qué editaste y por qué.",
-        cardEvidenceLabel: "Evidencia visual",
-        cardEvidenceText: "Entregá dos capturas: antes.png y despues.png, en PNG o JPG.",
         partATitle: "Parte A - Justificación guiada",
         removedSpan: "Eliminé la sección...",
         removedWhatPlaceholder: "qué eliminaste",
@@ -79,41 +67,30 @@
         usedAiLabel: "¿Usaste IA para corregir o auditar?",
         usedAiOptions: ["Seleccionar", "Sí", "No"],
         detailLabel: "Detalle",
-        detailPlaceholder: "Si usaste IA: pegá el prompt o resumí qué le pediste. Si no usaste: explicá cómo decidiste los cambios.",
-        partBTitle: "Parte B - Evidencias visuales",
-        beforeLabel: "Captura antes",
-        afterLabel: "Captura después",
-        beforePlaceholder: "antes.png",
-        afterPlaceholder: "despues.png",
+        detailPlaceholder: "Si usaste IA: pegá el prompt o resumí qué le pediste. Si no usaste: explicá cómo tomaste las decisiones.",
         deliveryTitle: "Entrega armada",
-        beforeBox: "ANTES",
-        afterBox: "DESPUÉS",
-        beforePending: "antes.png pendiente",
-        afterPending: "despues.png pendiente",
         pending: "pendiente",
         emptyLine: "_____",
         validateBtn: "Enviar actividad",
         resetBtn: "Reiniciar",
         summary(v){return `Eliminé la sección ${v.removedWhat || "_____"} porque ${v.removedWhy || "_____"}.\n\nReemplacé el texto ${v.textWhat || "_____"} para mejorar ${v.textWhy || "_____"}.\n\nLa imagen más importante es ${v.imageWhat || "_____"} porque ${v.imageWhy || "_____"}.\n\nEl cambio de mayor impacto fue ${v.impactWhat || "_____"} porque ${v.impactWhy || "_____"}.\n\nUso de IA: ${v.usedAi || "pendiente"}. ${v.aiDetail || ""}`;},
-        feedbackLabels: { removed: "Cambio eliminado con criterio técnico", text: "Texto reemplazado con criterio técnico", image: "Imagen principal justificada", impact: "Mayor impacto justificado", ai: "Aclara si usó IA y cómo", before: "Evidencia antes.png o JPG", after: "Evidencia despues.png o JPG" },
-        reasonLabels: { removed: "Falta completar la frase sobre la sección eliminada con criterio técnico.", text: "Falta completar la frase sobre el texto reemplazado con criterio técnico.", image: "Falta justificar la imagen más importante.", impact: "Falta justificar el cambio de mayor impacto.", ai: "Falta aclarar si usaste IA y cómo decidiste las correcciones.", before: "Falta registrar la evidencia antes.png o JPG.", after: "Falta registrar la evidencia despues.png o JPG." },
-        statusReady: "Actividad lista: la auditoría incluye cambios, criterios, uso de IA y evidencias.",
+        feedbackLabels: { removed: "Cambio eliminado con criterio técnico", text: "Texto reemplazado con criterio técnico", image: "Imagen principal justificada", impact: "Mayor impacto justificado", ai: "Aclara si se usó IA y cómo" },
+        reasonLabels: { removed: "Falta completar la frase sobre la sección eliminada con criterio técnico.", text: "Falta completar la frase sobre el texto reemplazado con criterio técnico.", image: "Falta justificar la imagen más importante.", impact: "Falta justificar el cambio de mayor impacto.", ai: "Falta aclarar si usaste IA y cómo tomaste las decisiones." },
+        statusReady: "Actividad lista: la auditoría incluye cambios, criterios y uso de IA.",
         statusReview: "Revisá los puntos marcados antes de cerrar la actividad.",
-        statusPending: "Completá auditoría, uso de IA y evidencias.",
-        pgSuccess: "Actividad completa: la auditoría incluye cambios, criterios, uso de IA y evidencias.",
+        statusPending: "Completá auditoría y uso de IA.",
+        pgSuccess: "Actividad completa: la auditoría incluye cambios, criterios y uso de IA.",
         pgFailure: "La actividad todavía tiene puntos por completar."
       },
       en: {
         metaTitle: "Class 5 - Audit and justification",
         eyebrow: "Class 5",
         pageTitle: "Audit and justification of changes",
-        pageIntro: "Review your own site critically, apply 4 important changes, and explain each decision using technical criteria.",
+        pageIntro: "Review your site with criteria, apply 4 important changes, and explain each decision using technical criteria.",
         briefTitle: "Assignment",
         briefText: "Justification matters more than saying \"I like it\". Use criteria such as contrast, hierarchy, clarity, visual coherence, accessibility, audience, or conversion.",
         cardAiLabel: "Is AI used?",
         cardAiText: "Yes, you can use AI to diagnose or suggest corrections. You still need to explain what you accepted, what you edited, and why.",
-        cardEvidenceLabel: "Visual evidence",
-        cardEvidenceText: "Submit two screenshots: before.png and after.png, in PNG or JPG.",
         partATitle: "Part A - Guided justification",
         removedSpan: "I removed the section...",
         removedWhatPlaceholder: "what you removed",
@@ -132,40 +109,29 @@
         usedAiOptions: ["Select", "Yes", "No"],
         detailLabel: "Detail",
         detailPlaceholder: "If you used AI: paste the prompt or summarize what you asked for. If you did not: explain how you decided on the changes.",
-        partBTitle: "Part B - Visual evidence",
-        beforeLabel: "Before screenshot",
-        afterLabel: "After screenshot",
-        beforePlaceholder: "before.png",
-        afterPlaceholder: "after.png",
         deliveryTitle: "Prepared submission",
-        beforeBox: "BEFORE",
-        afterBox: "AFTER",
-        beforePending: "before.png pending",
-        afterPending: "after.png pending",
         pending: "pending",
         emptyLine: "_____",
         validateBtn: "Submit activity",
         resetBtn: "Reset",
         summary(v){return `I removed the section ${v.removedWhat || "_____"} because ${v.removedWhy || "_____"}.\n\nI replaced the text ${v.textWhat || "_____"} to improve ${v.textWhy || "_____"}.\n\nThe most important image is ${v.imageWhat || "_____"} because ${v.imageWhy || "_____"}.\n\nThe highest-impact change was ${v.impactWhat || "_____"} because ${v.impactWhy || "_____"}.\n\nAI use: ${v.usedAi || "pending"}. ${v.aiDetail || ""}`;},
-        feedbackLabels: { removed: "Removed change justified with technical criteria", text: "Replaced text justified with technical criteria", image: "Main image is justified", impact: "Highest-impact change is justified", ai: "Explains whether AI was used and how", before: "before.png or JPG evidence", after: "after.png or JPG evidence" },
-        reasonLabels: { removed: "You still need to complete the sentence about the removed section with technical criteria.", text: "You still need to complete the sentence about the replaced text with technical criteria.", image: "You still need to justify the most important image.", impact: "You still need to justify the highest-impact change.", ai: "You still need to clarify whether you used AI and how you decided on the corrections.", before: "You still need to register the before.png or JPG evidence.", after: "You still need to register the after.png or JPG evidence." },
-        statusReady: "Activity ready: the audit includes changes, criteria, AI use, and evidence.",
+        feedbackLabels: { removed: "Removed change justified with technical criteria", text: "Replaced text justified with technical criteria", image: "Main image is justified", impact: "Highest-impact change is justified", ai: "Explains whether AI was used and how" },
+        reasonLabels: { removed: "You still need to complete the sentence about the removed section with technical criteria.", text: "You still need to complete the sentence about the replaced text with technical criteria.", image: "You still need to justify the most important image.", impact: "You still need to justify the highest-impact change.", ai: "You still need to clarify whether you used AI and how you decided on the corrections." },
+        statusReady: "Activity ready: the audit includes changes, criteria, and AI use.",
         statusReview: "Review the marked points before closing the activity.",
-        statusPending: "Complete the audit, AI use, and evidence.",
-        pgSuccess: "Activity complete: the audit includes changes, criteria, AI use, and evidence.",
+        statusPending: "Complete the audit and AI use.",
+        pgSuccess: "Activity complete: the audit includes changes, criteria, and AI use.",
         pgFailure: "The activity still has incomplete points."
       },
       pt: {
         metaTitle: "Aula 5 - Auditoria e justificativa",
         eyebrow: "Aula 5",
         pageTitle: "Auditoria e justificativa de mudanças",
-        pageIntro: "Observe seu próprio site com olhar crítico, aplique 4 mudanças importantes e explique cada decisão com critério técnico.",
+        pageIntro: "Observe seu site com criterio, aplique 4 mudanças importantes e explique cada decisão com critério técnico.",
         briefTitle: "Proposta",
         briefText: "A justificativa pesa mais do que dizer \"eu gosto\". Use critérios como contraste, hierarquia, clareza, coerência visual, acessibilidade, público ou conversão.",
         cardAiLabel: "Usa IA?",
         cardAiText: "Sim, você pode usar IA para diagnosticar ou propor correções. Mesmo assim, precisa indicar o que aceitou, o que editou e por quê.",
-        cardEvidenceLabel: "Evidência visual",
-        cardEvidenceText: "Entregue duas capturas: antes.png e depois.png, em PNG ou JPG.",
         partATitle: "Parte A - Justificativa guiada",
         removedSpan: "Removi a seção...",
         removedWhatPlaceholder: "o que você removeu",
@@ -183,28 +149,19 @@
         usedAiLabel: "Você usou IA para corrigir ou auditar?",
         usedAiOptions: ["Selecionar", "Sim", "Não"],
         detailLabel: "Detalhe",
-        detailPlaceholder: "Se usou IA: cole o prompt ou resuma o que pediu. Se não usou: explique como decidiu as mudanças.",
-        partBTitle: "Parte B - Evidências visuais",
-        beforeLabel: "Captura antes",
-        afterLabel: "Captura depois",
-        beforePlaceholder: "antes.png",
-        afterPlaceholder: "depois.png",
+        detailPlaceholder: "Se usou IA: cole o prompt ou resuma o que pediu. Se não usou: explique como tomou as decisões.",
         deliveryTitle: "Entrega montada",
-        beforeBox: "ANTES",
-        afterBox: "DEPOIS",
-        beforePending: "antes.png pendente",
-        afterPending: "depois.png pendente",
         pending: "pendente",
         emptyLine: "_____",
         validateBtn: "Enviar atividade",
         resetBtn: "Reiniciar",
         summary(v){return `Removi a seção ${v.removedWhat || "_____"} porque ${v.removedWhy || "_____"}.\n\nSubstituí o texto ${v.textWhat || "_____"} para melhorar ${v.textWhy || "_____"}.\n\nA imagem mais importante é ${v.imageWhat || "_____"} porque ${v.imageWhy || "_____"}.\n\nA mudança de maior impacto foi ${v.impactWhat || "_____"} porque ${v.impactWhy || "_____"}.\n\nUso de IA: ${v.usedAi || "pendente"}. ${v.aiDetail || ""}`;},
-        feedbackLabels: { removed: "Mudança removida com critério técnico", text: "Texto substituído com critério técnico", image: "Imagem principal justificada", impact: "Maior impacto justificado", ai: "Explica se usou IA e como", before: "Evidência antes.png ou JPG", after: "Evidência depois.png ou JPG" },
-        reasonLabels: { removed: "Falta completar a frase sobre a seção removida com critério técnico.", text: "Falta completar a frase sobre o texto substituído com critério técnico.", image: "Falta justificar a imagem mais importante.", impact: "Falta justificar a mudança de maior impacto.", ai: "Falta esclarecer se você usou IA e como decidiu as correções.", before: "Falta registrar a evidência antes.png ou JPG.", after: "Falta registrar a evidência depois.png ou JPG." },
-        statusReady: "Atividade pronta: a auditoria inclui mudanças, critérios, uso de IA e evidências.",
+        feedbackLabels: { removed: "Mudança removida com critério técnico", text: "Texto substituído com critério técnico", image: "Imagem principal justificada", impact: "Maior impacto justificado", ai: "Explica se usou IA e como" },
+        reasonLabels: { removed: "Falta completar a frase sobre a seção removida com critério técnico.", text: "Falta completar a frase sobre o texto substituído com critério técnico.", image: "Falta justificar a imagem mais importante.", impact: "Falta justificar a mudança de maior impacto.", ai: "Falta esclarecer se usou IA e como tomou as decisões." },
+        statusReady: "Atividade pronta: a auditoria inclui mudanças, critérios e uso de IA.",
         statusReview: "Revise os pontos marcados antes de encerrar a atividade.",
-        statusPending: "Complete a auditoria, o uso de IA e as evidências.",
-        pgSuccess: "Atividade completa: a auditoria inclui mudanças, critérios, uso de IA e evidências.",
+        statusPending: "Complete a auditoria e o uso de IA.",
+        pgSuccess: "Atividade completa: a auditoria inclui mudanças, critérios e uso de IA.",
         pgFailure: "A atividade ainda tem pontos a completar."
       }
     };
@@ -230,7 +187,7 @@
     const t = translations[currentLanguage];
     const storageKey = `webIaCreativa.clase5.v2.${currentLanguage}`;
     const form = document.querySelector("#auditForm");
-    const fields = ["removedWhat","removedWhy","textWhat","textWhy","imageWhat","imageWhy","impactWhat","impactWhy","usedAi","aiDetail","beforeFile","afterFile"];
+    const fields = ["removedWhat","removedWhy","textWhat","textWhy","imageWhat","imageWhy","impactWhat","impactWhy","usedAi","aiDetail"];
 
     function setText(id, value) { document.querySelector(`#${id}`).textContent = value; }
     function setPlaceholder(id, value) { document.querySelector(`#${id}`).placeholder = value; }
@@ -238,7 +195,7 @@
     function applyTranslations() {
       document.documentElement.lang = currentLanguage;
       document.title = t.metaTitle;
-      ["eyebrow","pageTitle","pageIntro","briefTitle","briefText","cardAiLabel","cardAiText","cardEvidenceLabel","cardEvidenceText","partATitle","removedSpan","textSpan","imageSpan","impactSpan","aiUsageTitle","usedAiLabel","detailLabel","partBTitle","beforeLabel","afterLabel","deliveryTitle","beforeBox","afterBox","validateBtn","resetBtn"].forEach((id) => setText(id, t[id]));
+      ["eyebrow","pageTitle","pageIntro","briefTitle","briefText","cardAiLabel","cardAiText","partATitle","removedSpan","textSpan","imageSpan","impactSpan","aiUsageTitle","usedAiLabel","detailLabel","deliveryTitle","validateBtn","resetBtn"].forEach((id) => setText(id, t[id]));
       setPlaceholder("removedWhat", t.removedWhatPlaceholder);
       setPlaceholder("removedWhy", t.removedWhyPlaceholder);
       setPlaceholder("textWhat", t.textWhatPlaceholder);
@@ -248,20 +205,17 @@
       setPlaceholder("impactWhat", t.impactWhatPlaceholder);
       setPlaceholder("impactWhy", t.impactWhyPlaceholder);
       setPlaceholder("aiDetail", t.detailPlaceholder);
-      setPlaceholder("beforeFile", t.beforePlaceholder);
-      setPlaceholder("afterFile", t.afterPlaceholder);
       document.querySelector("#usedAi").innerHTML = t.usedAiOptions.map((option, index) => `<option value="${index === 0 ? "" : option}">${option}</option>`).join("");
     }
 
     function values(){return Object.fromEntries(fields.map((name)=>[name,form[name].value.trim()]));}
     function hasCriterion(text){return criteriaPattern.test(text);}
-    function fileOk(name, options){return options.words.some((word)=>name.toLowerCase().includes(word)) && /\.(png|jpg|jpeg)$/i.test(name);}
-    function validate(){const v=values();const beforeWords=currentLanguage==="en"?["before"]:currentLanguage==="pt"?["antes"]:["antes"];const afterWords=currentLanguage==="en"?["after"]:currentLanguage==="pt"?["depois"]:["despues","después"];return{removed:v.removedWhat.length>=3&&hasCriterion(v.removedWhy),text:v.textWhat.length>=3&&hasCriterion(v.textWhy),image:v.imageWhat.length>=3&&hasCriterion(v.imageWhy),impact:v.impactWhat.length>=3&&hasCriterion(v.impactWhy),ai:!!v.usedAi&&v.aiDetail.length>=50,before:fileOk(v.beforeFile,{words:beforeWords}),after:fileOk(v.afterFile,{words:afterWords})};}
+    function validate(){const v=values();return{removed:v.removedWhat.length>=3&&hasCriterion(v.removedWhy),text:v.textWhat.length>=3&&hasCriterion(v.textWhy),image:v.imageWhat.length>=3&&hasCriterion(v.imageWhy),impact:v.impactWhat.length>=3&&hasCriterion(v.impactWhy),ai:!!v.usedAi&&v.aiDetail.length>=50};}
     function reasonsFrom(result){return Object.entries(result).filter(([,ok])=>!ok).map(([key])=>t.reasonLabels[key]);}
     function sendToPlayground(result, submission){const reasons=reasonsFrom(result);pgEvent.postToPg({event:reasons.length===0?"SUCCESS":"FAILURE",reasons,message:reasons.length===0?t.pgSuccess:t.pgFailure,feedbackLanguage:currentLanguage,submissionLanguage:currentLanguage,submission,state:JSON.stringify({activity:"clase-5-auditoria-cambios",language:currentLanguage,feedbackLanguage:currentLanguage,completed:reasons.length===0,usedAi:submission.usedAi,fields:result,submission,evaluatorInstructions:{supportedInputLanguages:supportedLanguages,feedbackLanguage:currentLanguage,returnFeedbackInSelectedLanguage:true}})});}
     function save(){localStorage.setItem(storageKey,JSON.stringify(values()));render(false);}
     function load(){const saved=JSON.parse(localStorage.getItem(storageKey)||"{}");fields.forEach((name)=>{if(saved[name])form[name].value=saved[name];});}
-    function render(analyzed){const v=values();document.querySelector("#beforePreview").textContent=v.beforeFile||t.beforePending;document.querySelector("#afterPreview").textContent=v.afterFile||t.afterPending;document.querySelector("#summary").textContent=t.summary(v);const result=validate();document.querySelector("#feedback").innerHTML=Object.entries(t.feedbackLabels).map(([key,label])=>`<div class="item ${result[key]?"success completed":analyzed?"error":"warning"}"><span class="dot"></span><span>${label}</span></div>`).join("");const complete=Object.values(result).every(Boolean);const status=document.querySelector("#status");status.className=`status ${complete?"success":analyzed?"error":"warning"}`;status.textContent=complete?t.statusReady:analyzed?t.statusReview:t.statusPending;if(analyzed){sendToPlayground(result,{...v,beforeFile:v.beforeFile,afterFile:v.afterFile});}}
+    function render(analyzed){const v=values();document.querySelector("#summary").textContent=t.summary(v);const result=validate();document.querySelector("#feedback").innerHTML=Object.entries(t.feedbackLabels).map(([key,label])=>`<div class="item ${result[key]?"success completed":analyzed?"error":"warning"}"><span class="dot"></span><span>${label}</span></div>`).join("");const complete=Object.values(result).every(Boolean);const status=document.querySelector("#status");status.className=`status ${complete?"success":analyzed?"error":"warning"}`;status.textContent=complete?t.statusReady:analyzed?t.statusReview:t.statusPending;if(analyzed){sendToPlayground(result,v);}}
 
     applyTranslations();
     form.addEventListener("input",save);

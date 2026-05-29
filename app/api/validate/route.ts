@@ -40,15 +40,13 @@ const languageText = {
     contextPrompt: "El prompt no retoma con claridad el contexto de uso indicado. Necesita mencionar mejor donde se va a usar o bajo que formato.",
     contextOk: "El prompt, los resultados y el analisis mantienen una relacion coherente con el contexto de uso planteado.",
     contextFormat: (label: string) => `El contexto pide un formato tipo ${label}, pero eso no aparece con claridad tanto en el prompt como en los resultados.`,
-    contextAudience: (label: string) => `El contexto sugiere una audiencia ${label}, pero el prompt o el analisis no muestran suficiente adaptacion de tono o destinatario.`,
+    contextAudience: (label: string) => `El contexto sugiere una audiencia ${label}, pero el prompt o el analisis no muestran suficiente adaptacion de tono o audiencia.`,
     incomplete: (label: string) => `${label}: la respuesta parece incompleta o no tiene sentido suficiente.`,
     missingSelect: (label: string) => `${label}: falta seleccionar una opcion.`,
     invalidHex: (label: string) => `${label}: debe ser un color HEX valido.`,
-    class1Prompt: "Prompt completo: falta explicitar destinatario, estilo visual, contexto o formato.",
+    class1Prompt: "Prompt completo: falta explicitar audiencia, estilo visual, contexto o formato.",
     class1Results: "Resultados de la IA: registra al menos 3 resultados reales.",
     class1Decision: "Analisis: falta una eleccion final justificada.",
-    beforeFile: "Evidencia antes: usa un nombre como antes.png o antes.jpg.",
-    afterFile: "Evidencia despues: usa un nombre como despues.png o despues.jpg.",
   },
   en: {
     complete: "Activity complete.",
@@ -67,8 +65,6 @@ const languageText = {
     class1Prompt: "Full prompt: it still needs to specify audience, visual style, context, or format.",
     class1Results: "AI results: record at least 3 real results.",
     class1Decision: "Analysis: a justified final choice is still missing.",
-    beforeFile: "Before evidence: use a name like before.png or before.jpg.",
-    afterFile: "After evidence: use a name like after.png or after.jpg.",
   },
   pt: {
     complete: "Atividade completa.",
@@ -80,15 +76,13 @@ const languageText = {
     contextPrompt: "O prompt nao retoma com clareza o contexto de uso indicado. Precisa mencionar melhor onde ou em que formato sera usado.",
     contextOk: "O prompt, os resultados e a analise mantem uma relacao coerente com o contexto de uso proposto.",
     contextFormat: (label: string) => `O contexto pede um formato do tipo ${label}, mas isso nao aparece com clareza tanto no prompt quanto nos resultados.`,
-    contextAudience: (label: string) => `O contexto sugere um publico ${label}, mas o prompt ou a analise nao mostram adaptacao suficiente de tom ou destinatario.`,
+    contextAudience: (label: string) => `O contexto sugere um publico ${label}, mas o prompt ou a analise nao mostram adaptacao suficiente de tom ou publico.`,
     incomplete: (label: string) => `${label}: a resposta parece incompleta ou sem conteudo suficiente.`,
     missingSelect: (label: string) => `${label}: falta selecionar uma opcao.`,
     invalidHex: (label: string) => `${label}: deve ser uma cor HEX valida.`,
     class1Prompt: "Prompt completo: falta explicitar publico, estilo visual, contexto ou formato.",
     class1Results: "Resultados da IA: registre pelo menos 3 resultados reais.",
     class1Decision: "Analise: falta uma escolha final justificada.",
-    beforeFile: "Evidencia antes: use um nome como antes.png ou antes.jpg.",
-    afterFile: "Evidencia depois: use um nome como depois.png ou depois.jpg.",
   },
 };
 
@@ -273,10 +267,6 @@ function localValidate(activityId: string, answers: Answers, language: Language)
     requireField(reasons, answers, "aiDetail", "AI usage detail", language, 8);
     const allCriteria = [answers.removedWhy, answers.textWhy, answers.imageWhy, answers.impactWhy].every((value) => criteriaPattern.test(normalize(value).toLowerCase()));
     if (!allCriteria) reasons.push(text.incomplete("Technical criteria"));
-    const beforePattern = language === "en" ? /before\.(png|jpg|jpeg)$/i : /antes\.(png|jpg|jpeg)$/i;
-    const afterPattern = language === "en" ? /after\.(png|jpg|jpeg)$/i : language === "pt" ? /depois\.(png|jpg|jpeg)$/i : /despues\.(png|jpg|jpeg)$/i;
-    if (!beforePattern.test(normalize(answers.beforeFile))) reasons.push(text.beforeFile);
-    if (!afterPattern.test(normalize(answers.afterFile))) reasons.push(text.afterFile);
   }
 
   return reasons;
@@ -300,15 +290,15 @@ async function groqValidate(activityId: string, answers: Answers, localReasons: 
           role: "system",
           content: isContextActivity
             ? `You are an automated evaluator for a creative web + AI learning platform.
-Review whether the student integrated the stated usage context correctly.
-The student's inputs may be in Spanish, English, or Portuguese.
+Review whether the learner integrated the stated usage context correctly.
+The learner's inputs may be in Spanish, English, or Portuguese.
 You must return feedback in ${language}.
 Respond only as strict JSON:
 {"contexto_valido": true, "feedback_alumno": "short feedback in ${language}" }`
             : `You are a teacher reviewing creative web + AI activities.
 Inputs may be in Spanish, English, or Portuguese.
 Return all feedback in ${language}.
-Do not complete the work for the student.
+Do not complete the work for the learner.
 Detect nonsense text, incoherence, contradictions, or weak criteria.
 Respond as strict JSON with reasons:string[] and suggestions:string[]. If everything is correct, reasons must be [].`,
         },
